@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Vente {
 	private int noVente;
-	private int nomArticle;
+	private String nomArticle;
 	private String description;
 	private LocalDateTime dateFinEncheres;
 	private float miseAPrix;
@@ -16,7 +16,7 @@ public class Vente {
 	
 	
 	//contstructors
-	public Vente(int noVente, int nomArticle, String description, LocalDateTime dateFinEncheres, float miseAPrix,
+	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, float miseAPrix,
 			float prixVente, Categorie categorieArticle, Utilisateur achete, Utilisateur vend, Retrait lieuRetrait) {
 		super();
 		this.noVente = noVente;
@@ -31,7 +31,7 @@ public class Vente {
 		this.lieuRetrait = lieuRetrait;
 	}
 	
-	public Vente(int noVente, int nomArticle, String description, LocalDateTime dateFinEncheres, float miseAPrix,
+	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, float miseAPrix,
 			Categorie categorieArticle, Utilisateur vend) {
 		super();
 		this.noVente = noVente;
@@ -56,11 +56,11 @@ public class Vente {
 		this.noVente = noVente;
 	}
 
-	public int getNomArticle() {
+	public String getNomArticle() {
 		return nomArticle;
 	}
 
-	public void setNomArticle(int nomArticle) {
+	public void setNomArticle(String nomArticle) {
 		this.nomArticle = nomArticle;
 	}
 
