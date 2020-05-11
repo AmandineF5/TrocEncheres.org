@@ -2,6 +2,7 @@ package fr.eni.projet01.trocenchere.bo;
 
 public class Utilisateur {
 	
+
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
@@ -138,3 +139,4 @@ public class Utilisateur {
 	
 	
 }
+
