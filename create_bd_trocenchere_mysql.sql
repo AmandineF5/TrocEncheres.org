@@ -54,10 +54,15 @@ ENGINE=InnoDB CHARACTER SET utf8;
 
 
 ALTER TABLE `UTILISATEURS` ADD PRIMARY KEY( `no_utilisateur`);
+ALTER TABLE `UTILISATEURS` CHANGE `no_utilisateur` `no_utilisateur` INT(11) NOT NULL AUTO_INCREMENT;
+
+
 ALTER TABLE `RETRAITS` ADD PRIMARY KEY( `no_vente`);
-ALTER TABLE `encheres` ADD PRIMARY KEY( `no_utilisateur`, `no_vente`);
+ALTER TABLE `ENCHERES` ADD PRIMARY KEY( `no_utilisateur`, `no_vente`);
 ALTER TABLE `CATEGORIES` ADD PRIMARY KEY( `no_categorie`);
+
 ALTER TABLE `VENTES` ADD PRIMARY KEY( `no_vente`);
+ALTER TABLE `VENTES` CHANGE `no_vente` `no_vente` INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ENCHERES` 
 ADD CONSTRAINT `encheres_utilisateur_fk` 
