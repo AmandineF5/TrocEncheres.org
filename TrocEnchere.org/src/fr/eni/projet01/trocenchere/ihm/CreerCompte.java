@@ -53,7 +53,7 @@ public class CreerCompte extends HttpServlet {
 			String mdpUtilisateur = request.getParameter("mdpUtilisateur");
 			String confMdpUtilisateur = request.getParameter("confMdpUtilisateur");
 			
-			List<String> messageErreur = new ArrayList<String>();
+			String messageErreur = "Les mots de passes sont différents";
 			RequestDispatcher rd = null;
 			
 			UtilisateurManager UM = new UtilisateurManager();
@@ -61,11 +61,10 @@ public class CreerCompte extends HttpServlet {
 			//comparaison mot de passe
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 				UM.ajouterUtilisateur(utilisateur);
-				rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //page suivante
+				rd = request.getRequestDispatcher("/page-principale");  //page suivante
 				} else {
-					messageErreur.add("Les mots de passes sont différents");
 					request.setAttribute("message", messageErreur);
-					rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //retour création compte 
+					rd = request.getRequestDispatcher("/creationCompte");  //retour création compte 
 					}
 
 			rd.forward(request, response);
