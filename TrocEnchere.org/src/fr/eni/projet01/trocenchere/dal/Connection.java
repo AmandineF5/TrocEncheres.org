@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 
 public class Connection {
-	private static Connection connection;
+	private static java.sql.Connection connection;
 	
-	public static Connection getConnection() {
+	public static java.sql.Connection getConnection() {
 		if (connection == null) {
 			try {
 				String url = Settings.getProperty("url");
