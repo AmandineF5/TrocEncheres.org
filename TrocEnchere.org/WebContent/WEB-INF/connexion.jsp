@@ -26,8 +26,15 @@
 	<div class="subtitle is-medium">
 	 	Se connecter
  	</div>
+	
+	<div>
+		  <c:if test="${messageDeco!=null && messageDeco.length()>0 }">
+		 	<p>${messageDeco}</p>
+		  </c:if>
+  	</div>
 
 	<form action="url/page/..." method="post">
+	 		
 	
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
