@@ -123,7 +123,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 	}
 
-	@Override
+	@Override 
 	public void deleteUser(int noUtilisateur) {
 	
 			try {
