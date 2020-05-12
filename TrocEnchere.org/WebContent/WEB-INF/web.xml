@@ -23,4 +23,12 @@
   
   
   
+  <servlet>
+	  <servlet-name>creationCompte</servlet-name>
+	  <jsp-file>/WEB-INF/creationCompte.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>creationCompte</servlet-name>
+	  <url-pattern>/creationCompte</url-pattern>
+  </servlet-mapping>
 </web-app>
