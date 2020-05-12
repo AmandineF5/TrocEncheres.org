@@ -20,9 +20,6 @@
   	<url-pattern>/nouveau-compte</url-pattern>
   </servlet-mapping>
   
-  
-  
-  
   <servlet>
 	  <servlet-name>creationCompte</servlet-name>
 	  <jsp-file>/WEB-INF/creationCompte.jsp</jsp-file>
@@ -31,4 +28,18 @@
 	  <servlet-name>creationCompte</servlet-name>
 	  <url-pattern>/creationCompte</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+	  <servlet-name>connexion</servlet-name>
+	  <jsp-file>/WEB-INF/connexion.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>connexion</servlet-name>
+	  <url-pattern>/connexion</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
 </web-app>
