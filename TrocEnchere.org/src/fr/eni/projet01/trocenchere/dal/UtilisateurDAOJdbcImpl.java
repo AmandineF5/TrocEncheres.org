@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 
@@ -18,13 +20,12 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			
 	private static final String DELETE_USER_SQL = "DELETE FROM utilisateurs WHERE no_utilisateur=?";
 	
-	
-	@Override
-	public void insertUser(Utilisateur user) {
-		try(Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
-				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL);)
-		{
-			ResultSet rs;
+	private static final String VERIF_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+
+ 	public void insertUser(Utilisateur user) {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL);){
+			// Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
 			state.setString(3, user.getPrenom());
@@ -36,8 +37,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setString(9, user.getMotDePasse());
 			state.setFloat(10, user.getCredit());
 			state.setBoolean(11, user.isAdministrateur());
-			state.executeUpdate();
-			
+			state.executeUpdate();			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -48,12 +48,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	public Utilisateur selectByIdUser(int noUtilisateur) {
 		
 		Utilisateur user = new Utilisateur();
-		try {
-			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement state;
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECTBYID_USER_SQL);){			
 			ResultSet rs;
-			//préparer le statement
-			state = cnx.prepareStatement(SELECTBYID_USER_SQL);
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
 			rs.next();
@@ -67,13 +64,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			user.setCodePostal(rs.getString("code_postal"));
 			user.setVille(rs.getString("ville"));
 			user.setMotDePasse(rs.getString("mot_de_passe"));
-			user.setCredit(rs.getInt("credit"));		
-					
+			user.setCredit(rs.getInt("credit"));
 			rs.close();
-			state.close();
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return user;
@@ -81,12 +74,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 	@Override
 	public void updateUser(Utilisateur user) {
-		Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
-			PreparedStatement state;
-			//préparer le statement
-			state = cnx.prepareStatement(UPDATE_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state = cnx.prepareStatement(UPDATE_USER_SQL);){
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
 			state.setString(3, user.getPrenom());
@@ -99,34 +88,47 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setFloat(10, user.getCredit());
 			state.setBoolean(11, user.isAdministrateur());
 			state.setInt(12, user.getNoUtilisateur());
-			state.execute();
-			state.close();
-			cnx.commit();
-		
+			state.execute();	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 
+	
 	@Override 
 	public void deleteUser(int noUtilisateur) {
 	
-			try {
-				Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement state;
-				state = cnx.prepareStatement(DELETE_USER_SQL);
+			try (Connection cnx = ConnectionProvider.getConnection();
+					PreparedStatement state = cnx.prepareStatement(DELETE_USER_SQL)){
 				state.setInt(1, noUtilisateur);
 				state.executeUpdate();
-				state.close();
-				cnx.commit();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
 		
 	}
+
+	
+	@Override
+	public Utilisateur verificationConnectionComptePseudo(String pseudo, String mdp) {
+		Utilisateur utilisateur = null;
+		
+		try (Connection cnx= ConnectionProvider.getConnection();
+				PreparedStatement state = cnx.prepareStatement(VERIF_PSEUDO);){
+			state.setString(1, pseudo);
+	        state.setString(2, mdp);
+	        ResultSet rs = state.executeQuery();     
+	        if (rs.next()) {
+	            utilisateur = new Utilisateur();
+	            utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+	            utilisateur.setEmail(pseudo);
+	        }} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return utilisateur;
+	}
+
 
 }
