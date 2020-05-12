@@ -26,7 +26,7 @@ public class CreerCompte extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/creationCompte.jsp");
 		rd.forward(request, response);
 	}
 
@@ -34,7 +34,7 @@ public class CreerCompte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+
 		
 		Utilisateur utilisateur = new Utilisateur();  
 			utilisateur.setPseudo(request.getParameter("pseudoUtilisateur"));
@@ -53,7 +53,7 @@ public class CreerCompte extends HttpServlet {
 			String mdpUtilisateur = request.getParameter("mdpUtilisateur");
 			String confMdpUtilisateur = request.getParameter("confMdpUtilisateur");
 			
-			String messageErreur = "Les mots de passes sont différents";
+			String messageErreur = "Les mots de passe sont diffÃ©rents";
 			RequestDispatcher rd = null;
 			
 			UtilisateurManager UM = new UtilisateurManager();
@@ -61,13 +61,14 @@ public class CreerCompte extends HttpServlet {
 			//comparaison mot de passe
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 				UM.ajouterUtilisateur(utilisateur);
-				rd = request.getRequestDispatcher("/page-principale");  //page suivante
+				rd = request.getRequestDispatcher("/page-principale");
+				rd.forward(request, response);//page suivante
 				} else {
 					request.setAttribute("message", messageErreur);
-					rd = request.getRequestDispatcher("/creationCompte");  //retour création compte 
+					doGet(request, response);  //retour crï¿½ation compte 
 					}
 
-			rd.forward(request, response);
+			
 			
 	}
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 		<div class="subtitle is-medium">
 	 		Créer un compte
 	 	</div>
-		<form action="" method="post">
+		<form action="/TrocEnchere.org/nouveau-compte" method="post">
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
 			    <label class="label">Pseudo:</label>
@@ -100,6 +101,18 @@
 		 
 		 <div class="field is-horizontal">
   			<div class="field-label is-normal">
+			    <label class="label">Ville:</label>
+			 </div>
+			 <div class="field-body">
+    			<div class="field">
+			    	<input type="text" class="input" name="villeUtilisateur" >
+		 		</div>
+		 	</div>
+		 </div>
+		 
+		 
+		 <div class="field is-horizontal">
+  			<div class="field-label is-normal">
 			    <label class="label">Mot de passe:</label>
 			 </div>
 			 <div class="field-body">
@@ -119,12 +132,10 @@
 		 		</div>
 		 	</div>
 		 </div>
-		 
-		  <div>
-			 <c:forEach var="err" items="${messageErreur}">
-			 	<p>${err}</p>
-			 </c:forEach>
-		 </div>
+		  <c:if test="${message!=null && message.length()>0 }">
+		 	<p>${message}</p>
+		  </c:if>
+		  
 		 
 		<div class="field-body">
 		    <div class="field">
