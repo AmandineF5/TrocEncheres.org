@@ -4,11 +4,88 @@
 <html>
 
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="./main.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<title>Troc-Enchères connexion</title>
+
 </head>
 
 <body>
+
+<header>
+	<div>Troc-Enchères</div>
+</header>
+	
+<main>
+	<div class="subtitle is-medium">
+	 	Se connecter
+ 	</div>
+
+	<form action="url/page/..." method="post">
+	
+		   <div class="field is-horizontal">
+  			 <div class="field-label is-normal">
+			    <label class="label">Identifiant :</label>
+			 </div>
+			 
+			 <div class="field-body">
+    			<div class="field">
+			    	<input type="text" class="input" name="pseudoUtilisateur" >
+		 		</div>
+		 	</div>
+		 </div>
+
+		<div class="field is-horizontal">
+  			<div class="field-label is-normal">
+			    <label class="label">Mot de passe :</label>
+			 </div>
+			 
+			 <div class="field-body">
+    			<div class="field">
+			    	<input type="password" class="input" name="mdpUtilisateur" >
+		 		</div>
+		 	</div>
+		 </div>
+		 
+		 <div class="field-body">
+		    <div class="field">
+		      <div class="control">
+				  <button type="submit" class="button is-primary" name="bouton" value="valider">Connexion</button>
+			  </div>
+			</div>
+		</div>
+		
+		<div>
+		  <input type="checkbox" id="souvenir" name="souvenir">
+		  <label for="souvenir">Se souvenir de moi</label>
+		</div>
+		
+		<a href="url/vers/page/récupération/mdp">Mot de passe oublié</a>
+				
+	</form>
+
+	
+	<form action="/nouveau-compte" method="post">
+		<div class="field-body">
+			    <div class="field">
+			      <div class="control">
+					  <button type="submit" class="button is-primary" name="bouton" value="valider">Créer un nouveau compte</button>
+				  </div>
+				</div>
+			</div>
+		</form>
+	
+</main>
+
+
+
+
+
 
 </body>
 
