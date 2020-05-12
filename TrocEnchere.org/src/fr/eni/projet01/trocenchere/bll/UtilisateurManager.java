@@ -26,7 +26,7 @@ public class UtilisateurManager {
 	 * @param noUtilisateur
 	 * @return un utilisateur
 	 */
-	public Utilisateur selectUser(int noUtilisateur) {
+	public Utilisateur selectionnerUtilisateur(int noUtilisateur) {
 		Utilisateur user;
 		user = DaoUser.selectByIdUser(noUtilisateur);
 		return user;
@@ -37,7 +37,7 @@ public class UtilisateurManager {
 	 * (ID 1009 et 1003)
 	 * @param utilisateur
 	 */
-	public void mettreAJourUser(Utilisateur utilisateur) {
+	public void mettreAJourUtilisateur(Utilisateur utilisateur) {
 		DaoUser.updateUser(utilisateur);
 	}
 	
@@ -46,7 +46,7 @@ public class UtilisateurManager {
 	 * (ID 1005 et 3001
 	 * @param noUtilisateur
 	 */
-	public void supprimerUser(int noUtilisateur) {
+	public void supprimerUtilisateurr(int noUtilisateur) {
 		DaoUser.deleteUser(noUtilisateur);
 	}
 	
