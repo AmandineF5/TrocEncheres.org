@@ -45,8 +45,8 @@ CREATE TABLE VENTES (
     nomarticle                    VARCHAR(100) NOT NULL,
     description                   VARCHAR(300) NOT NULL,
     date_fin_encheres             DATE NOT NULL,
-    prix_initial                  FLOAT,
-    prix_vente                    FLOAT,
+    prix_initial                  INTEGER,
+    prix_vente                    INTEGER,
     no_utilisateur                INTEGER NOT NULL,
     no_categorie                  INTEGER NOT NULL
 )
