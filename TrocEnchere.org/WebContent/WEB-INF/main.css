@@ -1,0 +1,38 @@
+@charset "UTF-8";
+main {
+	margin-left: 2vw;
+}
+
+
+header {
+
+	font-size: 3rem;
+	font-weight: bold;
+	text-align: center;
+	padding: 4vw;
+	margin-bottom: 3vw;
+}
+
+
+.button {
+	margin-top: 5vw;
+	text-align: center;
+
+}
+
+
+
+a {
+	text-align: center;
+	text-decoration: none;
+	color: rgb(255, 255, 255);
+}
+
+
+
+ /* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
