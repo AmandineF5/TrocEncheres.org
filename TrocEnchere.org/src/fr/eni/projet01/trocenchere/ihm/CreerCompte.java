@@ -35,28 +35,22 @@ public class CreerCompte extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		
-		Utilisateur user = new Utilisateur();  
-			user.setPseudo(request.getParameter("pseudoUtilisateur"));
-			user.setNom(request.getParameter("nomUtilisateur"));
-			user.setPrenom(request.getParameter("prenomUtilisateur"));
-			user.setEmail(request.getParameter("emailUtilisateur"));
-			user.setTelephone(request.getParameter("telUtilisateur"));
-			user.setRue(request.getParameter("rueUtilisateur"));
-			user.setCodePostal(request.getParameter("cpUtilisateur"));
-			user.setVille(request.getParameter("villeUtilisateur"));
-			user.setMotDePasse(request.getParameter("mdpUtilisateur"));
-			user.setMotDePasse(request.getParameter("confMdpUtilisateur"));
-			user.setCredit(0);
-			user.setAdministrateur(false);
+		Utilisateur utilisateur = new Utilisateur();  
+			utilisateur.setPseudo(request.getParameter("pseudoUtilisateur"));
+			utilisateur.setNom(request.getParameter("nomUtilisateur"));
+			utilisateur.setPrenom(request.getParameter("prenomUtilisateur"));
+			utilisateur.setEmail(request.getParameter("emailUtilisateur"));
+			utilisateur.setTelephone(request.getParameter("telUtilisateur"));
+			utilisateur.setRue(request.getParameter("rueUtilisateur"));
+			utilisateur.setCodePostal(request.getParameter("cpUtilisateur"));
+			utilisateur.setVille(request.getParameter("villeUtilisateur"));
+			utilisateur.setMotDePasse(request.getParameter("mdpUtilisateur"));
+			utilisateur.setMotDePasse(request.getParameter("confMdpUtilisateur"));
+			utilisateur.setCredit(0);
+			utilisateur.setAdministrateur(false);
 			
 			String mdpUtilisateur = request.getParameter("mdpUtilisateur");
 			String confMdpUtilisateur = request.getParameter("confMdpUtilisateur");
-			
-			String pseudoUtilisateur = request.getParameter("pseudoUtilisateur");
-			String pseudoExistant = null ;
-			
-			String emailUtilisateur = request.getParameter("emailUtilisateur");
-			String emailExistant = null ;
 			
 			List<String> messageErreur = new ArrayList<String>();
 			RequestDispatcher rd = null;
@@ -64,25 +58,12 @@ public class CreerCompte extends HttpServlet {
 			
 			//comparaison mot de passe
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
-				rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //URL pour envoyer les champs vers la BDD
+				rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //URL pour envoyer les champs vers la BDD et INSERT ! =) 
 				} else {
 					messageErreur.add("Les mots de passes sont différents");
+					request.setAttribute("message", messageErreur);
 					}
-			//vérification pseudo unique
-			 for (String string : messageErreur) {
-				
-			}
-			
-			if (true) {
-				
-			}
-			
-			//vérification email unique
-			if (true) {
-				
-			}
-			
-			request.setAttribute("message", messageErreur);
+
 			rd.forward(request, response);
 			
 	}
