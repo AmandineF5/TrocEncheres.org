@@ -2,7 +2,6 @@ package fr.eni.projet01.trocenchere.bo;
 
 import java.time.LocalDateTime;
 
-
 /**
  * 
  * @author coren
@@ -16,14 +15,14 @@ public class Vente {
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private Categorie categorieArticle;
-	private Utilisateur achete;
-	private Utilisateur vend;
+	private Utilisateur acheteur;
+	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
-	
-	
-	//contstructors
+
+	// contstructors
 	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
-			Integer prixVente, Categorie categorieArticle, Utilisateur achete, Utilisateur vend, Retrait lieuRetrait) {
+			Integer prixVente, Categorie categorieArticle, Utilisateur acheteur, Utilisateur vendeur,
+			Retrait lieuRetrait) {
 		super();
 		this.noVente = noVente;
 		this.nomArticle = nomArticle;
@@ -32,24 +31,17 @@ public class Vente {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.categorieArticle = categorieArticle;
-		this.achete = achete;
-		this.vend = vend;
+		this.acheteur = acheteur;
+		this.vendeur = vendeur;
 		this.lieuRetrait = lieuRetrait;
 	}
-	
+
 	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
-			Categorie categorieArticle, Utilisateur vend) {
-		super();
-		this.noVente = noVente;
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.categorieArticle = categorieArticle;
-		this.vend = vend;
+			Categorie categorieArticle, Utilisateur vendeur) {
+		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, null, vendeur, null);
 	}
-	
-	//getters and setters
+
+	// getters and setters
 	public Vente() {
 		super();
 	}
@@ -111,19 +103,19 @@ public class Vente {
 	}
 
 	public Utilisateur getAchete() {
-		return achete;
+		return acheteur;
 	}
 
 	public void setAchete(Utilisateur achete) {
-		this.achete = achete;
+		this.acheteur = acheteur;
 	}
 
 	public Utilisateur getVend() {
-		return vend;
+		return vendeur;
 	}
 
 	public void setVend(Utilisateur vend) {
-		this.vend = vend;
+		this.vendeur = vendeur;
 	}
 
 	public Retrait getLieuRetrait() {
@@ -138,12 +130,8 @@ public class Vente {
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente
-				+ ", categorieArticle=" + categorieArticle + ", achete=" + achete + ", vend=" + vend + ", lieuRetrait="
-				+ lieuRetrait + "]";
+				+ ", categorieArticle=" + categorieArticle + ", achete=" + acheteur + ", vend=" + vendeur
+				+ ", lieuRetrait=" + lieuRetrait + "]";
 	}
-	
 
-		
-	
-	
 }
