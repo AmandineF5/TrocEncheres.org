@@ -20,9 +20,7 @@
   	<url-pattern>/nouveau-compte</url-pattern>
   </servlet-mapping>
   
-  
-  
-  
+    
   <servlet>
 	  <servlet-name>creationCompte</servlet-name>
 	  <jsp-file>/WEB-INF/creationCompte.jsp</jsp-file>
