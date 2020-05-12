@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 
 /**
  * Servlet implementation class CreerCompte
@@ -55,13 +56,16 @@ public class CreerCompte extends HttpServlet {
 			List<String> messageErreur = new ArrayList<String>();
 			RequestDispatcher rd = null;
 			
+			UtilisateurManager UM = new UtilisateurManager();
 			
 			//comparaison mot de passe
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
-				rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //URL pour envoyer les champs vers la BDD et INSERT ! =) 
+				UM.ajouterUtilisateur(utilisateur);
+				rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //page suivante
 				} else {
 					messageErreur.add("Les mots de passes sont différents");
 					request.setAttribute("message", messageErreur);
+					rd = request.getRequestDispatcher("/WEB-INF/xxx/xxx");  //retour création compte 
 					}
 
 			rd.forward(request, response);
