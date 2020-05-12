@@ -6,6 +6,7 @@ import fr.eni.projet01.trocenchere.dal.UtilisateurDAO;
 
 public class UtilisateurManager {
 	private UtilisateurDAO DaoUser;
+	private Utilisateur utilisateur;
 	
 	public UtilisateurManager() {
 		this.DaoUser = DAOFactory.getUtilisateurDAO();
@@ -27,9 +28,9 @@ public class UtilisateurManager {
 	 * @return un utilisateur
 	 */
 	public Utilisateur selectionnerUtilisateur(int noUtilisateur) {
-		Utilisateur user;
+		Utilisateur utilisateur;
 		user = DaoUser.selectByIdUser(noUtilisateur);
-		return user;
+		return utilisateur;
 	}
 	
 	/**
@@ -39,6 +40,32 @@ public class UtilisateurManager {
 	 */
 	public void mettreAJourUtilisateur(Utilisateur utilisateur) {
 		DaoUser.updateUser(utilisateur);
+	}
+	
+	public boolean verificationConnectionCompte (String email, String mdp){
+	    boolean loginOK = false;
+	  try {
+	            Utilisateur ut = UtilisateurDAO.verificationConnectionCompte(email, mdp);
+
+	            if (ut != null) {
+	               this.setUtilisateur(ut);
+	               loginOK = true;
+	            } 
+
+
+	        } catch (SQLException | ClassNotFoundException ex) {
+	            throw new ServletException(ex);
+	        }
+	    return loginOK;
+
+	}
+
+	public setUtilisateur(Utilisateur ut) {
+	    utilisateur = ut;
+	}
+	
+	public Utilisateur getUtilisateur() {
+		return this.utilisateur;
 	}
 	
 	/**ITERATION 2 A enlever si on s'arrête au 1!!!!!!!
