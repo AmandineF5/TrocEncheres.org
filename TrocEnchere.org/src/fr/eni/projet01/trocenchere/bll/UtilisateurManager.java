@@ -1,5 +1,9 @@
 package fr.eni.projet01.trocenchere.bll;
 
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.dal.DAOFactory;
 import fr.eni.projet01.trocenchere.dal.UtilisateurDAO;
@@ -13,7 +17,7 @@ public class UtilisateurManager {
 	}
 
 	/**
-	 * Procédure pour insérer l'utilisateur dans le base de donnée lors d'une création de compte.
+	 * Procï¿½dure pour insï¿½rer l'utilisateur dans le base de donnï¿½e lors d'une crï¿½ation de compte.
 	 * (ID 1004)
 	 * @param utilisateur
 	 */
@@ -22,19 +26,19 @@ public class UtilisateurManager {
 	}
 	
 	/**
-	 * Sélectionner un utilisation par son id permet d'afficher un profil
+	 * Sï¿½lectionner un utilisation par son id permet d'afficher un profil
 	 * (ID 1007)
 	 * @param noUtilisateur
 	 * @return un utilisateur
 	 */
 	public Utilisateur selectionnerUtilisateur(int noUtilisateur) {
 		Utilisateur utilisateur;
-		user = DaoUser.selectByIdUser(noUtilisateur);
+		utilisateur = DaoUser.selectByIdUser(noUtilisateur);
 		return utilisateur;
 	}
 	
 	/**
-	 * Mettre à jour le profil d'un utilisateur pour modifier tous les paramètres.
+	 * Mettre ï¿½ jour le profil d'un utilisateur pour modifier tous les paramï¿½tres.
 	 * (ID 1009 et 1003)
 	 * @param utilisateur
 	 */
@@ -42,25 +46,19 @@ public class UtilisateurManager {
 		DaoUser.updateUser(utilisateur);
 	}
 	
-	public boolean verificationConnectionCompte (String email, String mdp){
+	public boolean verificationConnectionCompte (String pseudo, String mdp) throws SQLException, ClassNotFoundException{
 	    boolean loginOK = false;
-	  try {
-	            Utilisateur ut = UtilisateurDAO.verificationConnectionCompte(email, mdp);
+	  Utilisateur ut = DaoUser.verificationConnectionComptePseudo(pseudo, mdp);
 
-	            if (ut != null) {
-	               this.setUtilisateur(ut);
-	               loginOK = true;
-	            } 
-
-
-	        } catch (SQLException | ClassNotFoundException ex) {
-	            throw new ServletException(ex);
-	        }
+	if (ut != null) {
+	   this.setUtilisateur(ut);
+	   loginOK = true;
+	}
 	    return loginOK;
 
 	}
 
-	public setUtilisateur(Utilisateur ut) {
+	public void setUtilisateur(Utilisateur ut) {
 	    utilisateur = ut;
 	}
 	
@@ -68,7 +66,7 @@ public class UtilisateurManager {
 		return this.utilisateur;
 	}
 	
-	/**ITERATION 2 A enlever si on s'arrête au 1!!!!!!!
+	/**ITERATION 2 A enlever si on s'arrï¿½te au 1!!!!!!!
 	 * Permet de supprimer un compte. Utilisation par l'admin et l'utilisateur.
 	 * (ID 1005 et 3001
 	 * @param noUtilisateur
