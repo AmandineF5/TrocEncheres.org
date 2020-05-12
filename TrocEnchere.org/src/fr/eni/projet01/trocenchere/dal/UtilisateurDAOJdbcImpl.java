@@ -21,13 +21,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	
 	@Override
 	public void insertUser(Utilisateur user) {
-		try {
-			Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
-			//Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement state;
+		try(Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL);)
+		{
 			ResultSet rs;
-			//préparer le statement
-			state = cnx.prepareStatement(INSERT_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
 			state.setString(3, user.getPrenom());
@@ -39,20 +36,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setString(9, user.getMotDePasse());
 			state.setFloat(10, user.getCredit());
 			state.setBoolean(11, user.isAdministrateur());
-			//executer le statement
 			state.executeUpdate();
-			//Récupère la clé générée
-			rs = state.getGeneratedKeys();
-			//on se balade ds le resultSet pr récupérer la clé
-			if (rs.next()) {
-				user.setNoUtilisateur(rs.getInt(1));
-			}
-			rs.close();
-			state.close();
-			cnx.commit();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//cnx.rollback();
 		}
 
 	}
