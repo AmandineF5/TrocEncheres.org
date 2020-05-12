@@ -119,6 +119,13 @@
 		 		</div>
 		 	</div>
 		 </div>
+		 
+		  <div>
+			 <c:forEach var="err" items="${messageErreur}">
+			 	<p>${err}</p>
+			 </c:forEach>
+		 </div>
+		 
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
