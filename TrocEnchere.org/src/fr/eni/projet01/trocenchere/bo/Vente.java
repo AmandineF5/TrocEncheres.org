@@ -7,8 +7,8 @@ public class Vente {
 	private String nomArticle;
 	private String description;
 	private LocalDateTime dateFinEncheres;
-	private float miseAPrix;
-	private float prixVente;
+	private Integer miseAPrix;
+	private Integer prixVente;
 	private Categorie categorieArticle;
 	private Utilisateur achete;
 	private Utilisateur vend;
@@ -16,8 +16,8 @@ public class Vente {
 	
 	
 	//contstructors
-	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, float miseAPrix,
-			float prixVente, Categorie categorieArticle, Utilisateur achete, Utilisateur vend, Retrait lieuRetrait) {
+	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
+			Integer prixVente, Categorie categorieArticle, Utilisateur achete, Utilisateur vend, Retrait lieuRetrait) {
 		super();
 		this.noVente = noVente;
 		this.nomArticle = nomArticle;
@@ -31,7 +31,7 @@ public class Vente {
 		this.lieuRetrait = lieuRetrait;
 	}
 	
-	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, float miseAPrix,
+	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
 			Categorie categorieArticle, Utilisateur vend) {
 		super();
 		this.noVente = noVente;
@@ -80,11 +80,11 @@ public class Vente {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public float getMiseAPrix() {
+	public Integer getMiseAPrix() {
 		return miseAPrix;
 	}
 
-	public void setMiseAPrix(float miseAPrix) {
+	public void setMiseAPrix(Integer miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 
@@ -92,7 +92,7 @@ public class Vente {
 		return prixVente;
 	}
 
-	public void setPrixVente(float prixVente) {
+	public void setPrixVente(Integer prixVente) {
 		this.prixVente = prixVente;
 	}
 

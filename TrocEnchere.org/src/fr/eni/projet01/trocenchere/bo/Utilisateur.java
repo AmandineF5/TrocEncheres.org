@@ -13,11 +13,11 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private float credit;
+	private Integer credit;
 	private boolean administrateur;
 	
 	//constructeur SANS administateur -> false
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, float credit) {
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, Integer credit) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -34,7 +34,7 @@ public class Utilisateur {
 	
 	//constructeur sans n°UTILISATEUR -> généré automatiquement en entrant dans la BDD
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, Integer credit, boolean administrateur) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -50,7 +50,7 @@ public class Utilisateur {
 	
 	//constructeur ENTIER
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, Integer credit, boolean administrateur) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -132,10 +132,10 @@ public class Utilisateur {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	public float getCredit() {
+	public Integer getCredit() {
 		return credit;
 	}
-	public void setCredit(float credit) {
+	public void setCredit(Integer credit) {
 		this.credit = credit;
 	}
 	public boolean isAdministrateur() {
