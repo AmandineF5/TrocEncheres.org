@@ -2,6 +2,12 @@ package fr.eni.projet01.trocenchere.bo;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * 
+ * @author coren
+ *
+ */
 public class Vente {
 	private int noVente;
 	private String nomArticle;
