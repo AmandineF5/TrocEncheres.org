@@ -22,7 +22,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	@Override
 	public void insertUser(Utilisateur user) {
 		try {
-			Connection cnx = ConnectionProvider.getConnection();
+			Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+			//pool Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement state;
 			ResultSet rs;
 			//préparer le statement

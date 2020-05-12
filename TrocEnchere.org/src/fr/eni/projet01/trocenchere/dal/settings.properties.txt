@@ -1,0 +1,5 @@
+url=jdbc:mysql://localhost:3306/papeterie_db?autoReconnect=true&useSSL=false
+user=root
+password=
+driverjdbc=java.sql.DriverManager
+driverjdbc=com.mysql.jdbc.Driver
