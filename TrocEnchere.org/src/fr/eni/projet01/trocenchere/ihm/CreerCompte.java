@@ -7,9 +7,11 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
@@ -61,8 +63,12 @@ public class CreerCompte extends HttpServlet {
 			//comparaison mot de passe
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 				UM.ajouterUtilisateur(utilisateur);
-				rd = request.getRequestDispatcher("/page-principale");
-				rd.forward(request, response);//page suivante
+				HttpSession session = request.getSession();
+	            session.setAttribute("utilisateur", utilisateur);
+	            Cookie pseudoUtilisateur = new Cookie("pseudo", utilisateur.getPseudo());
+	            response.addCookie(pseudoUtilisateur);
+	            // lien vers servlet de gestion du compte;
+	            response.sendRedirect("");
 				} else {
 					request.setAttribute("message", messageErreur);
 					doGet(request, response);  //retour cr�ation compte 

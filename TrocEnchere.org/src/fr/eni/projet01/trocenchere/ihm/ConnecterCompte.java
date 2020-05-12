@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ public class ConnecterCompte extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/xxx.jsp"); // lien vers la jsp de connection au compte
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp"); // lien vers la jsp de connection au compte
 		rd.forward(request, response);
 	}
 
@@ -29,18 +30,21 @@ public class ConnecterCompte extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String mdp = request.getParameter("mdp");
 		UtilisateurManager um = new UtilisateurManager();
+		String message = null;
 		boolean loginOK;
 		try {
 			loginOK = um.verificationConnectionCompte(pseudo, mdp);
 			Utilisateur ut = um.getUtilisateur();
-			RequestDispatcher rd; 
+			
 			if (loginOK) {
 				HttpSession session = request.getSession();
 	            session.setAttribute("utilisateur", ut);
-	            rd = request.getRequestDispatcher("/"); // lien vers servlet de gestion du compte;
-	            rd.forward(request, response);
+	            Cookie pseudoUtilisateur = new Cookie("pseudo", ut.getPseudo());
+	            response.addCookie(pseudoUtilisateur);
+	            // lien vers servlet de gestion du compte;
+	            response.sendRedirect("");
 			} else if (!loginOK) {
-				String message = "Invalid email/password";
+				message = "Email ou mot de passe invalide";
 	            request.setAttribute("message", message);
 	            doGet(request, response);
 			}
