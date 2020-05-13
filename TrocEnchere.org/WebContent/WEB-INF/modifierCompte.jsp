@@ -18,6 +18,13 @@
 		<div>Troc-Enchères</div>
 	</header>
 	<main>
+		<div>
+		  <c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
+		  	<c:forEach val="err" items="${listeCodesErreur}">
+		 		<p>err</p>
+		 	</c:forEach>
+		  </c:if>
+	  	</div>
 		<div class="subtitle is-medium">
 	 		Mon Profil
 	 	</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 
@@ -32,6 +33,16 @@
 		 	<p>${messageDeco}</p>
 		  </c:if>
   	</div>
+  	
+  	<div>
+		  <c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
+		  	<c:forEach val="err" items="${listeCodesErreur}">
+		 		<p>err</p>
+		 	</c:forEach>
+		  </c:if>
+  	</div>
+  	
+  	
 
 	<form action="/TrocEnchere.org/ConnecterCompte" method="post">
 	 		
