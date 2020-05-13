@@ -33,7 +33,7 @@
 		  </c:if>
   	</div>
 
-	<form action="/ConnecterCompte" method="post">
+	<form action="/TrocEnchere.org/ConnecterCompte" method="post">
 	 		
 	
 		   <div class="field is-horizontal">
@@ -84,7 +84,7 @@
 	</form>
 
 	
-	<form action="/nouveau-compte" method="post">
+	<form action="/TrocEnchere.org/nouveau-compte" method="post">
 		<div class="field-body">
 			    <div class="field">
 			      <div class="control">
