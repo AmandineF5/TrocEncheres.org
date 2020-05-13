@@ -54,6 +54,27 @@
   
   
   
+     <!-- affichage compte -->
+  <servlet>  <!-- servlet -->
+  	<servlet-name>AfficherCompte</servlet-name>
+  	<servlet-class>fr.eni.projet01.trocenchere.ihm.AfficherCompte</servlet-class>  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AfficherCompte</servlet-name>
+  	<url-pattern>/afficher-compte</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>  <!-- JSP -->
+	  <servlet-name>afficherCompte</servlet-name>
+	  <jsp-file>/WEB-INF/afficherCompte.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>afficherCompte</servlet-name>
+	  <url-pattern>/afficherCompte</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   
   
 </web-app>
