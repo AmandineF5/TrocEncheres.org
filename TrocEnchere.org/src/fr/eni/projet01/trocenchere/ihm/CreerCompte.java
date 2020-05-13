@@ -2,6 +2,7 @@ package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -65,10 +66,15 @@ public class CreerCompte extends HttpServlet {
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 				try {
 					UM.ajouterUtilisateur(utilisateur);
+					
 					HttpSession session = request.getSession();
 		            session.setAttribute("utilisateur", utilisateur);
-		            Cookie pseudoUtilisateur = new Cookie("pseudo", utilisateur.getPseudo());
+		            
+		            String pseudoForCookie = utilisateur.getPseudo();
+		            String encodedpseudoForCookie = Base64.getEncoder().encodeToString(pseudoForCookie.getBytes()); //pour autoriser les espaces dans le pseudo
+		            Cookie pseudoUtilisateur = new Cookie("pseudo", encodedpseudoForCookie);
 		            response.addCookie(pseudoUtilisateur);
+		            
 		            // lien vers servlet de gestion du compte;
 		            response.sendRedirect("");
 				} catch (BusinessException e) {

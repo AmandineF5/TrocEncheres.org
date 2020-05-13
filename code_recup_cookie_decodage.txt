@@ -1,0 +1,2 @@
+byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+String decodedString = new String(decodedBytes);
