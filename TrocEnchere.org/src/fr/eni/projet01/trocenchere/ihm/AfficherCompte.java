@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 /**
  * Servlet implementation class AfficherCompte
@@ -23,9 +25,23 @@ public class AfficherCompte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		Utilisateur ut = (Utilisateur) session.getAttribute("utilisateur");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/afficherCompte.jsp");
+		
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		UtilisateurManager UM = new UtilisateurManager();
+		
+		//pour tester si aucune session chargée !
+//		Utilisateur utilisateur = null;
+//		try {
+//			utilisateur = UM.selectionnerUtilisateurById(1);
+//		} catch (BusinessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		request.setAttribute("utilisateur",utilisateur);
+		
 		rd.forward(request, response);
 		
 		
