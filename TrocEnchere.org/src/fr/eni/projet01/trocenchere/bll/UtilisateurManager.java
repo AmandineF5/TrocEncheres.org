@@ -31,9 +31,21 @@ public class UtilisateurManager {
 	 * @param noUtilisateur
 	 * @return un utilisateur
 	 */
-	public Utilisateur selectionnerUtilisateur(int noUtilisateur) {
+	public Utilisateur selectionnerUtilisateurById(int noUtilisateur) {
 		Utilisateur utilisateur;
 		utilisateur = DaoUser.selectByIdUser(noUtilisateur);
+		return utilisateur;
+	}
+	
+	/**
+	 * S�lectionner un utilisation par son pseudo permet d'afficher un profil
+	 * (ID 1007)
+	 * @param String pseudo
+	 * @return un utilisateur
+	 */
+	public Utilisateur selectionnerUtilisateurByPseudo(String pseudo) {
+		Utilisateur utilisateur;
+		utilisateur = DaoUser.selectByPseudo(pseudo);
 		return utilisateur;
 	}
 	
