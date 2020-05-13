@@ -27,8 +27,8 @@ public class ConnecterCompte extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pseudo = request.getParameter("pseudo");
-		String mdp = request.getParameter("mdp");
+		String pseudo = request.getParameter("pseudoUtilisateur");
+		String mdp = request.getParameter("mdpUtilisateur");
 		UtilisateurManager um = new UtilisateurManager();
 		String message = null;
 		boolean loginOK;

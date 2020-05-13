@@ -33,7 +33,7 @@
 		  </c:if>
   	</div>
 
-	<form action="url/page/..." method="post">
+	<form action="/ConnecterCompte" method="post">
 	 		
 	
 		   <div class="field is-horizontal">

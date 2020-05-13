@@ -11,7 +11,9 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <servlet>
+  
+   <!-- création compte -->
+  <servlet>  <!-- servlet -->
   	<servlet-name>CreerCompte</servlet-name>
   	<servlet-class>fr.eni.projet01.trocenchere.ihm.CreerCompte</servlet-class>  
   </servlet>
@@ -20,16 +22,7 @@
   	<url-pattern>/nouveau-compte</url-pattern>
   </servlet-mapping>
   
-   <servlet>
-  	<servlet-name>ConnecterCompte</servlet-name>
-  	<servlet-class>fr.eni.projet01.trocenchere.ihm.ConnecterCompte</servlet-class>  
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>ConnecterCompte</servlet-name>
-  	<url-pattern>/ConnecterCompte</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
+    <servlet>  <!-- JSP -->
 	  <servlet-name>creationCompte</servlet-name>
 	  <jsp-file>/WEB-INF/creationCompte.jsp</jsp-file>
   </servlet>
@@ -38,7 +31,19 @@
 	  <url-pattern>/creationCompte</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  
+  
+  <!-- connexion compte -->
+   <servlet>  <!-- servlet -->
+  	<servlet-name>ConnecterCompte</servlet-name>
+  	<servlet-class>fr.eni.projet01.trocenchere.ihm.ConnecterCompte</servlet-class>  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ConnecterCompte</servlet-name>
+  	<url-pattern>/ConnecterCompte</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>  <!-- JSP -->
 	  <servlet-name>connexion</servlet-name>
 	  <jsp-file>/WEB-INF/connexion.jsp</jsp-file>
   </servlet>
