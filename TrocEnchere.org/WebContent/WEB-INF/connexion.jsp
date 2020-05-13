@@ -36,7 +36,7 @@
   	
   	<div>
 		  <c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
-		  	<c:forEach val="err" items="${listeCodesErreur}">
+		  	<c:forEach var="err" items="${listeCodesErreur}">
 		 		<p>err</p>
 		 	</c:forEach>
 		  </c:if>
