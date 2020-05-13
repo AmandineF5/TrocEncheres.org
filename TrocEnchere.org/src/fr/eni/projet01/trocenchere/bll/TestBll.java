@@ -1,10 +1,11 @@
 package fr.eni.projet01.trocenchere.bll;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class TestBll {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BusinessException {
 		UtilisateurManager testBll = new UtilisateurManager();
 		Utilisateur user = new Utilisateur("Titi3", "Thierry", "ThierryT", "Thierry2@Thierry3.com", "06666666666", "8 rue Thierry", "03258", "Vichy", "0123", 0, false);
 		
