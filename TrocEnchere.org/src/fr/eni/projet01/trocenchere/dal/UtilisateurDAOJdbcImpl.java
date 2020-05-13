@@ -25,8 +25,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
  	public void insertUser(Utilisateur user) {
 		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL);){
-			// Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
 			state.setString(3, user.getPrenom());
@@ -38,11 +38,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setString(9, user.getMotDePasse());
 			state.setFloat(10, user.getCredit());
 			state.setBoolean(11, user.isAdministrateur());
-			state.executeUpdate();			
+			state.executeUpdate();
+			//test sans pool de connection
+			//cnx.commit();
+			//fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -50,6 +52,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTBYID_USER_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
@@ -66,10 +69,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			user.setVille(rs.getString("ville"));
 			user.setMotDePasse(rs.getString("mot_de_passe"));
 			user.setCredit(rs.getInt("credit"));
-			rs.close();
+			rs.close();	
+//			test sans pool de connection
+//			cnx.commit();
+//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return user;
 	}
 
@@ -78,13 +85,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement state= cnx.prepareStatement(SELECTBYID_USER_SQL);){			
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECT_BY_PSEUDO_SQL);){			
 			ResultSet rs;
 			state.setString(1, pseudoId);
 			rs = state.executeQuery();
 			rs.next();
 			user.setNoUtilisateur(rs.getInt("no_utilisateur"));
-			user.setPseudo(rs.getString("pseudo"));
+			user.setPseudo(pseudoId);
 			user.setNom(rs.getString("nom"));
 			user.setPrenom(rs.getString("prenom"));
 			user.setEmail(rs.getString("email"));
@@ -95,6 +103,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			user.setMotDePasse(rs.getString("mot_de_passe"));
 			user.setCredit(rs.getInt("credit"));
 			rs.close();
+//			test sans pool de connection
+//			cnx.commit();
+//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -103,6 +114,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	@Override
 	public void updateUser(Utilisateur user) {
 		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(UPDATE_USER_SQL);){
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
@@ -116,7 +128,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setFloat(10, user.getCredit());
 			state.setBoolean(11, user.isAdministrateur());
 			state.setInt(12, user.getNoUtilisateur());
-			state.execute();	
+			state.execute();
+//			test sans pool de connection
+//			cnx.commit();
+//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -128,9 +143,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	public void deleteUser(int noUtilisateur) {
 	
 			try (Connection cnx = ConnectionProvider.getConnection();
+					//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 					PreparedStatement state = cnx.prepareStatement(DELETE_USER_SQL)){
 				state.setInt(1, noUtilisateur);
 				state.executeUpdate();
+//				test sans pool de connection
+//				cnx.commit();
+//				fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -152,7 +171,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	            utilisateur = new Utilisateur();
 	            utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 	            utilisateur.setEmail(pseudo);
-	        }} catch (SQLException e) {
+	        }
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
 		return utilisateur;
