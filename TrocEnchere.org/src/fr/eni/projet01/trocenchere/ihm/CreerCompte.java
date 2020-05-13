@@ -65,16 +65,18 @@ public class CreerCompte extends HttpServlet {
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 				try {
 					UM.ajouterUtilisateur(utilisateur);
+					HttpSession session = request.getSession();
+		            session.setAttribute("utilisateur", utilisateur);
+		            Cookie pseudoUtilisateur = new Cookie("pseudo", utilisateur.getPseudo());
+		            response.addCookie(pseudoUtilisateur);
+		            // lien vers servlet de gestion du compte;
+		            response.sendRedirect("");
 				} catch (BusinessException e) {
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur",e.getListeErreur());
+					doGet(request, response);  
 				}
-				HttpSession session = request.getSession();
-	            session.setAttribute("utilisateur", utilisateur);
-	            Cookie pseudoUtilisateur = new Cookie("pseudo", utilisateur.getPseudo());
-	            response.addCookie(pseudoUtilisateur);
-	            // lien vers servlet de gestion du compte;
-	            response.sendRedirect("");
+				
 				} else {
 					request.setAttribute("message", messageErreur);
 					doGet(request, response);  //retour cr�ation compte 

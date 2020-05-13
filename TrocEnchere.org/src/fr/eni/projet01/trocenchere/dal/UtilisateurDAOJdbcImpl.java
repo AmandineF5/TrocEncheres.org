@@ -50,21 +50,28 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			
 		} catch (MySQLIntegrityConstraintViolationException e1) {
 			e1.printStackTrace();
-			String nouvelUtilisateurPseudo = user.getPseudo();
-			Utilisateur utilisateurExistantPseudo = this.selectByPseudo(nouvelUtilisateurPseudo);
-			String pseudoExistant = utilisateurExistantPseudo.getPseudo();
-			String nouvelUtilisateurEmail = user.getEmail();
-			Utilisateur utilisateurExistantEmail = this.selectByEmail(nouvelUtilisateurEmail);
-			String emailExistant = utilisateurExistantEmail.getEmail();
-			if (utilisateurExistantPseudo!=null && nouvelUtilisateurPseudo.equals(pseudoExistant)) {
-				be.ajouterErreur("Erreur: Ce pseudo est déjà pris");
-			} else if (nouvelUtilisateurEmail!=null && nouvelUtilisateurEmail.equals(emailExistant)){
+			
+			try {
+				String nouvelUtilisateurPseudo = user.getPseudo();
+				Utilisateur utilisateurExistantPseudo = this.selectByPseudo(nouvelUtilisateurPseudo);
+			} catch (Exception e2) {
+				e2.printStackTrace();
 				be.ajouterErreur("Erreur: Cet email est déjà pris");
+				throw be;
 			}
 			
-			throw be;
-		} catch (Exception e2) {
-			e2.printStackTrace();
+			try {
+				String nouvelUtilisateurEmail = user.getEmail();
+				Utilisateur utilisateurExistantEmail = this.selectByEmail(nouvelUtilisateurEmail);
+			} catch (Exception e3) {
+				e3.printStackTrace();
+				be.ajouterErreur("Erreur: Ce pseudo est déjà pris");
+				throw be;
+			}
+			
+			
+		} catch (Exception e4) {
+			e4.printStackTrace();
 			be.ajouterErreur("Erreur: impossible de créer le compte");
 			throw be;
 		}
