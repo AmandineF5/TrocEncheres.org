@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 
 /**
@@ -62,7 +63,12 @@ public class CreerCompte extends HttpServlet {
 			
 			//comparaison mot de passe
 			if (mdpUtilisateur.equals(confMdpUtilisateur)) {
-				UM.ajouterUtilisateur(utilisateur);
+				try {
+					UM.ajouterUtilisateur(utilisateur);
+				} catch (BusinessException e) {
+					e.printStackTrace();
+					request.setAttribute("listeCodesErreur",e.getListeErreur());
+				}
 				HttpSession session = request.getSession();
 	            session.setAttribute("utilisateur", utilisateur);
 	            Cookie pseudoUtilisateur = new Cookie("pseudo", utilisateur.getPseudo());

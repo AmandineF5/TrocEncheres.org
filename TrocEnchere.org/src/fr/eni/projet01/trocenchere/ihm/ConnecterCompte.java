@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 
 public class ConnecterCompte extends HttpServlet {
@@ -48,9 +49,12 @@ public class ConnecterCompte extends HttpServlet {
 	            request.setAttribute("message", message);
 	            doGet(request, response);
 			}
-		} catch (SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-		};
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+			request.setAttribute("listeCodesErreur",e1.getListeErreur());
+		} catch (SQLException | ClassNotFoundException e2 ) {
+			e2.printStackTrace();
+		}
 		
 	}
 
