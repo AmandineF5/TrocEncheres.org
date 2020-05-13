@@ -28,7 +28,7 @@
 		<div class="subtitle is-medium">
 	 		Mon Profil
 	 	</div>
-		<form action="/TrocEnchere.org/nouveau-compte" method="post">
+		<form action="/ModifierCompte" method="post">
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
 			    <label class="label">Pseudo:</label>
@@ -159,13 +159,14 @@
 		    <div class="field">
 		      <div class="control">
 				  <button type="submit" class="button is-primary" name="bouton" value="enregistrer">Enregistrer</button>
-				  <button type="submit" class="button is-primary" name="bouton" value="supprimer">Supprimer mon compte</button>
-				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Retour</button></a> <%--rediriger vers Ou? --%>
 			  </div>
 			</div>
 		</div>
 		
 		</form>
+		
+		<button type="submit" class="button is-primary" name="bouton" value="supprimer">Supprimer mon compte</button>
+		<a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Retour</button></a> <%--rediriger vers Acceuil --%>
 	</main>
 
 </body>
