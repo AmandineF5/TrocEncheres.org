@@ -76,7 +76,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTBYEMAIL_USER_SQL);){			
 			ResultSet rs;
-			state.setString(5, utilisateurEmail);
+			state.setString(1, utilisateurEmail);
 			rs = state.executeQuery();
 			rs.next();
 			user.setNoUtilisateur(rs.getInt("no_utilisateur"));
