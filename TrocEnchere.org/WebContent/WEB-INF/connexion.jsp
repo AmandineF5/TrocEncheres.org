@@ -84,7 +84,7 @@
 	</form>
 
 	
-	<form action="/TrocEnchere.org/nouveau-compte" method="post">
+	<form action="/TrocEnchere.org/nouveau-compte" method="get">
 		<div class="field-body">
 			    <div class="field">
 			      <div class="control">
