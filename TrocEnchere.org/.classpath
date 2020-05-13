@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="D:/Documents DDE/ENI/08-Java EE/Cours 160 - Module 1/Ressources/apache-tomcat-8.5.23/lib/tomcat-util-scan.jar"/>
 	<classpathentry kind="lib" path="D:/Documents DDE/ENI/08-Java EE/Cours 160 - Module 1/Ressources/apache-tomcat-8.5.23/lib/tomcat-websocket.jar"/>
 	<classpathentry kind="lib" path="D:/Documents DDE/ENI/08-Java EE/Cours 160 - Module 1/Ressources/apache-tomcat-8.5.23/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.43-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

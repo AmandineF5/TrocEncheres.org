@@ -5,11 +5,24 @@ import fr.eni.projet01.trocenchere.bo.Utilisateur;
 public class TestDal {
 
 	public static void main(String[] args) {
-		Utilisateur user = new Utilisateur("Titi", "Thierry", "ThierryT", "Thierry@Thierry.com", "025455455", "8 rue Thierry", "03258", "Vichy", "0123", 0, false);
+		//Utilisateur user = new Utilisateur("Titi3", "Thierry", "ThierryT", "Thierry2@Thierry3.com", "06666666666", "8 rue Thierry", "03258", "Vichy", "0123", 0, false);
 		
 		UtilisateurDAOJdbcImpl test = new UtilisateurDAOJdbcImpl();
 		
-		test.insertUser(user);
+		//test.insertUser(user);
+		//System.out.println(user);
+		
+		//Utilisateur user4 = test.selectByIdUser(6);
+		//System.out.println(user4);
+		//user4.setCodePostal("25654");
+		//user4.setNom("Thierry789");
+		//user4.setTelephone("0324564666");
+		//test.updateUser(user4);
+		//System.out.println(user4);
+		//test.deleteUser(6);
+		
+		Utilisateur user3 = test.selectByPseudo("Titi");
+		System.out.println(user3);
 	}
 
 }
