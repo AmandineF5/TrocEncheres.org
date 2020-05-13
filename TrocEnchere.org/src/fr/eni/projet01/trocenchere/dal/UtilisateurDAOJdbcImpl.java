@@ -253,8 +253,16 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	        ResultSet rs = state.executeQuery();     
 	        if (rs.next()) {
 	            utilisateur = new Utilisateur();
-	            utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+	            utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+	            utilisateur.setNom(rs.getString("nom"));
+	            utilisateur.setPrenom(rs.getString("prenom"));
 	            utilisateur.setEmail(pseudo);
+	            utilisateur.setTelephone(rs.getString("telephone"));
+	            utilisateur.setRue(rs.getString("rue"));
+	            utilisateur.setCodePostal(rs.getString("code_postal"));
+	            utilisateur.setVille(rs.getString("ville"));
+	            utilisateur.setMotDePasse(mdp);
+	            utilisateur.setCredit(rs.getInt("credit"));                     
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
