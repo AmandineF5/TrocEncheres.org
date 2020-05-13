@@ -12,5 +12,6 @@ public interface UtilisateurDAO {
 	public void updateUser (Utilisateur utilisateur);	
 	public void deleteUser (int noUtilisateur);
 	public Utilisateur verificationConnectionComptePseudo (String pseudo, String mdp);
+	public Utilisateur selectByPseudo (String pseudo);
 	
 }
