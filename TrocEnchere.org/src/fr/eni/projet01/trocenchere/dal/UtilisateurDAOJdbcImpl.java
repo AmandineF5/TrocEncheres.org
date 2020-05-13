@@ -14,6 +14,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 													"ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
 	private static final String SELECTBYID_USER_SQL = "SELECT * FROM utilisateurs WHERE no_utilisateur = ?";
+	private static final String SELECT_BY_PSEUDO_SQL = "SELECT * FROM utilisateurs WHERE pseudo = ?";
 	
 	private static final String UPDATE_USER_SQL = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?,telephone=?,rue=?,code_postal=?"+
 													",ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur = ?";
@@ -72,6 +73,33 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		return user;
 	}
 
+	@Override
+	public Utilisateur selectByPseudo(String pseudoId) {
+		
+		Utilisateur user = new Utilisateur();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECTBYID_USER_SQL);){			
+			ResultSet rs;
+			state.setString(1, pseudoId);
+			rs = state.executeQuery();
+			rs.next();
+			user.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			user.setPseudo(rs.getString("pseudo"));
+			user.setNom(rs.getString("nom"));
+			user.setPrenom(rs.getString("prenom"));
+			user.setEmail(rs.getString("email"));
+			user.setTelephone(rs.getString("telephone"));
+			user.setRue(rs.getString("rue"));
+			user.setCodePostal(rs.getString("code_postal"));
+			user.setVille(rs.getString("ville"));
+			user.setMotDePasse(rs.getString("mot_de_passe"));
+			user.setCredit(rs.getInt("credit"));
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 	@Override
 	public void updateUser(Utilisateur user) {
 		try (Connection cnx = ConnectionProvider.getConnection();
