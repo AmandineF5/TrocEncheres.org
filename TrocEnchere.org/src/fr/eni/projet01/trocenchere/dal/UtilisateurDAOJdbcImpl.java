@@ -204,21 +204,26 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 //			test sans pool de connection
 //			cnx.commit();
 //			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
-		}  catch (MySQLIntegrityConstraintViolationException e1) {
+		}   catch (MySQLIntegrityConstraintViolationException e1) {
 			e1.printStackTrace();
-			String nouveauPseudo = user.getPseudo();
-			Utilisateur utilisateurExistantPseudo = this.selectByPseudo(nouveauPseudo);
-			String pseudoExistant = utilisateurExistantPseudo.getPseudo();
-			String nouvelEmail = user.getEmail();
-			Utilisateur utilisateurExistantEmail = this.selectByEmail(nouvelEmail);
-			String emailExistant = utilisateurExistantEmail.getEmail();
-			if (utilisateurExistantPseudo!=null && nouveauPseudo.equals(pseudoExistant)) {
-				be.ajouterErreur("Erreur: Ce pseudo est déjà pris");
-			} else if (utilisateurExistantEmail!=null && nouvelEmail.equals(emailExistant)){
+			
+			try {
+				String nouvelUtilisateurPseudo = user.getPseudo();
+				Utilisateur utilisateurExistantPseudo = this.selectByPseudo(nouvelUtilisateurPseudo);
+			} catch (Exception e2) {
+				e2.printStackTrace();
 				be.ajouterErreur("Erreur: Cet email est déjà pris");
+				throw be;
 			}
 			
-			throw be;
+			try {
+				String nouvelUtilisateurEmail = user.getEmail();
+				Utilisateur utilisateurExistantEmail = this.selectByEmail(nouvelUtilisateurEmail);
+			} catch (Exception e3) {
+				e3.printStackTrace();
+				be.ajouterErreur("Erreur: Ce pseudo est déjà pris");
+				throw be;
+			}
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			be.ajouterErreur("Erreur: impossible de modifier le compte");
