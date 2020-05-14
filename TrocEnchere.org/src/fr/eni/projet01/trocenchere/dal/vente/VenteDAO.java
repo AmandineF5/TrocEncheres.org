@@ -7,27 +7,28 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public interface VenteDAO {
 	
-	//manque les "throws Exception"
-	
 	/**
 	 * création d'un article à vendre
 	 * @param Vente
+	 * @throws BusinessException 
 	 */
-	public void insert (Vente Vente);
+	public void insert (Vente Vente) throws BusinessException;
 	
 	/**
 	 * affichage de la vente par noVente
 	 * @param noVente
 	 * @return une vente
+	 * @throws BusinessException 
 	 */
-	public List<Vente> selectById (int noVente);
+	public List<Vente> selectById (int noVente) throws BusinessException;
 	
 	/**
 	 * Récupère toutes les ventes publiées par un utilisateur
 	 * @param noUtilisateur
 	 * @return la liste des ventes appartenant à l'utilisateur
+	 * @throws BusinessException 
 	 */
-	public  List<Vente> selectAll (int noUtilisateur);
+	public  List<Vente> selectAll (int noUtilisateur) throws BusinessException;
 	
 	/**
 	 * Chercher et récupère toutes les ventes publiées comportant le mot clé
