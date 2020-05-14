@@ -89,7 +89,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="datetime-local" class="input" name="dateFinEncheres" >
+			    	<input type="date" class="input" name="dateFinEncheres" >
 		 		</div>
 		 	</div>
 		 </div>
