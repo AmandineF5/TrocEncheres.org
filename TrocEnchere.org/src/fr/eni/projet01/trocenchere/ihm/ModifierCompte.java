@@ -27,6 +27,11 @@ public class ModifierCompte extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		request.setAttribute("utilisateur", utilisateur);
+		
+		/*to test 
+		Utilisateur user = new Utilisateur(5, "you", "Jin", "Sue", "qsdf@qsd.fcom", "123123", "jeanperrin", "972833", "REnnes", "qsdf", 5);
+		request.setAttribute("utilisateur", user);
+		*/
 		// forward to page
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierCompte.jsp");
 		rd.forward(request, response);
