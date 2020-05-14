@@ -10,7 +10,7 @@ CREATE TABLE CATEGORIES (
 ENGINE=InnoDB CHARACTER SET utf8;
 
 CREATE TABLE ENCHERES (
-    date_enchere                  DATETIME NOT NULL,
+    date_enchere                  DATE NOT NULL,
     no_acheteur   INTEGER NOT NULL,
     no_vente             INTEGER NOT NULL,
     points          INTEGER NOT NULL
@@ -61,7 +61,7 @@ ALTER TABLE `UTILISATEURS` CHANGE `no_utilisateur` `no_utilisateur` INT(11) NOT 
 
 
 ALTER TABLE `RETRAITS` ADD PRIMARY KEY( `no_vente`);
-ALTER TABLE `ENCHERES` ADD PRIMARY KEY( `no_utilisateur`, `no_vente`);
+ALTER TABLE `ENCHERES` ADD PRIMARY KEY( `no_acheteur`, `no_vente`);
 ALTER TABLE `CATEGORIES` ADD PRIMARY KEY( `no_categorie`);
 
 ALTER TABLE `VENTES` ADD PRIMARY KEY( `no_vente`);
@@ -73,8 +73,8 @@ ALTER TABLE `UTILISATEURS` ADD UNIQUE(`email`);
 ALTER TABLE `UTILISATEURS` ADD UNIQUE(`pseudo`, `telephone`, `email`);
 
 ALTER TABLE `ENCHERES` 
-ADD CONSTRAINT `encheres_utilisateur_fk` 
-FOREIGN KEY (`no_utilisateur`) REFERENCES `UTILISATEURS`(`no_utilisateur`) 
+ADD CONSTRAINT `encheres_acheteur_fk` 
+FOREIGN KEY (`no_acheteur`) REFERENCES `UTILISATEURS`(`no_utilisateur`) 
 ON DELETE NO ACTION 
 ON UPDATE NO ACTION;
 

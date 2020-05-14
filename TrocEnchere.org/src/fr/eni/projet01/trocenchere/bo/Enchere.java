@@ -1,10 +1,11 @@
 package fr.eni.projet01.trocenchere.bo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
 public class Enchere {
-	private LocalDateTime dateEnchere;
+	private LocalDate dateEnchere;
 	private Vente concerne;
 	private Utilisateur encherit;
 	private Integer points;
@@ -22,7 +23,7 @@ public class Enchere {
 	 * @param encherit
 	 * @param points
 	 */
-	public Enchere(LocalDateTime dateEnchere, Vente concerne, Utilisateur encherit, Integer points) {
+	public Enchere(LocalDate dateEnchere, Vente concerne, Utilisateur encherit, Integer points) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.concerne = concerne;
@@ -31,11 +32,11 @@ public class Enchere {
 	}
 
 
-	public LocalDateTime getDateEnchere() {
+	public LocalDate getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public void setDateEnchere(LocalDateTime dateEnchere) {
+	public void setDateEnchere(LocalDate dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 
