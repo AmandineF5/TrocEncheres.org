@@ -18,11 +18,13 @@ public class Vente {
 	private Utilisateur acheteur;
 	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
+	private Boolean publie;
+	private String nomImage;
 
 	// contstructors
 	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
 			Integer prixVente, Categorie categorieArticle, Utilisateur acheteur, Utilisateur vendeur,
-			Retrait lieuRetrait) {
+			Retrait lieuRetrait, Boolean publie, String nomImage) {
 		super();
 		this.noVente = noVente;
 		this.nomArticle = nomArticle;
@@ -34,11 +36,13 @@ public class Vente {
 		this.acheteur = acheteur;
 		this.vendeur = vendeur;
 		this.lieuRetrait = lieuRetrait;
+		this.publie = publie;
+		this.nomImage = nomImage;
 	}
 
 	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
 			Categorie categorieArticle, Utilisateur vendeur) {
-		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, null, vendeur, null);
+		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, null, vendeur, null, false, null);
 	}
 
 	// getters and setters
@@ -126,12 +130,28 @@ public class Vente {
 		this.lieuRetrait = lieuRetrait;
 	}
 
+	public Boolean getPublie() {
+		return publie;
+	}
+
+	public void setPublie(Boolean publie) {
+		this.publie = publie;
+	}
+
+	public String getNomImage() {
+		return nomImage;
+	}
+
+	public void setNomImage(String nomImage) {
+		this.nomImage = nomImage;
+	}
+	
 	@Override
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente
-				+ ", categorieArticle=" + categorieArticle + ", achete=" + acheteur + ", vend=" + vendeur
-				+ ", lieuRetrait=" + lieuRetrait + "]";
+				+ ", categorieArticle=" + categorieArticle + ", acheteur=" + acheteur + ", vendeur=" + vendeur
+				+ ", lieuRetrait=" + lieuRetrait + ", publie=" + publie + ", nomImage=" + nomImage + "]";
 	}
 
 }
