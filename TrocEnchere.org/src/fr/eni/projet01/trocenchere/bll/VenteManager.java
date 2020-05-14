@@ -18,14 +18,14 @@ public class VenteManager {
 		this.venteDAO = DAOFactory.getVenteDAO();
 	}
 
-	public void ajouterVente (Vente vente) throws BusinessException {
-		venteDAO.insert(vente);
+	public Vente ajouterVente (Vente vente) throws BusinessException {
+		return venteDAO.insert(vente);
 	}
 	
 
 	public List<Vente> selectionnerVenteById (int noVente) throws BusinessException {
 		List<Vente> listeVente = new ArrayList<Vente>();
-		listeVente = venteDAO.selectById (noVente);
+		//listeVente = venteDAO.selectById (noVente);
 		return listeVente;
 	}
 
