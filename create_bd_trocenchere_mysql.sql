@@ -48,7 +48,9 @@ CREATE TABLE VENTES (
     prix_initial                  INTEGER,
     prix_vente                    INTEGER,
     no_utilisateur                INTEGER NOT NULL,
-    no_categorie                  INTEGER NOT NULL
+    no_categorie                  INTEGER NOT NULL,
+    nomImage                      VARCHAR(50) NOT NULL,
+    publiee                       BIT(1) NOT NULL DEFAULT b'0'
 )
 ENGINE=InnoDB CHARACTER SET utf8;
 
