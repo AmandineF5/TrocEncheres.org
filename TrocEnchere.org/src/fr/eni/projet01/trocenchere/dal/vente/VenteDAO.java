@@ -34,14 +34,14 @@ public interface VenteDAO {
 	 * @param keyWord
 	 * @return une liste de vente
 	 */
-	public List<Vente> searchByKeyWord (String keyWord);
+	public List<Vente> searchByKeyWord (String keyWord)throws BusinessException;
 	
 	/**
 	 * cherche et récupère une vente par categorie
 	 * @param libelle ou noCategorie
 	 * @return une liste de vente
 	 */
-	public List<Vente> searchByCatagory (String libelle); //ou par int noCategorie
+	public List<Vente> searchByCatagory (String libelle)throws BusinessException; //ou par int noCategorie
 	
 	/**
 	 * suppression d'une vente
