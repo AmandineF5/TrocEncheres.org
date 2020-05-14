@@ -90,7 +90,7 @@ public class Vente {
 		this.miseAPrix = miseAPrix;
 	}
 
-	public float getPrixVente() {
+	public int getPrixVente() {
 		return prixVente;
 	}
 
