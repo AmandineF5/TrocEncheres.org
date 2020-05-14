@@ -3,7 +3,9 @@ package fr.eni.projet01.trocenchere.dal.vente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			
+			
 //			vente.setVendeur(rs.getInt("no_utilisateur"));
 //			vente.setCategorieArticle(rs.getInt("no_categorie"));
 			
@@ -103,6 +106,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setNoVente(rs.getInt("no_vente"));
 			vente.setNomArticle(rs.getString("nomarticle"));
 			vente.setDescription(rs.getString("description"));
+			
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate date = LocalDate.parse(rs.getDate("date_fin_encheres"), dtf);
+			LocalDateTime dateFinEncheres = date.atTime(0, 0);
+			
 			//vente.setDateFinEncheres(rs.getDate("date_fin_echeres"));  //probleme sur le format LocalDateTime
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
