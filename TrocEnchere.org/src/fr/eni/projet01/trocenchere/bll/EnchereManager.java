@@ -3,8 +3,11 @@ package fr.eni.projet01.trocenchere.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import fr.eni.project01.trocenchere.dal.enchere.EnchereDAO;
 import fr.eni.projet01.trocenchere.bo.Enchere;
+import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.dal.DAOFactory;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
@@ -17,7 +20,7 @@ public class EnchereManager {
 	}
 
 	public void ajouterEnchere (Enchere enchere) throws BusinessException {
-		enchereDAO.insert(enchere);
+		this.enchereDAO.insert(enchere);
 	}
 	
 
@@ -34,7 +37,34 @@ public class EnchereManager {
 	}
 	
 	public void supprimerVente (int noVente) throws BusinessException {
-		enchereDAO.delete(noVente);
+		this.enchereDAO.delete(noVente);
 	}
+	
+	public String trouverClassementEnchere (int noVente, int noUtilisateurSession) throws BusinessException {
+		String classement=null;
+		List<Enchere> listeEnchere = new ArrayList<Enchere>();
+		listeEnchere = this.selectionnerEnchereByIdUser(noVente);
+		int nbEnchere = listeEnchere.size();
+		int noUtilisateurEnchere;
+		Utilisateur utilisateurEnchere;
+		int index = 0;
+		
+		for(Enchere e : listeEnchere) {
+			utilisateurEnchere = e.getEncherit();
+			noUtilisateurEnchere = utilisateurEnchere.getNoUtilisateur();
+			
+			if (noUtilisateurEnchere==noUtilisateurSession) {
+				break;
+			}
+			
+			index++;		
+		}
+		
+		classement = String.format("%d / %d", index, nbEnchere);		
+		return classement;
+	}
+	
+	
+	
 	
 }

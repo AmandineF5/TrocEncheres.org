@@ -21,8 +21,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String INSERT_ENCHERE_SQL = "INSERT INTO encheres(date_enchere, no_acheteur, no_vente, points) VALUES (?,?,?,?)";
 
-	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE ventes.no_vente = ?";
-	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ?";
+	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE ventes.no_vente = ? ORDER BY points DESC";
+	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? ORDER BY points DESC";
 	
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
 	
@@ -44,13 +44,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			Utilisateur user = um.selectionnerUtilisateurById(noUtilisateur);
 			enchere.setEncherit(user);
 			
-			VenteManager vm = new VenteManager();
-			Vente vente = vm.selectionnerVenteById(rs.getInt("no_vente"));
+			Vente vente = new Vente ();
+			vente.setNoVente(rs.getInt("no_vente"));
+			vente.setNomArticle(rs.getString("nomarticle"));
+			vente.setDescription(rs.getString("description"));
+			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+			vente.setMiseAPrix(rs.getInt("prix_initial"));
+			vente.setPrixVente(rs.getInt("prix_vente"));
 			enchere.setConcerne(vente);
-
+			
 			enchere.setPoints(rs.getInt("points"));
-			
-			
+				
 			rs.close();	
 			
 		} catch (Exception e) {
@@ -81,8 +85,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			Utilisateur user = um.selectionnerUtilisateurById(rs.getInt("no_acheteur"));
 			enchere.setEncherit(user);
 			
-			VenteManager vm = new VenteManager();
-			Vente vente = vm.selectionnerVenteById(noVente);
+			Vente vente = new Vente ();
+			vente.setNoVente(noVente);
+			vente.setNomArticle(rs.getString("nomarticle"));
+			vente.setDescription(rs.getString("description"));
+			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+			vente.setMiseAPrix(rs.getInt("prix_initial"));
+			vente.setPrixVente(rs.getInt("prix_vente"));
 			enchere.setConcerne(vente);
 
 			enchere.setPoints(rs.getInt("points"));
