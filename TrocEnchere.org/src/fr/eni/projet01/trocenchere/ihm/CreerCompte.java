@@ -76,7 +76,8 @@ public class CreerCompte extends HttpServlet {
 		            response.addCookie(pseudoUtilisateur);
 		            
 		            // lien vers servlet de gestion du compte;
-		            response.sendRedirect("/afficher-compte");
+		            
+		         response.sendRedirect(request.getContextPath()+"/afficherCompte");
 				} catch (BusinessException e) {
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur",e.getListeErreur());
