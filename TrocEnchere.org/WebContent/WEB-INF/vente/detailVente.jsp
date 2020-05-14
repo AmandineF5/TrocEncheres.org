@@ -19,17 +19,17 @@
 	</header>
 	<main>
 		<div class="subtitle is-medium">
-	 		Nouvelle vente
+	 		Détail Vente
 	 	</div>
 	 	
-		<form action="${request.contextPath}/NouvelleVente" method="post">
+		
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
 			    <label class="label">Article:</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="nomarticle" >
+			    	${vente.nomArticle}
 		 		</div>
 		 	</div>
 		 </div>
