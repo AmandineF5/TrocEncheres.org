@@ -1,7 +1,9 @@
 package fr.eni.project01.trocenchere.ihm.vente;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,12 +36,13 @@ public class NouvelleVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		Utilisateur utilisateur = extractedUserSession(request);		
 		request.setAttribute("utilisateur", utilisateur);
 		
 		request.getRequestDispatcher("/WEB-INF/vente/nouvelleVente.jsp").forward(request, response);
 	}
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,15 +53,19 @@ public class NouvelleVente extends HttpServlet {
 		//newVente.setNoVente(noVente);
 		newVente.setNomArticle(request.getParameter("nomArticle"));
 		newVente.setDescription(request.getParameter("description"));
-		//newVente.setDateFinEncheres(request.getParameter("dateFinEncheres")); //"dateFinEncheres"
 		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate date = LocalDate.parse(request.getParameter("dateFinEncheres"), dtf);
+		LocalDateTime dateFinEncheres = date.atTime(0, 0);
+		newVente.setDateFinEncheres(dateFinEncheres);		
 		newVente.setMiseAPrix(Integer.parseInt(request.getParameter("prixInitial")));		
 		
 		//newVente.setCategorieArticle(request.getParameter("categorie"));
 		
-		//newVente.setVendeur(vend);
-		
-		//newVente.setLieuRetrait(lieuRetrait);
+		Utilisateur utilisateur = extractedUserSession(request);
+		newVente.setVendeur(utilisateur);
+		Retrait retrait = new Retrait(request.getParameter("rueUtilisateur"), request.getParameter("cpUtilisateur"), request.getParameter("villeUtilisateur"));
+		newVente.setLieuRetrait(retrait);
 		
 //		noVente;
 //		private String nomArticle;
@@ -72,6 +79,12 @@ public class NouvelleVente extends HttpServlet {
 //		private Retrait lieuRetrait;
 		
 		//doGet(request, response);
+	}
+		
+	private Utilisateur extractedUserSession(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		return utilisateur;
 	}
 
 }
