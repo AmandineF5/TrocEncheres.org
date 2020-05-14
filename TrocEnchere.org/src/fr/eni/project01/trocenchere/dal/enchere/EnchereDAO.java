@@ -10,6 +10,6 @@ public interface EnchereDAO {
 
 	public List<Enchere> selectByUserId(int noUtilisateur) throws BusinessException;
 	public List<Enchere> selectByVenteId(int noVente) throws BusinessException;
-	public Enchere insert(Enchere newEnchere) throws BusinessException;
+	public void insert(Enchere newEnchere) throws BusinessException;
 	public void delete(int noVente) throws BusinessException;
 }
