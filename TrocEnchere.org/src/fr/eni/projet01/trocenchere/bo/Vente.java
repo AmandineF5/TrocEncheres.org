@@ -102,19 +102,19 @@ public class Vente {
 		this.categorieArticle = categorieArticle;
 	}
 
-	public Utilisateur getAchete() {
+	public Utilisateur getAcheteur() {
 		return acheteur;
 	}
 
-	public void setAchete(Utilisateur achete) {
+	public void setAcheteur(Utilisateur achete) {
 		this.acheteur = acheteur;
 	}
 
-	public Utilisateur getVend() {
+	public Utilisateur getVendeur() {
 		return vendeur;
 	}
 
-	public void setVend(Utilisateur vend) {
+	public void setVendeur(Utilisateur vend) {
 		this.vendeur = vendeur;
 	}
 
