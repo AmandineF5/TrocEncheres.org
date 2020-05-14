@@ -266,9 +266,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	        if (rs.next()) {
 	            utilisateur = new Utilisateur();
 	            utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+	            utilisateur.setPseudo(pseudo);
 	            utilisateur.setNom(rs.getString("nom"));
 	            utilisateur.setPrenom(rs.getString("prenom"));
-	            utilisateur.setEmail(pseudo);
+	            utilisateur.setEmail(rs.getString("email"));
 	            utilisateur.setTelephone(rs.getString("telephone"));
 	            utilisateur.setRue(rs.getString("rue"));
 	            utilisateur.setCodePostal(rs.getString("code_postal"));
