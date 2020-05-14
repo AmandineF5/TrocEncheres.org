@@ -78,7 +78,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		}
 	}
 
-	public List<Vente> selectById(int noVente) throws BusinessException {
+	public Vente selectById(int noVente) throws BusinessException {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
@@ -114,10 +114,10 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			throw be;
 		}
 		
-		return listeVentes;
+		return vente;
 	}
 	
-	public List<Vente> selectAll (int noUtilisateur) throws BusinessException {
+	public List<Vente> selectAll(int noUtilisateur) throws BusinessException {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
@@ -172,7 +172,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setNoVente(rs.getInt("no_vente"));
 			vente.setNomArticle(rs.getString("nomarticle"));
 			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_echeres"));  //probleme sur le format LocalDateTime
+			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			
@@ -213,12 +213,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setNoVente(rs.getInt("no_vente"));
 			vente.setNomArticle(rs.getString("nomarticle"));
 			vente.setDescription(rs.getString("description"));
-			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate date = LocalDate.parse(rs.getDate("date_fin_encheres"), dtf);
-			LocalDateTime dateFinEncheres = date.atTime(0, 0);
-			
-			//vente.setDateFinEncheres(rs.getDate("date_fin_echeres"));  //probleme sur le format LocalDateTime
+			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			
@@ -226,21 +221,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 //			vente.setCategorieArticle(rs.getInt("no_categorie"));
 			
 			listeVente.add(vente);
-			rs.close();
-			
-//			private int noVente;
-//			private String nomArticle;
-//			private String description;
-//			private LocalDateTime dateFinEncheres;
-//			private Integer miseAPrix;
-//			private Integer prixVente;
-//			private Categorie categorieArticle;
-//			private Utilisateur acheteur;
-//			private Utilisateur vendeur;
-//			private Retrait lieuRetrait;
-			
-			
-			
+			rs.close();			
 			
 //			test sans pool de connection
 //			cnx.commit();
