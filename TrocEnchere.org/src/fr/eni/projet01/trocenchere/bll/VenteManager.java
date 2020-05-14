@@ -23,10 +23,10 @@ public class VenteManager {
 	}
 	
 
-	public List<Vente> selectionnerVenteById (int noVente) throws BusinessException {
-		List<Vente> listeVente = new ArrayList<Vente>();
-		//listeVente = venteDAO.selectById (noVente);
-		return listeVente;
+	public Vente selectionnerVenteById (int noVente) throws BusinessException {
+		Vente vente;
+		vente = venteDAO.selectById (noVente);
+		return vente;
 	}
 
 	public List<Vente> selectionnerVenteUtilisateur (int noUtilisateur)  throws BusinessException {
