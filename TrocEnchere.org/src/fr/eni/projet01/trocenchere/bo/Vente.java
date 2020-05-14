@@ -1,6 +1,6 @@
 package fr.eni.projet01.trocenchere.bo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * 
@@ -11,7 +11,7 @@ public class Vente {
 	private int noVente;
 	private String nomArticle;
 	private String description;
-	private LocalDateTime dateFinEncheres;
+	private LocalDate dateFinEncheres;  //changé de LocalDateTime pour LocalDate
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private Categorie categorieArticle;
@@ -22,7 +22,7 @@ public class Vente {
 	private String nomImage;
 
 	// contstructors
-	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
+	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
 			Integer prixVente, Categorie categorieArticle, Utilisateur acheteur, Utilisateur vendeur,
 			Retrait lieuRetrait, Boolean publie, String nomImage) {
 		super();
@@ -40,7 +40,7 @@ public class Vente {
 		this.nomImage = nomImage;
 	}
 
-	public Vente(int noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
+	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
 			Categorie categorieArticle, Utilisateur vendeur) {
 		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, null, vendeur, null, false, null);
 	}
@@ -74,11 +74,11 @@ public class Vente {
 		this.description = description;
 	}
 
-	public LocalDateTime getDateFinEncheres() {
+	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
-	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
+	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
