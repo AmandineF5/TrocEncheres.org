@@ -20,7 +20,7 @@ public interface VenteDAO {
 	 * @param noVente
 	 * @return une vente
 	 */
-	public Vente selectById (int noVente);
+	public List<Vente> selectById (int noVente);
 	
 	/**
 	 * Récupère toutes les ventes publiées par un utilisateur
