@@ -104,5 +104,7 @@ FOREIGN KEY (`no_utilisateur`) REFERENCES `UTILISATEURS`(`no_utilisateur`)
 ON DELETE NO ACTION 
 ON UPDATE NO ACTION;
 
-
+INSERT INTO categories(libelle) VALUES ("Animalerie"), ("Articles d'électroménager"), ("Bricolage"),
+ ("Ameublement"), ("Décoration"), ("Jouets et jeux"),("Livres"), ("Puériculture"), ("Informatique"),
+ ("Téléphonie"), ("Jeux vidéo et consoles"), ("Vélo"), ("Vêtements et accessoires")
 
