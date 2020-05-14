@@ -31,7 +31,7 @@
 			</c:if>
 		</div>
 		<div class="subtitle is-medium">Mon Profil</div>
-		<form action="/ModifierCompte" method="post">
+		<form action="/TrocEnchere.org/ModifierCompte" method="post">
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
 					<label class="label">Pseudo:</label>
