@@ -22,7 +22,7 @@
 	 		Nouvelle vente
 	 	</div>
 	 	
-		<form action="${request.contextPath}/NouvelleVente" method="post">
+		<form action="/TrocEnchere.org/NouvelleVente" method="post">
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
 			    <label class="label">Article:</label>
@@ -52,8 +52,8 @@
 			 <div class="field-body">
     			<div class="field">
     				<select name="categorie" size="1">
-    					<c:forEach var="cat" items="${categorie}" ${newVente}>
-    						<option value="${categorie.noCategorie} ${newVente.categorieArticle.noCategorie}">${categorie.libelle} ${newVente.categorieArticle.libelle}</option>
+    					<c:forEach var="cat" items="${categories}" > <%-- ${newVente} --%>
+    						<option value="${cat.noCategorie} ">${cat.libelle} </option> <%-- ${newVente.categorieArticle.noCategorie} ${newVente.categorieArticle.libelle} --%>
     					</c:forEach>
     				</select>
 		 		</div>
@@ -140,8 +140,9 @@
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-				  <button type="submit" class="button is-primary" name="bouton" value="valider">Publier</button>
-				  <button type="submit" class="button is-primary" name="bouton" value="valider">Enregistrer</button>
+				  <button type="submit" class="button is-primary" name="bouton" value="Publier">Publier</button>
+				  
+				  <button type="submit" class="button is-primary" name="bouton" value="Enregistre">Enregistrer</button>
 				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="annuler">Annuler</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>

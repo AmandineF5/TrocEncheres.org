@@ -163,6 +163,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return listeVentes;
 	}
 
+	
+	
 	@Override
 	public List<Vente> searchByKeyWord(String keyWord) throws BusinessException {
 		
@@ -189,7 +191,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setVendeur(utilisateur);
 			
 			Categorie categorie = new Categorie();
-			int x = rs.getInt("no_categorie");
+			categorie.setNoCategorie(rs.getInt("no_categorie"));
+			categorie.setLibelle(rs.getString("libelle"));
 			vente.setCategorieArticle(categorie);
 			
 			listeVente.add(vente);
@@ -272,8 +275,4 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			throw be;
 		}
 	}
-	
-	
-	
-
 }
