@@ -10,9 +10,10 @@ CREATE TABLE CATEGORIES (
 ENGINE=InnoDB CHARACTER SET utf8;
 
 CREATE TABLE ENCHERES (
-    date_enchere                  datetime NOT NULL,
-    no_utilisateur   INTEGER NOT NULL,
-    no_vente             INTEGER NOT NULL
+    date_enchere                  DATETIME NOT NULL,
+    no_acheteur   INTEGER NOT NULL,
+    no_vente             INTEGER NOT NULL,
+    points          INTEGER NOT NULL
 )
 ENGINE=InnoDB CHARACTER SET utf8;
 
