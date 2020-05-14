@@ -1,4 +1,4 @@
-package fr.eni.projet01.trocenchere.dal;
+package fr.eni.projet01.trocenchere.dal.encheres;
 
 import java.util.List;
 
