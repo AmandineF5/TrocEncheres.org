@@ -10,9 +10,10 @@ public interface VenteDAO {
 	/**
 	 * création d'un article à vendre
 	 * @param Vente
+	 * @return 
 	 * @throws BusinessException 
 	 */
-	public void insert (Vente Vente) throws BusinessException;
+	public Vente insert (Vente Vente) throws BusinessException;
 	
 	/**
 	 * affichage de la vente par noVente
