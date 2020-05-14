@@ -28,10 +28,6 @@ public class ModifierCompte extends HttpServlet {
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		request.setAttribute("utilisateur", utilisateur);
 		
-		/*to test 
-		Utilisateur user = new Utilisateur(5, "you", "Jin", "Sue", "qsdf@qsd.fcom", "123123", "jeanperrin", "972833", "REnnes", "qsdf", 5);
-		request.setAttribute("utilisateur", user);
-		*/
 		// forward to page
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierCompte.jsp");
 		rd.forward(request, response);
@@ -49,6 +45,7 @@ public class ModifierCompte extends HttpServlet {
 
 		// get updated parameters from jsp, stored in new user to send to db
 		Utilisateur newUtilisateur = new Utilisateur();
+		newUtilisateur.setNoUtilisateur(userID);
 		newUtilisateur.setPseudo(request.getParameter("pseudoUtilisateur"));
 		newUtilisateur.setNom(request.getParameter("nomUtilisateur"));
 		newUtilisateur.setPrenom(request.getParameter("prenomUtilisateur"));
@@ -58,7 +55,6 @@ public class ModifierCompte extends HttpServlet {
 		newUtilisateur.setCodePostal(request.getParameter("cpUtilisateur"));
 		newUtilisateur.setVille(request.getParameter("villeUtilisateur"));
 		newUtilisateur.setMotDePasse(request.getParameter("mdpUtilisateur"));
-		newUtilisateur.setMotDePasse(request.getParameter("confMdpUtilisateur"));
 		newUtilisateur.setCredit(utilisateur.getCredit());
 		newUtilisateur.setAdministrateur(false);
 
@@ -68,6 +64,8 @@ public class ModifierCompte extends HttpServlet {
 		String messageErreur = "Les mots de passe sont différents";
 		RequestDispatcher rd = null;
 
+	
+		
 		// comparaison mot de passe
 		if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 			try {
@@ -76,14 +74,17 @@ public class ModifierCompte extends HttpServlet {
 				// set new one
 				session.setAttribute("utilisateur", newUtilisateur);
 				// send to affichage compte
-				rd = request.getRequestDispatcher("/afficher-compte");
-				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/afficherCompte");
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur", e.getListeErreur());
 			}
 
-		}
+		}else {
+			request.setAttribute("message", messageErreur);
+			doGet(request, response);  //retour modifier compte 
+			}
+			
 
 	}
 }
