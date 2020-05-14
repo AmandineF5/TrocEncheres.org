@@ -2,8 +2,14 @@ package fr.eni.projet01.trocenchere.dal.vente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.projet01.trocenchere.bo.Categorie;
+import fr.eni.projet01.trocenchere.bo.Retrait;
+import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
@@ -42,15 +48,95 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	}
 
 	@Override
-	public List<Vente> searchByKeyWord(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Vente> searchByKeyWord(String keyWord) throws BusinessException {
+		
+		List<Vente> listeVente = new ArrayList<Vente>();
+		Vente vente = new Vente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_KEYWORD_SQL);){			
+			ResultSet rs;
+			state.setString(1, keyWord);
+			rs = state.executeQuery();
+			rs.next();
+			
+			vente.setNoVente(rs.getInt("no_vente"));
+			vente.setNomArticle(rs.getString("nomarticle"));
+			vente.setDescription(rs.getString("description"));
+			vente.setDateFinEncheres(rs.getDate("date_fin_echeres"));  //probleme sur le format LocalDateTime
+			vente.setMiseAPrix(rs.getInt("prix_initial"));
+			vente.setPrixVente(rs.getInt("prix_vente"));
+			
+//			vente.setVendeur(rs.getInt("no_utilisateur"));
+//			vente.setCategorieArticle(rs.getInt("no_categorie"));
+			
+			listeVente.add(vente);
+			rs.close();
+			
+			
+			
+//			test sans pool de connection
+//			cnx.commit();
+//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: libellé inconnu");
+			throw be;
+		}
+		return listeVente;
 	}
 
 	@Override
-	public List<Vente> searchByCatagory(String libelle) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Vente> searchByCatagory(String libelle) throws BusinessException {
+		
+		List<Vente> listeVente = new ArrayList<Vente>();
+		Vente vente = new Vente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_CATEGORY_SQL);){			
+			ResultSet rs;
+			state.setString(1, libelle);
+			rs = state.executeQuery();
+			rs.next();
+			
+			vente.setNoVente(rs.getInt("no_vente"));
+			vente.setNomArticle(rs.getString("nomarticle"));
+			vente.setDescription(rs.getString("description"));
+			//vente.setDateFinEncheres(rs.getDate("date_fin_echeres"));  //probleme sur le format LocalDateTime
+			vente.setMiseAPrix(rs.getInt("prix_initial"));
+			vente.setPrixVente(rs.getInt("prix_vente"));
+			
+//			vente.setVendeur(rs.getInt("no_utilisateur"));
+//			vente.setCategorieArticle(rs.getInt("no_categorie"));
+			
+			listeVente.add(vente);
+			rs.close();
+			
+//			private int noVente;
+//			private String nomArticle;
+//			private String description;
+//			private LocalDateTime dateFinEncheres;
+//			private Integer miseAPrix;
+//			private Integer prixVente;
+//			private Categorie categorieArticle;
+//			private Utilisateur acheteur;
+//			private Utilisateur vendeur;
+//			private Retrait lieuRetrait;
+			
+			
+			
+			
+//			test sans pool de connection
+//			cnx.commit();
+//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: libellé inconnu");
+			throw be;
+		}
+		return listeVente;
 	}
 
 	@Override
