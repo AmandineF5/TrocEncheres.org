@@ -1,6 +1,7 @@
 package fr.eni.projet01.trocenchere.bo;
 
 public class Categorie {
+	
 	private int noCategorie;
 	private String libelle;
 	

@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Retrait;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
@@ -32,7 +33,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
 		
 
-	public void insert(Vente vente) throws BusinessException {
+	public Vente insert(Vente vente) throws BusinessException {
  		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement state = cnx.prepareStatement(INSERT_VENTES_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -62,10 +63,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			state = cnx.prepareStatement(INSERT_RETRAITS_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			Retrait retrait = vente.getLieuRetrait();
-			state.setInt(1, vente.getNoVente);
+			state.setInt(1, vente.getNoVente());
 			state.setString(2, retrait.getRue());
-			state.setString(3, retrait.getCodePostal);
-			state.setString(4, retrait.getVille);
+			state.setString(3, retrait.getCodePostal());
+			state.setString(4, retrait.getRue());
+			
+			vente.setLieuRetrait(retrait);
 			
 			state.executeUpdate();
 			
@@ -76,6 +79,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			be.ajouterErreur("Erreur: impossible de créer la vente");
 			throw be;
 		}
+		
+		return vente;
 	}
 
 	public Vente selectById(int noVente) throws BusinessException {
@@ -144,8 +149,10 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			categorie.setLibelle(rs.getString("libelle"));
 			vente.setCategorieArticle(categorie);
 			
+			//listeVentes.add(vente); ???
+			
 			rs.close();	
-//			
+			
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -161,6 +168,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		
 		List<Vente> listeVente = new ArrayList<Vente>();
 		Vente vente = new Vente();
+		
 		try (Connection cnx = ConnectionProvider.getConnection();
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_KEYWORD_SQL);){			
@@ -176,9 +184,13 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			
+			UtilisateurManager UM = new UtilisateurManager();
+			Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
+			vente.setVendeur(utilisateur);
 			
-//			vente.setVendeur(rs.getInt("no_utilisateur"));
-//			vente.setCategorieArticle(rs.getInt("no_categorie"));
+			Categorie categorie = new Categorie();
+			int x = rs.getInt("no_categorie");
+			vente.setCategorieArticle(categorie);
 			
 			listeVente.add(vente);
 			rs.close();
@@ -202,6 +214,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		
 		List<Vente> listeVente = new ArrayList<Vente>();
 		Vente vente = new Vente();
+		
 		try (Connection cnx = ConnectionProvider.getConnection();
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_CATEGORY_SQL);){			
@@ -217,7 +230,10 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			
-//			vente.setVendeur(rs.getInt("no_utilisateur"));
+			UtilisateurManager UM = new UtilisateurManager();
+			Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
+			vente.setVendeur(utilisateur);
+			
 //			vente.setCategorieArticle(rs.getInt("no_categorie"));
 			
 			listeVente.add(vente);
