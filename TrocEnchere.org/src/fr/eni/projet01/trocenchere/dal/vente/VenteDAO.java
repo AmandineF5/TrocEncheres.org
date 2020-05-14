@@ -20,7 +20,7 @@ public interface VenteDAO {
 	 * @return une vente
 	 * @throws BusinessException 
 	 */
-	public List<Vente> selectById (int noVente) throws BusinessException;
+	public Vente selectById (int noVente) throws BusinessException;
 	
 	/**
 	 * Récupère toutes les ventes publiées par un utilisateur
