@@ -40,32 +40,18 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				<textarea class="input" name="description" placeholder="Descritpion du produit" rows="10" cols="30"></textarea>
+    				<p>${vente.description}</p>
 		 		</div>
 		 	</div>
 		 </div>
 		 
 		  <div class="field is-horizontal">
   			<div class="field-label is-normal">
-			    <label class="label">Catégorie:</label>
+			    <label class="label">Meilleure offre:</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				<select name="categorie" size="1">
-    					<option></option>
-    				</select>
-		 		</div>
-		 	</div>
-		 </div>
-		 
-		  <div class="field is-horizontal">
-  			<div class="field-label is-normal">
-			    <label class="label">Photo de l'article:</label>
-			 </div>
-			 <div class="field-body">
-    			<div class="field">
-    				<!-- <button name="photoArticle" type="button" onclick="">UPLOADER</button> -->
-    				<input type="file" id="myPhoto" name="photoArticle">
+    				<!-- Need info for meilleure offre ${} -->
 		 		</div>
 		 	</div>
 		 </div>
@@ -75,77 +61,53 @@
 			    <label class="label">Mise à prix:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
-			    	<input type="number" class="input" name="prixInitial" >
-		 		</div>
+    			${vente.MiseAPrix}
 		 	</div>
 		 </div>
-		 
+		  
 		  <div class="field is-horizontal">
   			<div class="field-label is-normal">
 			    <label class="label">Fin de l'enchère:</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="datetime-local" class="input" name="dateFinEncheres" >
+			    		${vente.dateFinEncheres}
 		 		</div>
 		 	</div>
 		 </div>
 		 
-		 <fieldset>
-		 	<legend>Retrait</legend>
-			 
-			 <div class="field is-horizontal">
-	  			<div class="field-label is-normal">
-				    <label class="label">Rue:</label>
-				 </div>
-				 <div class="field-body">
-	    			<div class="field">
-				    	<input type="text" class="input" name="rueUtilisateur" >${utilisateur.rue}
-			 		</div>
-			 	</div>
+		   <div class="field is-horizontal">
+  			<div class="field-label is-normal">
+			    <label class="label">Retrait:</label>
 			 </div>
-			 
-			  <div class="field is-horizontal">
-	  			<div class="field-label is-normal">
-				    <label class="label">Code postal:</label>
-				 </div>
-				 <div class="field-body">
-	    			<div class="field">
-				    	<input type="text" class="input" name="cpUtilisateur" >${utilisateur.codePostal}
-			 		</div>
-			 	</div>
-			 </div>
-			 
-			 <div class="field is-horizontal">
-	  			<div class="field-label is-normal">
-				    <label class="label">Ville:</label>
-				 </div>
-				 <div class="field-body">
-	    			<div class="field">
-				    	<input type="text" class="input" name="villeUtilisateur" >${utilisateur.ville}
-			 		</div>
-			 	</div>
-			 </div>
-		 </fieldset>
+			 <div class="field-body">
+    			<div class="field">
+			    		${retrait.rue}<br>
+			    		${retrait.codePostal}${retrait.ville}
+		 		</div>
+		 	</div>
+		 </div>
 		 
-		 
-		  <c:if test="${message!=null && message.length()>0 }">
-		 	<p>${message}</p>
-		  </c:if>
-		  
+		  <div class="field is-horizontal">
+  			<div class="field-label is-normal">
+			    <label class="label">Vendeur:</label>
+			 </div>
+			 <div class="field-body">
+    			<div class="field">
+			    		${utilisateur.pseudo}
+		 		</div>
+		 	</div>
+		 </div>
 		 
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-				  <button type="submit" class="button is-primary" name="bouton" value="valider">Publier</button>
-				  <button type="submit" class="button is-primary" name="bouton" value="valider">Enregistrer</button>
-				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="annuler">Annuler</button></a> <%--rediriger vers l'accueil --%>
+				  <button type="submit" class="button is-primary" name="bouton" value="annuler">Annuler la vente</button>
+				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Back</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>
 		</div>
 		
-		</form>
 	</main>
 
 </body>

@@ -154,7 +154,7 @@
 				<div class="field-body">
 					<div class="field">
 						<!--is this ok--, want to affiche the credit from the user-->
-						<p>${utilisateur.getCredit()}</p>
+						${utilisateur.getCredit()}
 					</div>
 				</div>
 			</div>
