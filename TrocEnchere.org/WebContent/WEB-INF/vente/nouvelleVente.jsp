@@ -29,7 +29,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="nomarticle" >
+			    	<input type="text" class="input" name="nomArticle" >
 		 		</div>
 		 	</div>
 		 </div>
@@ -52,7 +52,9 @@
 			 <div class="field-body">
     			<div class="field">
     				<select name="categorie" size="1">
-    					<option></option>
+    					<c:forEach var="cat" items="${categorie}" ${newVente}>
+    						<option value="${categorie.noCategorie} ${newVente.categorieArticle.noCategorie}">${categorie.libelle} ${newVente.categorieArticle.libelle}</option>
+    					</c:forEach>
     				</select>
 		 		</div>
 		 	</div>
@@ -101,7 +103,7 @@
 				 </div>
 				 <div class="field-body">
 	    			<div class="field">
-				    	<input type="text" class="input" name="rueUtilisateur" >${utilisateur.rue}
+				    	<input type="text" class="input" name="rueUtilisateur" value="${utilisateur.rue}">
 			 		</div>
 			 	</div>
 			 </div>
@@ -112,7 +114,7 @@
 				 </div>
 				 <div class="field-body">
 	    			<div class="field">
-				    	<input type="text" class="input" name="cpUtilisateur" >${utilisateur.codePostal}
+				    	<input type="text" class="input" name="cpUtilisateur" value="${utilisateur.codePostal}">
 			 		</div>
 			 	</div>
 			 </div>
@@ -123,7 +125,7 @@
 				 </div>
 				 <div class="field-body">
 	    			<div class="field">
-				    	<input type="text" class="input" name="villeUtilisateur" >${utilisateur.ville}
+				    	<input type="text" class="input" name="villeUtilisateur" value="${utilisateur.ville}">
 			 		</div>
 			 	</div>
 			 </div>
