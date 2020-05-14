@@ -51,7 +51,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				<!-- Need info for meilleure offre ${} -->
+    				
 		 		</div>
 		 	</div>
 		 </div>
