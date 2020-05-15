@@ -30,7 +30,7 @@ public class EnchereManager {
 		
 		if (points > pointsMeilleureEnchere) {
 			VenteManager vm = new VenteManager();
-			vm.mettreAJourPrixVente (points);
+			vm.mettreAJourPrixVente (noVente, points);
 		}
 		
 	}

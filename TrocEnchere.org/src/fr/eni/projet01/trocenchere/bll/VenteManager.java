@@ -44,6 +44,9 @@ public class VenteManager {
 		return listeCategorie;
 	}
 	
+	public void mettreAJourPrixVente (int noVente, Integer points) throws BusinessException {
+		venteDAO.update(noVente, points);
+	}
 }
 
 	
