@@ -1,10 +1,9 @@
 package fr.eni.projet01.trocenchere.bll;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.DAOFactory;
 import fr.eni.projet01.trocenchere.dal.vente.VenteDAO;
@@ -37,6 +36,12 @@ public class VenteManager {
 	
 	public void supprimerVente (int noVente) throws BusinessException {
 		venteDAO.delete(noVente);
+	}
+	
+	public List<Categorie> selectionnerCategorie() throws BusinessException{
+		List<Categorie> listeCategorie = new ArrayList<>();
+		listeCategorie = venteDAO.selectCatagory();
+		return listeCategorie;
 	}
 	
 }

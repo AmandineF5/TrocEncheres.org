@@ -31,7 +31,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
  		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
-				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL);){
+				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)){
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
 			state.setString(3, user.getPrenom());
@@ -44,6 +44,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setFloat(10, user.getCredit());
 			state.setBoolean(11, user.isAdministrateur());
 			state.executeUpdate();
+			
+			ResultSet rs = state.getGeneratedKeys();
+			if(rs.next())
+			{
+				user.setNoUtilisateur(rs.getInt(1));
+			}
+			rs.close();
+			state.close();
+	
 			//test sans pool de connection
 			//cnx.commit();
 			//fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
