@@ -43,7 +43,7 @@ public class EnchereManager {
 	public String trouverClassementEnchere (int noVente, int noUtilisateurSession) throws BusinessException {
 		String classement=null;
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
-		listeEnchere = this.selectionnerEnchereByIdUser(noVente);
+		listeEnchere = this.selectionnerEnchereByIdVente(noVente);
 		int nbEnchere = listeEnchere.size();
 		int noUtilisateurEnchere;
 		Utilisateur utilisateurEnchere;
@@ -62,6 +62,14 @@ public class EnchereManager {
 		
 		classement = String.format("%d / %d", index, nbEnchere);		
 		return classement;
+	}
+	
+	public Enchere trouverHighestBid (int noVente) throws BusinessException {
+		Enchere highestBid=null;
+		List<Enchere> listeEnchere = new ArrayList<Enchere>();
+		listeEnchere = this.selectionnerEnchereByIdVente(noVente);
+		highestBid = listeEnchere.get(0);	
+		return highestBid;
 	}
 	
 	
