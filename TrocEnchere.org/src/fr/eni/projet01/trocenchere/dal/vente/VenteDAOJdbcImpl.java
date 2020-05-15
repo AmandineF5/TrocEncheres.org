@@ -19,7 +19,7 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class VenteDAOJdbcImpl implements VenteDAO {
 	
-	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?)\r\n";
+	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
 	private static final String INSERT_RETRAITS_SQL = "INSERT INTO retraits(no_vente, rue, code_postal, ville) VALUES (?,?,?,?)";
 
 	private static final String SELECTBYID_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_vente = ?";
@@ -28,11 +28,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ?";
 	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE libelle = ?";
 	
-	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ? \r\n";
+	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ?";
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
 	
 	private static final String SELECTALL_CATEGORIES_SQL = "SELECT * FROM categories";
-		
+	
+	private static final String UPDATE_VENTES_SQL = "UPDATE ventes SET points=? WHERE no_vente=?";
 
 	public Vente insert(Vente vente) throws BusinessException {
  		BusinessException be = new BusinessException();
@@ -42,15 +43,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			state.setString(2, vente.getDescription());
 			state.setDate(3, java.sql.Date.valueOf(vente.getDateFinEncheres()));
 			state.setInt(4, vente.getMiseAPrix());
-			state.setInt(5, vente.getPrixVente());
-			
-			Utilisateur ut = vente.getAcheteur();
-			
-			state.setInt(6, ut.getNoUtilisateur());
-			
-			Categorie cat = vente.getCategorieArticle();
-			
-			state.setInt(7, cat.getNoCategorie());
+			state.setInt(5, vente.getPrixVente());			
+			state.setInt(6, vente.getVendeur().getNoUtilisateur());	
+			state.setInt(7, vente.getCategorieArticle().getNoCategorie());
 
 			state.executeUpdate();
 			ResultSet rs = state.getGeneratedKeys();
@@ -83,12 +78,27 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		
 		return vente;
 	}
+	
+	public void update (int noVente, Integer points) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state= cnx.prepareStatement(UPDATE_VENTES_SQL);){			
+			state.setInt(1, points);
+			state.setInt(2, noVente);
+	
+			state.execute();
+			
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: mise à jour des points impossible");
+			throw be;
+		}
+		
+	}
 
 	public Vente selectById(int noVente) throws BusinessException {
-		List<Vente> listeVentes = new ArrayList<Vente>();
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTBYID_VENTES_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noVente);
@@ -132,25 +142,29 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
-			rs.next();
-			vente.setNomArticle(rs.getString("nomarticle"));
-			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-			vente.setMiseAPrix(rs.getInt("prix_initial"));
-			vente.setPrixVente(rs.getInt("prix_vente"));
-			
-			Retrait retrait = new Retrait();
-			retrait.setRue(rs.getString("rue"));
-			retrait.setCodePostal(rs.getString("code_postal"));
-			retrait.setVille(rs.getString("ville"));
-			vente.setLieuRetrait(retrait);
-			
-			Categorie categorie = new Categorie();
-			categorie.setNoCategorie(rs.getInt("no_categorie"));
-			categorie.setLibelle(rs.getString("libelle"));
-			vente.setCategorieArticle(categorie);
-			
-			listeVentes.add(vente);
+			while (rs.next()) {
+				if (rs.getInt("no_vente")!=vente.getNoVente()) {
+					vente = new Vente();
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					vente.setLieuRetrait(retrait);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
+					listeVentes.add(vente);					
+				}				
+			}
 			
 			rs.close();	
 			
@@ -178,32 +192,32 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs;
 			state.setString(1, keyWord);
 			rs = state.executeQuery();
-			rs.next();
+			while (rs.next()) {
+				if (rs.getInt("no_vente")!=vente.getNoVente()) {
+					vente = new Vente();
+					vente.setNoVente(rs.getInt("no_vente"));
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					
+					UtilisateurManager UM = new UtilisateurManager();
+					Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
+					vente.setVendeur(utilisateur);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
+					listeVente.add(vente);
+				}
+				
+			}
 			
-			vente.setNoVente(rs.getInt("no_vente"));
-			vente.setNomArticle(rs.getString("nomarticle"));
-			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
-			vente.setMiseAPrix(rs.getInt("prix_initial"));
-			vente.setPrixVente(rs.getInt("prix_vente"));
-			
-			UtilisateurManager UM = new UtilisateurManager();
-			Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
-			vente.setVendeur(utilisateur);
-			
-			Categorie categorie = new Categorie();
-			categorie.setNoCategorie(rs.getInt("no_categorie"));
-			categorie.setLibelle(rs.getString("libelle"));
-			vente.setCategorieArticle(categorie);
-			
-			listeVente.add(vente);
 			rs.close();
 			
-			
-			
-//			test sans pool de connection
-//			cnx.commit();
-//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -220,35 +234,37 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		Vente vente = new Vente();
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_CATEGORY_SQL);){			
 			ResultSet rs;
 			state.setString(1, libelle);
 			rs = state.executeQuery();
-			rs.next();
+			while (rs.next()) {
+				if (rs.getInt("no_vente")!=vente.getNoVente()) {
+					vente =  new Vente();
+					vente.setNoVente(rs.getInt("no_vente"));
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					
+					UtilisateurManager UM = new UtilisateurManager();
+					Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
+					vente.setVendeur(utilisateur);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
+					listeVente.add(vente);
+					
+				}
+	
+			}
 			
-			vente.setNoVente(rs.getInt("no_vente"));
-			vente.setNomArticle(rs.getString("nomarticle"));
-			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
-			vente.setMiseAPrix(rs.getInt("prix_initial"));
-			vente.setPrixVente(rs.getInt("prix_vente"));
-			
-			UtilisateurManager UM = new UtilisateurManager();
-			Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
-			vente.setVendeur(utilisateur);
-			
-			Categorie categorie = new Categorie();
-			categorie.setNoCategorie(rs.getInt("no_categorie"));
-			categorie.setLibelle(rs.getString("libelle"));
-			vente.setCategorieArticle(categorie);
-			
-			listeVente.add(vente);
 			rs.close();			
 			
-//			test sans pool de connection
-//			cnx.commit();
-//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -289,20 +305,22 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTALL_CATEGORIES_SQL);){			
-			ResultSet rs = state.executeQuery();
-			rs.next();
-			
-			categorie.setLibelle(rs.getString("libelle"));
-			categorie.setNoCategorie(rs.getInt("no_categorie"));
-			
-			listeCategorie.add(categorie);
-			
+			ResultSet rs = state.executeQuery();			
+			while (rs.next()) {
+				if (rs.getInt("no_categorie")!=categorie.getNoCategorie()) {
+					categorie = new Categorie();
+					categorie.setLibelle(rs.getString("libelle"));
+					categorie.setNoCategorie(rs.getInt("no_categorie"));				
+					listeCategorie.add(categorie);					
+				}
+				
+			}	
 			rs.close();	
 			
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
-			be.ajouterErreur("Erreur: problème survenu lors de la récupération des catégories dans la BDD");
+			be.ajouterErreur("Erreur: problème survenu lors de la récupération des catégories");
 			throw be;
 		}
 		

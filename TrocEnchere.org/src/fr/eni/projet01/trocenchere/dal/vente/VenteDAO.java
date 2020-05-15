@@ -22,6 +22,10 @@ public interface VenteDAO {
 	 * @return une vente
 	 * @throws BusinessException 
 	 */
+	
+	public void update (int noVente, Integer points) throws BusinessException;
+	
+	
 	public Vente selectById (int noVente) throws BusinessException;
 	
 	/**
