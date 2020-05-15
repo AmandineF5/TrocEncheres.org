@@ -15,7 +15,7 @@ public class Vente {
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private Categorie categorieArticle;
-	private Utilisateur acheteur;
+	//private Utilisateur acheteur;
 	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
 	private Boolean publie;
@@ -23,7 +23,7 @@ public class Vente {
 
 	// contstructors
 	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
-			Integer prixVente, Categorie categorieArticle, Utilisateur acheteur, Utilisateur vendeur,
+			Integer prixVente, Categorie categorieArticle, Utilisateur vendeur,
 			Retrait lieuRetrait, Boolean publie, String nomImage) {
 		super();
 		this.noVente = noVente;
@@ -33,7 +33,7 @@ public class Vente {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.categorieArticle = categorieArticle;
-		this.acheteur = acheteur;
+
 		this.vendeur = vendeur;
 		this.lieuRetrait = lieuRetrait;
 		this.publie = publie;
@@ -42,7 +42,7 @@ public class Vente {
 
 	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
 			Categorie categorieArticle, Utilisateur vendeur) {
-		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, null, vendeur, null, false, null);
+		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, vendeur, null, false, null);
 	}
 
 	// getters and setters
@@ -106,19 +106,11 @@ public class Vente {
 		this.categorieArticle = categorieArticle;
 	}
 
-	public Utilisateur getAcheteur() {
-		return acheteur;
-	}
-
-	public void setAcheteur(Utilisateur achete) {
-		this.acheteur = acheteur;
-	}
-
 	public Utilisateur getVendeur() {
 		return vendeur;
 	}
 
-	public void setVendeur(Utilisateur vend) {
+	public void setVendeur(Utilisateur vendeur) {
 		this.vendeur = vendeur;
 	}
 
@@ -150,7 +142,7 @@ public class Vente {
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente
-				+ ", categorieArticle=" + categorieArticle.toString() + ", acheteur=" + acheteur.toString() + ", vendeur=" + vendeur.toString()
+				+ ", categorieArticle=" + categorieArticle + ", vendeur=" + vendeur
 				+ ", lieuRetrait=" + lieuRetrait.toString() + ", publie=" + publie + ", nomImage=" + nomImage + "]";
 	}
 
