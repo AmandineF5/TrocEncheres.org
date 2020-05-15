@@ -8,6 +8,7 @@ import com.sun.javafx.binding.StringFormatter;
 import fr.eni.project01.trocenchere.dal.enchere.EnchereDAO;
 import fr.eni.projet01.trocenchere.bo.Enchere;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.DAOFactory;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
@@ -21,6 +22,17 @@ public class EnchereManager {
 
 	public void ajouterEnchere (Enchere enchere) throws BusinessException {
 		this.enchereDAO.insert(enchere);
+		Integer points = enchere.getPoints();
+		Vente vente = enchere.getConcerne();
+		int noVente = vente.getNoVente();
+		Enchere meilleureEnchere = this.trouverHighestBid(noVente);
+		Integer pointsMeilleureEnchere = meilleureEnchere.getPoints();
+		
+		if (points > pointsMeilleureEnchere) {
+			VenteManager vm = new VenteManager();
+			vm.mettreAJourPrixVente (points);
+		}
+		
 	}
 	
 
