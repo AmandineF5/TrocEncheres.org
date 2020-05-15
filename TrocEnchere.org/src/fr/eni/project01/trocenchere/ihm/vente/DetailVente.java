@@ -29,26 +29,7 @@ public class DetailVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*test for jsp
-		Vente venteAAfficher = new Vente();
-		venteAAfficher.setMiseAPrix(3);
-		venteAAfficher.setDescription("This is the article");
-		venteAAfficher.setNomArticle("Tractor");
-		Retrait pickUp = new Retrait();
-		pickUp.setRue("rue");
-		pickUp.setCodePostal("codePostal");
-		pickUp.setVille("ville");
-		venteAAfficher.setLieuRetrait(pickUp);
-		Utilisateur test = new Utilisateur();
-		test.setPseudo("Yoyoma");
-		venteAAfficher.setVendeur(test);
 		
-		Enchere highestEnchere = new Enchere();
-		highestEnchere.setPoints(6);
-		Utilisateur person = new Utilisateur();
-		person.setPseudo("face");
-		highestEnchere.setEncherit(person);
-		*/
 		
 		//get noVente from incoming page
 		String noVente = (String) request.getAttribute("NoVente");
