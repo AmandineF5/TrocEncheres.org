@@ -99,19 +99,19 @@ public class NouvelleVente extends HttpServlet {
 			newVente.setPublie(false);
 		}		
 		Vente venteAAfficher = new Vente();
-//		try {
-//			venteAAfficher = vM.ajouterVente(newVente);
-//			
-//			System.out.println(newVente.toString());
-//			
-//			//Cookie pour renvoyer le numéro de vente à afficher
-//			String noNewVente = String.valueOf(venteAAfficher.getNoVente());
-//			Cookie noVente = new Cookie("noVente", noNewVente);
-//			noVente.setMaxAge(20);
-//			response.addCookie(noVente);
-//		} catch (BusinessException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			venteAAfficher = vM.ajouterVente(newVente);
+			
+			System.out.println(newVente.toString());
+			
+			//Cookie pour renvoyer le numéro de vente à afficher
+			String noNewVente = String.valueOf(venteAAfficher.getNoVente());
+			Cookie noVente = new Cookie("noVente", noNewVente);
+			noVente.setMaxAge(20);
+			response.addCookie(noVente);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 		
 		venteAAfficher.setNoVente(666);
 		String noVente = String.valueOf(venteAAfficher.getNoVente());
