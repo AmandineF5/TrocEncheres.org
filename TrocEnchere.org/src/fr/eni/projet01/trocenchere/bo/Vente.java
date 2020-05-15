@@ -150,8 +150,8 @@ public class Vente {
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente
-				+ ", categorieArticle=" + categorieArticle + ", acheteur=" + acheteur + ", vendeur=" + vendeur
-				+ ", lieuRetrait=" + lieuRetrait + ", publie=" + publie + ", nomImage=" + nomImage + "]";
+				+ ", categorieArticle=" + categorieArticle.toString() + ", acheteur=" + acheteur.toString() + ", vendeur=" + vendeur.toString()
+				+ ", lieuRetrait=" + lieuRetrait.toString() + ", publie=" + publie + ", nomImage=" + nomImage + "]";
 	}
 
 }
