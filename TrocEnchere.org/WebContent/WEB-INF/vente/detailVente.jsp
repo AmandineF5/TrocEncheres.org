@@ -58,7 +58,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				${enchere.points} pts par ${encherit.pseudo}
+    				${enchere.points} pts par ${enchere.getEncherit().getPseudo()}
 		 		</div>
 		 	</div>
 		 </div>
@@ -89,8 +89,10 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    		${retrait.rue}<br>
-			    		${retrait.codePostal}${retrait.ville}
+			    		${vente.getLieuRetrait().getRue()}<br/>
+			    		${vente.getLieuRetrait().getCodePostal()}
+			    		${vente.getLieuRetrait().getVille()}
+			    		
 		 		</div>
 		 	</div>
 		 </div>
@@ -101,7 +103,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    		${vendeur.pseudo}
+			    		${vente.getVendeur().getPseudo()}
 		 		</div>
 		 	</div>
 		 </div>
@@ -109,7 +111,7 @@
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-		      <button type="submit" class="button is-primary" name="bouton" value="${utilisateur.noVente}" formaction="/TrocEnchere.org/DetailVente" formmethod="post">Annuler la vente</button>
+		      <button type="submit" class="button is-primary" name="bouton" value="${vente.noVente}" formaction="/TrocEnchere.org/DetailVente" formmethod="post">Annuler la vente</button>
 		      <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Back</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>

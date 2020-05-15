@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet01.trocenchere.bll.EnchereManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
 import fr.eni.projet01.trocenchere.bo.Enchere;
+import fr.eni.projet01.trocenchere.bo.Retrait;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
@@ -28,6 +29,27 @@ public class DetailVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*test for jsp
+		Vente venteAAfficher = new Vente();
+		venteAAfficher.setMiseAPrix(3);
+		venteAAfficher.setDescription("This is the article");
+		venteAAfficher.setNomArticle("Tractor");
+		Retrait pickUp = new Retrait();
+		pickUp.setRue("rue");
+		pickUp.setCodePostal("codePostal");
+		pickUp.setVille("ville");
+		venteAAfficher.setLieuRetrait(pickUp);
+		Utilisateur test = new Utilisateur();
+		test.setPseudo("Yoyoma");
+		venteAAfficher.setVendeur(test);
+		
+		Enchere highestEnchere = new Enchere();
+		highestEnchere.setPoints(6);
+		Utilisateur person = new Utilisateur();
+		person.setPseudo("face");
+		highestEnchere.setEncherit(person);
+		*/
+		
 		//get noVente from incoming page
 		String noVente = (String) request.getAttribute("NoVente");
 		int noVenteAAfficher = Integer.parseInt(noVente);
@@ -40,8 +62,10 @@ public class DetailVente extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
 		}
+		
 		//set vente as attribute
 		request.setAttribute("vente", venteAAfficher);
+		
 		
 		//find the highest bid by id no
 		Enchere highestEnchere = new Enchere();
@@ -52,6 +76,7 @@ public class DetailVente extends HttpServlet {
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
 		}
 		//set bid as attribute
+		
 		request.setAttribute("enchere", highestEnchere);
 		
 				
