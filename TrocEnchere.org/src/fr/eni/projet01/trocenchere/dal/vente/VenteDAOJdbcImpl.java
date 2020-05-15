@@ -24,13 +24,14 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 	private static final String SELECTBYID_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_vente = ?";
 	private static final String SELECTALL_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ?";
-	private static final String SELECTCATEGORIE_SQL = "SELECT * FROM categories"; 
 	
-	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes JOIN retraits ON ventes.no_vente = retraits.no_vente WHERE nomarticle LIKE ? OR description LIKE ?";
-	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes JOIN retraits ON ventes.no_vente = retraits.no_vente WHERE libelle = ?";
+	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ?";
+	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE libelle = ?";
 	
 	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ? \r\n";
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
+	
+	private static final String SELECTALL_CATEGORIES_SQL = "SELECT * FROM categories";
 		
 
 	public Vente insert(Vente vente) throws BusinessException {
@@ -111,7 +112,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setCategorieArticle(categorie);
 			
 			rs.close();	
-//			
+			
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -149,7 +150,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			categorie.setLibelle(rs.getString("libelle"));
 			vente.setCategorieArticle(categorie);
 			
-			//listeVentes.add(vente); ???
+			listeVentes.add(vente);
 			
 			rs.close();	
 			
@@ -237,7 +238,10 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			Utilisateur utilisateur = UM.selectionnerUtilisateurById(rs.getInt("no_utilisateur"));
 			vente.setVendeur(utilisateur);
 			
-//			vente.setCategorieArticle(rs.getInt("no_categorie"));
+			Categorie categorie = new Categorie();
+			categorie.setNoCategorie(rs.getInt("no_categorie"));
+			categorie.setLibelle(rs.getString("libelle"));
+			vente.setCategorieArticle(categorie);
 			
 			listeVente.add(vente);
 			rs.close();			
@@ -274,5 +278,34 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			be.ajouterErreur("Erreur: supression ompossible car n° de vente inconnu");
 			throw be;
 		}
+	}
+
+	@Override
+	public List<Categorie> selectCatagory() throws BusinessException {
+		
+		List<Categorie> listeCategorie = new ArrayList<>();
+		Categorie categorie = new Categorie();
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECTALL_CATEGORIES_SQL);){			
+			ResultSet rs = state.executeQuery();
+			rs.next();
+			
+			categorie.setLibelle(rs.getString("libelle"));
+			categorie.setNoCategorie(rs.getInt("no_categorie"));
+			
+			listeCategorie.add(categorie);
+			
+			rs.close();	
+			
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: problème survenu lors de la récupération des catégories dans la BDD");
+			throw be;
+		}
+		
+		return listeCategorie;
 	}
 }

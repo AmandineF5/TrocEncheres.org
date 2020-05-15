@@ -2,6 +2,7 @@ package fr.eni.projet01.trocenchere.dal.vente;
 
 import java.util.List;
 
+import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
@@ -52,4 +53,10 @@ public interface VenteDAO {
 	 */
 	public void delete (int noVente) throws BusinessException;
 	
+	/**
+	 * Chercher et récupère toutes les catégories d'articles présente sur le site
+	 * @return une liste de Categorie
+	 * @throws BusinessException
+	 */
+	public List<Categorie> selectCatagory()throws BusinessException;
 }
