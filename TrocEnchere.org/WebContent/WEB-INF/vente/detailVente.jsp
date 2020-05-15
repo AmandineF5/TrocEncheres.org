@@ -111,7 +111,7 @@
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-		      <button type="submit" class="button is-primary" name="bouton" value="${vente.noVente}" formaction="/TrocEnchere.org/DetailVente" formmethod="post">Annuler la vente</button>
+		      <button type="submit" class="button is-primary" name="delete" value="${vente.noVente}" formaction="/TrocEnchere.org/DetailVente" formmethod="post">Annuler la vente</button>
 		      <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Back</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>

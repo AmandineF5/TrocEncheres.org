@@ -73,10 +73,10 @@ public class DetailVente extends HttpServlet {
 		RequestDispatcher rd = null;
 		
 		//get id from delete button
-		int noVente= Integer.parseInt(request.getParameter("button"));
+		int venteID= Integer.parseInt(request.getParameter("delete"));
 		//send id to delete the vente
 		try {
-			vM.supprimerVente(noVente);
+			vM.supprimerVente(venteID);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
