@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import fr.eni.projet01.trocenchere.bll.VenteManager;
 import fr.eni.projet01.trocenchere.bo.Categorie;
@@ -72,41 +73,50 @@ public class NouvelleVente extends HttpServlet {
 		//LocalDateTime dateFinEncheres = date.atTime(0, 0);
 		newVente.setDateFinEncheres(date);		
 		newVente.setMiseAPrix(Integer.parseInt(request.getParameter("prixInitial")));		
+		newVente.setPrixVente(0);		
 				
-		//int categorieChoisi = Integer.parseInt(request.getParameter("categorie"));
-		String categorieChoisi = request.getParameter("categorie");
-		int noCategorie = Integer.parseInt(categorieChoisi.trim());
+		int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
 		
 		Categorie newCategarieChoisi = new Categorie(noCategorie, "");
 		newVente.setCategorieArticle(newCategarieChoisi);
-		
+		newVente.setAcheteur(null);
 		Utilisateur utilisateur = extractedUserSession(request);
 		newVente.setVendeur(utilisateur);
+		
 		Retrait retrait = new Retrait(request.getParameter("rueUtilisateur"), request.getParameter("cpUtilisateur"), request.getParameter("villeUtilisateur"));
 		newVente.setLieuRetrait(retrait);
 		
+		Part imagePart;
+		
+		
+		newVente.setNomImage(request.getParameter("nomImage"));
 		
 		//Enregistrer ou publier une vente
 		String boutonChoix = request.getParameter("bouton");
-		if (boutonChoix.equals("Publier")) {
+		if (boutonChoix.equalsIgnoreCase("Publier")) {
 			newVente.setPublie(true);
 		} else {
 			newVente.setPublie(false);
 		}		
-		
+		Vente venteAAfficher = new Vente();
 //		try {
-//			Vente vente = vM.ajouterVente(newVente);
+//			venteAAfficher = vM.ajouterVente(newVente);
+//			
+//			System.out.println(newVente.toString());
+//			
+//			//Cookie pour renvoyer le numéro de vente à afficher
+//			String noNewVente = String.valueOf(venteAAfficher.getNoVente());
+//			Cookie noVente = new Cookie("noVente", noNewVente);
+//			noVente.setMaxAge(20);
+//			response.addCookie(noVente);
 //		} catch (BusinessException e) {
 //			e.printStackTrace();
 //		}
 		
-		System.out.println(newVente.toString());
-		//Cookie pour renvoyer le numéro de vente à afficher
-		String noNewVente = String.valueOf(newVente.getNoVente());
-		Cookie noVente = new Cookie("noVente", noNewVente);
-		noVente.setMaxAge(20);
-		response.addCookie(noVente);
-
+		venteAAfficher.setNoVente(666);
+		String noVente = String.valueOf(venteAAfficher.getNoVente());
+		request.setAttribute("NoVente", noVente);
+		
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("/DetailVente");
 		rd.forward(request, response);
