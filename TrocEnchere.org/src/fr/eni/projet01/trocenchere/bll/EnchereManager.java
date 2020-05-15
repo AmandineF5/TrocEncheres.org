@@ -36,7 +36,7 @@ public class EnchereManager {
 		return listeEnchere;
 	}
 	
-	public void supprimerVente (int noVente) throws BusinessException {
+	public void supprimerEnchere (int noVente) throws BusinessException {
 		this.enchereDAO.delete(noVente);
 	}
 	
