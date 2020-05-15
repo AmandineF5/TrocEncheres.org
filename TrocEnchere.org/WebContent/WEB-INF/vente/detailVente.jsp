@@ -22,6 +22,13 @@
 	 		Détail Vente
 	 	</div>
 	 	
+	 	<div>
+			  <c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
+			  	<c:forEach var="err" items="${listeCodesErreur}">
+			 		<li>${err}</li>
+			 	</c:forEach>
+			  </c:if>
+	  	</div>
 		
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
@@ -51,7 +58,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				
+    				${enchere.points} pts par ${encherit.pseudo}
 		 		</div>
 		 	</div>
 		 </div>
@@ -61,7 +68,7 @@
 			    <label class="label">Mise à prix:</label>
 			 </div>
 			 <div class="field-body">
-    			${vente.MiseAPrix}
+    			${vente.miseAPrix}
 		 	</div>
 		 </div>
 		  
@@ -94,7 +101,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    		${utilisateur.pseudo}
+			    		${vendeur.pseudo}
 		 		</div>
 		 	</div>
 		 </div>
@@ -102,8 +109,8 @@
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-				  <button type="submit" class="button is-primary" name="bouton" value="annuler">Annuler la vente</button>
-				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Back</button></a> <%--rediriger vers l'accueil --%>
+		      <button type="submit" class="button is-primary" name="bouton" value="${utilisateur.noVente}" formaction="/TrocEnchere.org/DetailVente" formmethod="post">Annuler la vente</button>
+		      <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Back</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>
 		</div>
