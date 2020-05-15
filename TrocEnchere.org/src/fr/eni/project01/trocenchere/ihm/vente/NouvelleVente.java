@@ -1,6 +1,7 @@
 package fr.eni.project01.trocenchere.ihm.vente;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
 import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Retrait;
@@ -63,6 +65,7 @@ public class NouvelleVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Vente newVente = new Vente();
 		VenteManager vM = new VenteManager();
+		UtilisateurManager uM = new UtilisateurManager();
 		
 		//newVente.setNoVente(noVente);
 		newVente.setNomArticle(request.getParameter("nomArticle"));
@@ -79,15 +82,17 @@ public class NouvelleVente extends HttpServlet {
 		
 		Categorie newCategarieChoisi = new Categorie(noCategorie, "");
 		newVente.setCategorieArticle(newCategarieChoisi);
-		newVente.setAcheteur(null);
-		Utilisateur utilisateur = extractedUserSession(request);
+		
+		Utilisateur utilisateur = extractedUserSession(request);		
+		System.out.println(utilisateur);
 		newVente.setVendeur(utilisateur);
+		
+		System.out.println(newVente.getVendeur());	
 		
 		Retrait retrait = new Retrait(request.getParameter("rueUtilisateur"), request.getParameter("cpUtilisateur"), request.getParameter("villeUtilisateur"));
 		newVente.setLieuRetrait(retrait);
 		
-		Part imagePart;
-		
+		Part imagePart;		
 		
 		newVente.setNomImage(request.getParameter("nomImage"));
 		
@@ -98,7 +103,11 @@ public class NouvelleVente extends HttpServlet {
 		} else {
 			newVente.setPublie(false);
 		}		
+		
+		System.out.println(newVente);
+		
 		Vente venteAAfficher = new Vente();
+		
 		try {
 			venteAAfficher = vM.ajouterVente(newVente);
 			
