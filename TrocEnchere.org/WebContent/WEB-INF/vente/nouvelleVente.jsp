@@ -40,7 +40,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				<textarea class="input" name="description" placeholder="Descritpion du produit" rows="10" cols="30"></textarea>
+    				<textarea class="input" name="description" placeholder="Descritpion du produit" rows="20" cols="30"></textarea>
 		 		</div>
 		 	</div>
 		 </div>
@@ -52,8 +52,8 @@
 			 <div class="field-body">
     			<div class="field">
     				<select name="categorie" size="1">
-    					<c:forEach var="cat" items="${categories}" > <%-- ${newVente} --%>
-    						<option value="${cat.noCategorie} ">${cat.libelle} </option> <%-- ${newVente.categorieArticle.noCategorie} ${newVente.categorieArticle.libelle} --%>
+    					<c:forEach var="cat" items="${categories}" >
+    						<option value="${cat.noCategorie} ">${cat.libelle} </option>
     					</c:forEach>
     				</select>
 		 		</div>
@@ -66,8 +66,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-    				<!-- <button name="photoArticle" type="button" onclick="">UPLOADER</button> -->
-    				<input type="file" id="myPhoto" name="photoArticle">
+    				<input type="file" id="myPhoto" name="nomImage">
 		 		</div>
 		 	</div>
 		 </div>
