@@ -22,7 +22,9 @@ public class DetailVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String noVente = (String) request.getAttribute("NoVente");
+		int noVenteAAfficher = Integer.parseInt(noVente);
+		System.out.println(noVente);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vente/detailVente.jsp");
 		rd.forward(request, response);
