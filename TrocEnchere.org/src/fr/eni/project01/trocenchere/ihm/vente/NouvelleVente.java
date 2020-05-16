@@ -1,12 +1,15 @@
 package fr.eni.project01.trocenchere.ihm.vente;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.io.File;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +20,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
@@ -31,8 +41,10 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
  */
 @WebServlet("/NouvelleVente")
 public class NouvelleVente extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	private static final long serialVersionUID = 1L;    
+	VenteManager vM = new VenteManager();
+	private String repertoireStockage=null;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,14 +58,15 @@ public class NouvelleVente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utilisateur utilisateur = extractedUserSession(request);		
 		request.setAttribute("utilisateur", utilisateur);	
-		//Catégories en dur en attendant une requête pour récupérer la liste des catégories.
-				List<Categorie> categories = new ArrayList<Categorie>();
-				Categorie categorie1 = new Categorie(1, "Jouet");
-				Categorie categorie2 = new Categorie(2, "Livres");
-				categories.add(categorie1);
-				categories.add(categorie2);
-				request.setAttribute("categories", categories);	
+
+		List<Categorie> categories = new ArrayList<Categorie>();
+		try {
+			categories = vM.selectionnerCategorie();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 				
+		request.setAttribute("categories", categories);				
 		request.getRequestDispatcher("/WEB-INF/vente/nouvelleVente.jsp").forward(request, response);
 	}
 
@@ -64,10 +77,7 @@ public class NouvelleVente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Vente newVente = new Vente();
-		VenteManager vM = new VenteManager();
-		UtilisateurManager uM = new UtilisateurManager();
 		
-		//newVente.setNoVente(noVente);
 		newVente.setNomArticle(request.getParameter("nomArticle"));
 		newVente.setDescription(request.getParameter("description"));
 		
@@ -76,7 +86,7 @@ public class NouvelleVente extends HttpServlet {
 		//LocalDateTime dateFinEncheres = date.atTime(0, 0);
 		newVente.setDateFinEncheres(date);		
 		newVente.setMiseAPrix(Integer.parseInt(request.getParameter("prixInitial")));		
-		newVente.setPrixVente(0);		
+		newVente.setPrixVente(Integer.parseInt(request.getParameter("prixInitial")));		
 				
 		int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
 		
@@ -84,45 +94,59 @@ public class NouvelleVente extends HttpServlet {
 		newVente.setCategorieArticle(newCategarieChoisi);
 		
 		Utilisateur utilisateur = extractedUserSession(request);		
-		System.out.println(utilisateur);
 		newVente.setVendeur(utilisateur);
-		
-		System.out.println(newVente.getVendeur());	
 		
 		Retrait retrait = new Retrait(request.getParameter("rueUtilisateur"), request.getParameter("cpUtilisateur"), request.getParameter("villeUtilisateur"));
 		newVente.setLieuRetrait(retrait);
 		
-		Part imagePart;		
-		
-		newVente.setNomImage(request.getParameter("nomImage"));
-		
+//		if(ServletFileUpload.isMultipartContent(request))
+//		{
+//			// Create a factory for disk-based file items
+//			DiskFileItemFactory factory = new DiskFileItemFactory();
+//
+//			// Create a new file upload handler
+//			ServletFileUpload upload = new ServletFileUpload(factory);
+//
+//			// Parse the request
+//			List items;
+//			try {
+//				items = upload.parseRequest((RequestContext) request);
+//				// Process the uploaded items
+//				Iterator iter = items.iterator();
+//				while (iter.hasNext()) {
+//					FileItem item = (FileItem) iter.next();
+//					
+//					if (!item.isFormField()) 
+//					{
+//						String fichier = processUploadedFile(item);
+//						System.out.println(fichier);
+//						newVente.setNomImage(fichier);
+//					}
+//				}
+//			} catch (FileUploadException e) {
+//				e.printStackTrace();
+//			}			
+//		}
+
 		//Enregistrer ou publier une vente
+		newVente.setPublie(true);
+		
 		String boutonChoix = request.getParameter("bouton");
+		System.out.println(boutonChoix);
 		if (boutonChoix.equalsIgnoreCase("Publier")) {
 			newVente.setPublie(true);
 		} else {
-			newVente.setPublie(false);
+			newVente.setPublie(true);
 		}		
-		
-		System.out.println(newVente);
 		
 		Vente venteAAfficher = new Vente();
 		
 		try {
 			venteAAfficher = vM.ajouterVente(newVente);
-			
-			System.out.println(newVente.toString());
-			
-			//Cookie pour renvoyer le numéro de vente à afficher
-			String noNewVente = String.valueOf(venteAAfficher.getNoVente());
-			Cookie noVente = new Cookie("noVente", noNewVente);
-			noVente.setMaxAge(20);
-			response.addCookie(noVente);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
 		
-		venteAAfficher.setNoVente(666);
 		String noVente = String.valueOf(venteAAfficher.getNoVente());
 		request.setAttribute("NoVente", noVente);
 		
@@ -138,4 +162,52 @@ public class NouvelleVente extends HttpServlet {
 		return utilisateur;
 	}
 
+	private void processRequest(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, FileUploadException {
+		PrintWriter out = response.getWriter();
+		if(ServletFileUpload.isMultipartContent(request))
+		{
+			// Create a factory for disk-based file items
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+
+			// Create a new file upload handler
+			ServletFileUpload upload = new ServletFileUpload(factory);
+
+			// Parse the request
+			List items = upload.parseRequest((RequestContext) request);
+			
+			// Process the uploaded items
+			Iterator iter = items.iterator();
+			while (iter.hasNext()) {
+			    FileItem item = (FileItem) iter.next();
+
+			    if (!item.isFormField()) 
+			    {
+			        String fichier = processUploadedFile(item);
+			        out.write("{success:true,fichier:\""+fichier+"\"}");
+			    }
+			}
+		}
+		out.flush();
+		out.close();
+	}
+
+	private String processUploadedFile(FileItem item) {
+		String fileName = item.getName();
+		int index=1;
+		while(new File(this.repertoireStockage+fileName).exists())
+		{
+			fileName = "("+index+")"+item.getName();
+			index+=1;
+		}
+		
+	    File uploadedFile = new File(this.repertoireStockage + fileName);
+	    try {
+			item.write(uploadedFile);
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return fileName;
+	}
 }
