@@ -22,7 +22,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?,?)";
 	private static final String INSERT_RETRAITS_SQL = "INSERT INTO retraits(no_vente, rue, code_postal, ville) VALUES (?,?,?,?)";
 
-	private static final String SELECTBYID_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_vente = ?";
+	private static final String SELECTBYID_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ?";
 	private static final String SELECTALL_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ?";
 	
 	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ?";
@@ -120,6 +120,21 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			categorie.setNoCategorie(rs.getInt("no_categorie"));
 			categorie.setLibelle(rs.getString("libelle"));
 			vente.setCategorieArticle(categorie);
+			
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			utilisateur.setPseudo(rs.getString("pseudo"));
+			utilisateur.setNom(rs.getNString("nom"));
+			utilisateur.setPrenom(rs.getNString("prenom"));
+			utilisateur.setEmail(rs.getNString("email"));
+			utilisateur.setTelephone(rs.getString("telephone"));
+			utilisateur.setRue(rs.getString("rue"));
+			utilisateur.setCodePostal(rs.getString("code_postal"));
+			utilisateur.setVille(rs.getString("ville"));
+			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+			utilisateur.setCredit(rs.getInt("credit"));
+			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+			vente.setVendeur(utilisateur);
 			
 			rs.close();	
 			
