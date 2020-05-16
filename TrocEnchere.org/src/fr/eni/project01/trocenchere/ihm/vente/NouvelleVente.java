@@ -14,12 +14,10 @@ import java.io.File;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
@@ -35,6 +33,9 @@ import fr.eni.projet01.trocenchere.bo.Retrait;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
+
+
+
 
 /**
  * Servlet implementation class NouvelleVente
@@ -82,10 +83,9 @@ public class NouvelleVente extends HttpServlet {
 		newVente.setDescription(request.getParameter("description"));
 		
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy"); //  yyyy-MM-dd
-		String date1 = request.getParameter("dateFinEncheres");
-        LocalDate date2 =  LocalDate.parse(date1);
+        LocalDate date =  LocalDate.parse(request.getParameter("dateFinEncheres"));
         //LocalDateTime dateFinEncheres = date.atTime(0, 0);
-        newVente.setDateFinEncheres(date2);
+        newVente.setDateFinEncheres(date);
 				
 		newVente.setMiseAPrix(Integer.parseInt(request.getParameter("prixInitial")));		
 		newVente.setPrixVente(Integer.parseInt(request.getParameter("prixInitial")));		
@@ -129,16 +129,15 @@ public class NouvelleVente extends HttpServlet {
 //				e.printStackTrace();
 //			}			
 //		}
-
-		//Enregistrer ou publier une vente
-		//newVente.setPublie(true);
+		newVente.setNomImage("ESSAI");
 		
+		
+		//Enregistrer ou publier une vente		
 		String boutonChoix = request.getParameter("bouton");
-		System.out.println(boutonChoix);
 		if (boutonChoix.equalsIgnoreCase("Publier")) {
 			newVente.setPublie(true);
 		} else {
-			newVente.setPublie(true);
+			newVente.setPublie(false);
 		}		
 		
 		Vente venteAAfficher = new Vente();
@@ -152,13 +151,11 @@ public class NouvelleVente extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("NoVente", venteAAfficher.getNoVente());
 //		String noVente = String.valueOf(venteAAfficher.getNoVente());
-//		request.setAttribute("NoVente", noVente);
-		
+//		request.setAttribute("NoVente", noVente);		
 //		RequestDispatcher rd;
 //		rd = request.getRequestDispatcher("/DetailVente");		
 //		rd.forward(request, response);
 		response.sendRedirect(request.getContextPath()+"/DetailVente");
-		//request.getRequestDispatcher("/DetailVente").forward(request, response);
 	
 	}
 		
@@ -216,4 +213,5 @@ public class NouvelleVente extends HttpServlet {
 //		}
 //	    return fileName;
 //	}
+	
 }
