@@ -38,10 +38,7 @@ public class DetailVente extends HttpServlet {
 		
 		//getting cookie
 		//String noVente = (String) request.getAttribute("NoVente");
-		HttpSession session = request.getSession();
-		int noVente = (int) session.getAttribute("NoVente");
-		//getting the id
-		int noVenteAAfficher = noVente; //Integer.parseInt(noVente);
+		int noVenteAAfficher = getNoVenteDeSession(request);
 		
 		//find the Vente in the database
 		Vente venteAAfficher = new Vente();
@@ -76,6 +73,14 @@ public class DetailVente extends HttpServlet {
 		
 	}
 
+	private int getNoVenteDeSession(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int noVente = (int) session.getAttribute("NoVente");
+		//getting the id
+		int noVenteAAfficher = noVente; //Integer.parseInt(noVente);
+		return noVenteAAfficher;
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -83,8 +88,8 @@ public class DetailVente extends HttpServlet {
 		
 		RequestDispatcher rd = null;
 		
-		//get id from delete button
-		int venteID= Integer.parseInt(request.getParameter("delete"));
+		
+		int venteID = getNoVenteDeSession(request);
 		//send id to delete the vente
 		try {
 			vM.supprimerVente(venteID);
