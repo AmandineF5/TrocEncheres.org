@@ -30,10 +30,12 @@ public class DetailVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		//get noVente from incoming page
-		String noVente = (String) request.getAttribute("NoVente");
-		int noVenteAAfficher = Integer.parseInt(noVente);
+		
+		//getting cookie
+		//String noVente = (String) request.getAttribute("NoVente");
+		//getting the id
+		int noVenteAAfficher = 4;
 		
 		//find the Vente in the database
 		Vente venteAAfficher = new Vente();
@@ -60,9 +62,10 @@ public class DetailVente extends HttpServlet {
 		
 		request.setAttribute("enchere", highestEnchere);
 		
-				
+			
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vente/detailVente.jsp");
 		rd.forward(request, response);
+		
 	}
 
 	/**
@@ -71,7 +74,7 @@ public class DetailVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher rd = null;
-		
+		if(request.getParameter("delete")!=null) {
 		//get id from delete button
 		int venteID= Integer.parseInt(request.getParameter("delete"));
 		//send id to delete the vente
@@ -81,8 +84,9 @@ public class DetailVente extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
 		}
+		}
 		response.sendRedirect(request.getContextPath()+"/NouvelleVente");
-		doGet(request, response);
+
 	}
 
 }

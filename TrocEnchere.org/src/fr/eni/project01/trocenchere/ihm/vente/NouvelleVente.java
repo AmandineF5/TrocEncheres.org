@@ -82,9 +82,11 @@ public class NouvelleVente extends HttpServlet {
 		newVente.setDescription(request.getParameter("description"));
 		
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy"); //  yyyy-MM-dd
-		LocalDate date = LocalDate.parse(request.getParameter("dateFinEncheres")); //, dtf
-		//LocalDateTime dateFinEncheres = date.atTime(0, 0);
-		newVente.setDateFinEncheres(date);		
+		String date1 = request.getParameter("dateFinEncheres");
+        LocalDate date2 =  LocalDate.parse(date1);
+        //LocalDateTime dateFinEncheres = date.atTime(0, 0);
+        newVente.setDateFinEncheres(date2);
+				
 		newVente.setMiseAPrix(Integer.parseInt(request.getParameter("prixInitial")));		
 		newVente.setPrixVente(Integer.parseInt(request.getParameter("prixInitial")));		
 				
@@ -147,6 +149,7 @@ public class NouvelleVente extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+
 		String noVente = String.valueOf(venteAAfficher.getNoVente());
 		request.setAttribute("NoVente", noVente);
 		
