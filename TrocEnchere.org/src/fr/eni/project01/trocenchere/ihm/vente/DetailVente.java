@@ -98,9 +98,7 @@ public class DetailVente extends HttpServlet {
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
 		}
 		
-		//response.sendRedirect
-		rd = request.getRequestDispatcher("/NouvelleVente");		
-		rd.forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/NouvelleVente");
 
 	}
 
