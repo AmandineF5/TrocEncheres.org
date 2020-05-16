@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import fr.eni.projet01.trocenchere.bll.EnchereManager;
+import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
 import fr.eni.projet01.trocenchere.bo.Enchere;
 import fr.eni.projet01.trocenchere.bo.Retrait;
@@ -25,6 +28,7 @@ public class DetailVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        VenteManager vM = new VenteManager();
        EnchereManager eM = new EnchereManager();
+       
   	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -34,13 +38,17 @@ public class DetailVente extends HttpServlet {
 		
 		//getting cookie
 		//String noVente = (String) request.getAttribute("NoVente");
+		HttpSession session = request.getSession();
+		int noVente = (int) session.getAttribute("NoVente");
 		//getting the id
-		int noVenteAAfficher = 4;
+		int noVenteAAfficher = noVente; //Integer.parseInt(noVente);
 		
 		//find the Vente in the database
 		Vente venteAAfficher = new Vente();
 		try {
 			 venteAAfficher = vM.selectionnerVenteById(noVenteAAfficher);
+			 System.out.println(venteAAfficher.getVendeur());
+			 
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
@@ -74,7 +82,7 @@ public class DetailVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher rd = null;
-		if(request.getParameter("delete")!=null) {
+		
 		//get id from delete button
 		int venteID= Integer.parseInt(request.getParameter("delete"));
 		//send id to delete the vente
@@ -84,8 +92,10 @@ public class DetailVente extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
 		}
-		}
-		response.sendRedirect(request.getContextPath()+"/NouvelleVente");
+		
+		//response.sendRedirect
+		rd = request.getRequestDispatcher("/NouvelleVente");		
+		rd.forward(request, response);
 
 	}
 

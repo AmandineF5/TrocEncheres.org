@@ -108,7 +108,7 @@
 				<label class="label">Vendeur:</label>
 			</div>
 			<div class="field-body">
-				<div class="field">${vente.getVendeur().getPseudo()}</div>
+				<div class="field">${vente.vendeur.pseudo}</div>
 			</div>
 		</div>
 
