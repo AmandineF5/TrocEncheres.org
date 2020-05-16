@@ -131,7 +131,7 @@ public class NouvelleVente extends HttpServlet {
 //		}
 
 		//Enregistrer ou publier une vente
-		newVente.setPublie(true);
+		//newVente.setPublie(true);
 		
 		String boutonChoix = request.getParameter("bouton");
 		System.out.println(boutonChoix);
@@ -149,13 +149,16 @@ public class NouvelleVente extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-
-		String noVente = String.valueOf(venteAAfficher.getNoVente());
-		request.setAttribute("NoVente", noVente);
+		HttpSession session = request.getSession();
+		session.setAttribute("NoVente", venteAAfficher.getNoVente());
+//		String noVente = String.valueOf(venteAAfficher.getNoVente());
+//		request.setAttribute("NoVente", noVente);
 		
-		RequestDispatcher rd;
-		rd = request.getRequestDispatcher("/DetailVente");
-		rd.forward(request, response);
+//		RequestDispatcher rd;
+//		rd = request.getRequestDispatcher("/DetailVente");		
+//		rd.forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/DetailVente");
+		//request.getRequestDispatcher("/DetailVente").forward(request, response);
 	
 	}
 		
@@ -165,52 +168,52 @@ public class NouvelleVente extends HttpServlet {
 		return utilisateur;
 	}
 
-	private void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, FileUploadException {
-		PrintWriter out = response.getWriter();
-		if(ServletFileUpload.isMultipartContent(request))
-		{
-			// Create a factory for disk-based file items
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-
-			// Create a new file upload handler
-			ServletFileUpload upload = new ServletFileUpload(factory);
-
-			// Parse the request
-			List items = upload.parseRequest((RequestContext) request);
-			
-			// Process the uploaded items
-			Iterator iter = items.iterator();
-			while (iter.hasNext()) {
-			    FileItem item = (FileItem) iter.next();
-
-			    if (!item.isFormField()) 
-			    {
-			        String fichier = processUploadedFile(item);
-			        out.write("{success:true,fichier:\""+fichier+"\"}");
-			    }
-			}
-		}
-		out.flush();
-		out.close();
-	}
-
-	private String processUploadedFile(FileItem item) {
-		String fileName = item.getName();
-		int index=1;
-		while(new File(this.repertoireStockage+fileName).exists())
-		{
-			fileName = "("+index+")"+item.getName();
-			index+=1;
-		}
-		
-	    File uploadedFile = new File(this.repertoireStockage + fileName);
-	    try {
-			item.write(uploadedFile);
-			Thread.sleep(1000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	    return fileName;
-	}
+//	private void processRequest(HttpServletRequest request,
+//			HttpServletResponse response) throws IOException, FileUploadException {
+//		PrintWriter out = response.getWriter();
+//		if(ServletFileUpload.isMultipartContent(request))
+//		{
+//			// Create a factory for disk-based file items
+//			DiskFileItemFactory factory = new DiskFileItemFactory();
+//
+//			// Create a new file upload handler
+//			ServletFileUpload upload = new ServletFileUpload(factory);
+//
+//			// Parse the request
+//			List items = upload.parseRequest((RequestContext) request);
+//			
+//			// Process the uploaded items
+//			Iterator iter = items.iterator();
+//			while (iter.hasNext()) {
+//			    FileItem item = (FileItem) iter.next();
+//
+//			    if (!item.isFormField()) 
+//			    {
+//			        String fichier = processUploadedFile(item);
+//			        out.write("{success:true,fichier:\""+fichier+"\"}");
+//			    }
+//			}
+//		}
+//		out.flush();
+//		out.close();
+//	}
+//
+//	private String processUploadedFile(FileItem item) {
+//		String fileName = item.getName();
+//		int index=1;
+//		while(new File(this.repertoireStockage+fileName).exists())
+//		{
+//			fileName = "("+index+")"+item.getName();
+//			index+=1;
+//		}
+//		
+//	    File uploadedFile = new File(this.repertoireStockage + fileName);
+//	    try {
+//			item.write(uploadedFile);
+//			Thread.sleep(1000);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	    return fileName;
+//	}
 }
