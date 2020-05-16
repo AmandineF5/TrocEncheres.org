@@ -19,7 +19,7 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class VenteDAOJdbcImpl implements VenteDAO {
 	
-	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, publiee) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, publiee, nomImage) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String INSERT_RETRAITS_SQL = "INSERT INTO retraits(no_vente, rue, code_postal, ville) VALUES (?,?,?,?)";
 
 	private static final String SELECTBYID_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ?";
@@ -47,7 +47,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			state.setInt(6, vente.getVendeur().getNoUtilisateur());	
 			state.setInt(7, vente.getCategorieArticle().getNoCategorie());
 			state.setBoolean(8, vente.getPublie());
-
+			state.setString(9, vente.getNomImage());
+			
 			state.executeUpdate();
 			ResultSet rs = state.getGeneratedKeys();
 			if(rs.next())
