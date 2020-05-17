@@ -3,13 +3,32 @@
   <display-name>TrocEnchere.org</display-name>
   
   <welcome-file-list>
+    <welcome-file>Accueil</welcome-file>
     <welcome-file>ConnecterCompte</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+     <!-- accueil -->
+  <servlet>  <!-- servlet -->
+  	<servlet-name>Accueil</servlet-name>
+  	<servlet-class>fr.eni.projet01.trocenchere.ihm.Accueil</servlet-class>  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Accueil</servlet-name>
+  	<url-pattern>/accueil</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>  <!-- JSP -->
+	  <servlet-name>accueil</servlet-name>
+	  <jsp-file>/WEB-INF/accueil.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>accueil</servlet-name>
+	  <url-pattern>/accueil</url-pattern>
+  </servlet-mapping>
   
   
    <!-- création compte -->
