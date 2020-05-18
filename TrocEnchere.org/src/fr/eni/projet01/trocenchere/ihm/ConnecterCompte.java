@@ -43,7 +43,9 @@ public class ConnecterCompte extends HttpServlet {
 	            Cookie pseudoUtilisateur = new Cookie("pseudo", ut.getPseudo());
 	            response.addCookie(pseudoUtilisateur);
 	            // lien vers servlet de gestion du compte;
-	            response.sendRedirect("");
+	            response.sendRedirect("/TrocEnchere.org/accueil");
+	            //RequestDispatcher rd = request.getRequestDispatcher("/accueil");
+	    		//rd.forward(request, response);
 			} else if (!loginOK) {
 				message = "Email ou mot de passe invalide";
 	            request.setAttribute("message", message);

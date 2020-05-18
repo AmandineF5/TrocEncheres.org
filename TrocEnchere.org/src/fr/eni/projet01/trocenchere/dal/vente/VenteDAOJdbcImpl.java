@@ -25,7 +25,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String INSERT_RETRAITS_SQL = "INSERT INTO retraits(no_vente, rue, code_postal, ville) VALUES (?,?,?,?)";
 
 	private static final String SELECTBYID_VENTES_PUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ? AND ventes.publiee=1";
-	private static final String SELECTALL_VENTES_PUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ? AND ventes.publiee=1";
+	private static final String SELECTALL_VENTES_PUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_utilisateur = ? AND ventes.publiee=1";
 	
 	private static final String SELECTBYID_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ? AND ventes.publiee=0";
 	private static final String SELECTALL_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ? AND ventes.publiee=0";
@@ -192,6 +192,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			while (rs.next()) {
 				if (rs.getInt("no_vente")!=vente.getNoVente()) {
 					vente = new Vente();
+					vente.setNoVente(rs.getInt("no_vente"));
 					vente.setNomArticle(rs.getString("nomarticle"));
 					vente.setDescription(rs.getString("description"));
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
