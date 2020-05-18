@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/* Créé par Amandine
+*
+*
+*/
+
+/* 	ADAPTATION CONTENU POUR LES MOBILES */
+
+
+@-ms-viewport {
+  width: device-width;
+}
+
+@-o-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}
+	/* passer body (et tous les éléments de largeur fixe) en largeur automatique */
+
+body {
+	width: auto;
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	width: auto;
+	padding: 2vw;
+}
+	
+	/* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
+
+img,
+table,
+td,
+textarea,
+input,
+iframe {
+	max-width: 100%;
+}
+
+	/* conserver le ratio des images */
+
+img {
+	height: auto;
+}
+	
+	/* gestion des mots longs */
+
+textarea,
+table,
+td,
+th {
+	-webkit-hyphens: auto; /* césure propre */
+	-moz-hyphens: auto;
+	hyphens: auto;
+	word-wrap: break-word; /* passage à la ligne forcé */
+}
+	
+	
+	/* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
+
+.element1,
+.element2 {
+	float: none;
+	width: auto;
+}
+
+	/* Un message personnalisé */
+
+body:before {
+	content: "Version mobile du site";
+	display: block;
+	text-align: center;
+	font-style: italic;
+	color: #777;
+	font-size: min(3vw, 15px);
+}
+
+h1 {
+	font-size: min(5vw, 40px);
+	color: #7f8c8d;
+	text-align: center;
+}
+
+h2 {
+	font-size: min(4vw, 30px);
+	color: #7f8c8d;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+
+}
+
+.italic {
+	font-style: italic;
+	font-size: min(3vw, 14px);
+}
+
+.main-button {
+	background-color: #f39c12;
+}
+

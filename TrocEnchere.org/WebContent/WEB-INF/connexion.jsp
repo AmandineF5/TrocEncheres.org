@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="./CSS/main.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <title>Troc-Enchères connexion</title>
@@ -20,12 +20,15 @@
 <body>
 
 <header>
-	<div>Troc-Enchères</div>
+	<div>
+		<img src="./images/banner.png" alt="banniere">
+	</div>
 </header>
 	
 <main>
-	<div class="subtitle is-medium">
-	 	Se connecter
+	<div class="subtitle">
+	 	<h1>Bonjour !</h1>
+		<h2>Connectez-vous pour découvrir toutes nos fonctionnalités.</h2>
  	</div>
 	
 	<div>
@@ -80,7 +83,7 @@
 		 <div class="field-body">
 		    <div class="field">
 		      <div class="control">
-				  <button type="submit" class="button is-primary" name="bouton" value="valider">Connexion</button>
+				  <button type="submit" class="button main-button" name="bouton" value="valider">Connexion</button>
 			  </div>
 			</div>
 		</div>
@@ -90,7 +93,7 @@
 		  <label for="souvenir">Se souvenir de moi</label>
 		</div>
 		
-		<a href="url/vers/page/récupération/mdp">Mot de passe oublié</a>
+		<a href="url/vers/page/récupération/mdp" class="italic">Mot de passe oublié</a>
 				
 	</form>
 
@@ -99,7 +102,7 @@
 		<div class="field-body">
 			    <div class="field">
 			      <div class="control">
-					  <button type="submit" class="button is-primary" name="bouton" value="valider">Créer un nouveau compte</button>
+					  <button type="submit" class="button main-button" name="bouton" value="valider">Créer un nouveau compte</button>
 				  </div>
 				</div>
 			</div>
