@@ -23,6 +23,7 @@ import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 /**
+ * @author Corentin et Leslie
  * Servlet implementation class Accueil
  */
 @WebServlet("/Accueil")
@@ -38,12 +39,7 @@ public class Accueil extends HttpServlet {
 		Utilisateur utilisateur = extractedUserSession(request);		
 		request.setAttribute("utilisateur", utilisateur);
 		//Récupérer et afficher les catégories
-		List<Categorie> categories = new ArrayList<Categorie>();
-		try {
-			categories = vM.selectionnerCategorie();
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}		
+		List<Categorie> categories = toutesCategorie();		
 		request.setAttribute("categories", categories);	
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
@@ -63,16 +59,18 @@ public class Accueil extends HttpServlet {
 		List<Vente> venteByCategory = new ArrayList<Vente>();
 		
 		try {
-			if (request.getParameter("mesVentes")!=null) {
+			if (request.getParameter("mesVentes")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {
 				mesVentes = vM.selectionnerVenteUtilisateur(utilisateur.getNoUtilisateur());				
 			}
 			if (request.getParameter("mesEnchères")!=null) {
 				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateur.getNoUtilisateur());				
 			}
-			if (request.getParameter("categorie")!=null) {
+			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
+				//créer fonction selectAll sans parametre
+			} else {				
 				int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
-				venteByKeyword = vM.selectionnerVenteByCategory(noCategorie);
-			}
+				venteByCategory = vM.selectionnerVenteByCategory(noCategorie);	
+			}			
 			if (request.getParameter("venteByKeyword")!=null) {
 				venteByKeyword = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
 			}
@@ -87,6 +85,9 @@ public class Accueil extends HttpServlet {
 		request.setAttribute("venteByCategory", venteByCategory);
 		request.setAttribute("venteByKeyword", venteByKeyword);
 		
+		//Récupérer et afficher les catégories
+		List<Categorie> categories = toutesCategorie();			
+		request.setAttribute("categories", categories);	
 		
 		//Déléguer la réponse à la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
@@ -100,4 +101,13 @@ public class Accueil extends HttpServlet {
 		return utilisateur;
 	}
 
+	private List<Categorie> toutesCategorie (){
+		List<Categorie> categories = new ArrayList<Categorie>();
+		try {
+			categories = vM.selectionnerCategorie();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return categories;
+	}
 }
