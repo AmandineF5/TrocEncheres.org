@@ -89,7 +89,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			vente.setNoVente(noVente);
 			vente.setNomArticle(rs.getString("nomarticle"));
 			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			enchere.setConcerne(vente);

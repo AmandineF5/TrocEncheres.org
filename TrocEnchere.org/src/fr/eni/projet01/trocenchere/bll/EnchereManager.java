@@ -42,9 +42,10 @@ public class EnchereManager {
 		return listeEnchere;
 	}
 
+	//Don't understand this function? why not call the selectbyventeId directly
 	public  List<Enchere> selectionnerEnchereByIdVente (int noVente) throws BusinessException {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
-		listeEnchere = enchereDAO.selectByUserId(noVente);
+		listeEnchere = enchereDAO.selectByVenteId(noVente);
 		return listeEnchere;
 	}
 	
@@ -80,6 +81,7 @@ public class EnchereManager {
 		Enchere highestBid=null;
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		listeEnchere = this.selectionnerEnchereByIdVente(noVente);
+		//problem here out of bounds exception
 		highestBid = listeEnchere.get(0);	
 		return highestBid;
 	}
