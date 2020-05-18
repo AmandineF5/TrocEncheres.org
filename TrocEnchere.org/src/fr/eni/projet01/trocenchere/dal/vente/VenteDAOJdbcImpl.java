@@ -317,8 +317,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
 			//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
-			PreparedStatement state1 = cnx.prepareStatement(DELETE_VENTES_SQL);
-			PreparedStatement state2 = cnx.prepareStatement(DELETE_RETRAITS_SQL)){
+			PreparedStatement state1 = cnx.prepareStatement(DELETE_RETRAITS_SQL);
+			PreparedStatement state2 = cnx.prepareStatement(DELETE_VENTES_SQL)){
 			state1.setInt(1, noVente);
 			state2.setInt(1, noVente);
 			state1.executeUpdate();
