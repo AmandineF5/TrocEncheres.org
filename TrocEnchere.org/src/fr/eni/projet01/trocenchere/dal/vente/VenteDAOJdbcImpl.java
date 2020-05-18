@@ -266,7 +266,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	}
 
 	/**
-	 * @author Corentin
+	 * @author créé par Corentin
 	 * @author modifié par Leslie et Amandine
 	 * @param numéro de la catégorie
 	 * @return liste de vente publiée classée par catégorie
