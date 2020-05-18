@@ -104,13 +104,12 @@ label {
 .text-small-pad {
 	margin: 0.5px 1 px;
 	padding: 0.5px 1 px;
-	text-align: center;
+
 }
 
-a {
+a, a:visited {
 	text-decoration: none;
-	color: black;
-
+	color: inherit;
 }
 
 .italic {
@@ -128,8 +127,8 @@ a {
 
 .big-button {
 	margin-top: 2em;
-	height: min(10em, 50px);
-	font-size: min(6vw, 25px);
+	height: min(8em, 40px);
+	font-size: min(5vw, 25px);
 	
 }
 
@@ -140,6 +139,11 @@ a {
 
 header {
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+#sousmenu1 {
+	background-color: #ecf0f1;
+	color: black;
 }
 
 
