@@ -141,7 +141,6 @@
 		      <div class="control">
 				  <button type="submit" class="button is-primary" name="bouton" value="Publier">Publier</button>
 				  
-				  <button type="submit" class="button is-primary" name="bouton" value="Enregistre">Enregistrer</button>
 				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="annuler">Annuler</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>

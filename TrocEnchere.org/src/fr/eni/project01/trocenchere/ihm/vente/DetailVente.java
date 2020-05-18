@@ -88,7 +88,6 @@ public class DetailVente extends HttpServlet {
 		
 		RequestDispatcher rd = null;
 		
-		if(request.getParameter("delete") != null) {
 		int venteID = getNoVenteDeSession(request);
 		//send id to delete the vente
 		try {
@@ -99,7 +98,7 @@ public class DetailVente extends HttpServlet {
 		}
 		
 		response.sendRedirect(request.getContextPath()+"/NouvelleVente");
-		}
+		
 	}
 
 }
