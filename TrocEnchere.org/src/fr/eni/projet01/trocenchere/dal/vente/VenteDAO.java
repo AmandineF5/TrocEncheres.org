@@ -48,7 +48,7 @@ public interface VenteDAO {
 	 * @param libelle ou noCategorie
 	 * @return une liste de vente
 	 */
-	public List<Vente> searchByCatagory (String libelle)throws BusinessException; //ou par int noCategorie
+	public List<Vente> searchByCatagory (int noCategorie)throws BusinessException; //ou par int noCategorie
 	
 	/**
 	 * suppression d'une vente
