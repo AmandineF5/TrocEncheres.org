@@ -43,7 +43,7 @@ import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
-/**
+/**@author Leslie
  * Servlet implementation class NouvelleVente
  */
 @WebServlet("/NouvelleVente")
