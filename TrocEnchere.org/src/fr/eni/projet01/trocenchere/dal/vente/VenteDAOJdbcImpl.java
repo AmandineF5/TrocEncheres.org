@@ -17,6 +17,8 @@ import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
+//fait par Corentin
+//modifier par Leslie, Janet
 public class VenteDAOJdbcImpl implements VenteDAO {
 	
 	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, publiee, nomImage) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -111,6 +113,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 			vente.setMiseAPrix(rs.getInt("prix_initial"));
 			vente.setPrixVente(rs.getInt("prix_vente"));
+			vente.setNomImage(rs.getString("nomImage"));
+			vente.setPublie(rs.getBoolean("publiee"));
 			
 			Retrait retrait = new Retrait();
 			retrait.setRue(rs.getString("rue"));
