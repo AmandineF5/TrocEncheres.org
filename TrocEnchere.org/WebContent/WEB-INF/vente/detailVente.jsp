@@ -110,9 +110,8 @@
 					<button type="submit" class="button is-primary" name="delete" value="${vente.noVente}">Annuler la vente</button>
 					</form>
 					
-					<a href=""><button type="submit"
+					<a href="/TrocEnchere.org/accueil"><button type="submit"
 							class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
-					<%--rediriger vers l'accueil --%>
 				</div>
 			</div>
 		</div>
