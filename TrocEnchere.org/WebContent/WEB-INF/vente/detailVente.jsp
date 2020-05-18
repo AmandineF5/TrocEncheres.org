@@ -107,7 +107,7 @@
 			<div class="field">
 				<div class="control">
 					<form action="/TrocEnchere.org/DetailVente" method="post">
-					<button type="submit" class="button is-primary" name="delete" value="notnull">Annuler la vente</button>
+					<button type="submit" class="button is-primary" name="delete" value="${vente.noVente}">Annuler la vente</button>
 					</form>
 					
 					<a href=""><button type="submit"
