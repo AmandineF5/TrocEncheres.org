@@ -38,6 +38,32 @@ public class VenteManager {
 		venteDAO.delete(noVente);
 	}
 	
+	
+	/**
+	 * @author Leslie
+	 * selectionnerVenteByCategory / searchByCatagory
+	 * @param libelle
+	 * @return une liste de ventes publiées classées par catégorie
+	 * @throws BusinessException
+	 */
+	public List<Vente> selectionnerVenteByCategory(String libelle) throws BusinessException {
+		List<Vente> listeVente = new ArrayList<Vente>();
+		listeVente = venteDAO.searchByCatagory(libelle);
+		return listeVente;	
+	}
+	/**
+	 * @author Leslie
+	 * @param keyWord
+	 * @return une liste de ventes publiées classées par mot clé
+	 * @throws BusinessException
+	 */
+	public List<Vente> selectionnerVenteByKeyWord(String keyWord) throws BusinessException{
+		List<Vente> listeVente = new ArrayList<Vente>();
+		listeVente = venteDAO.searchByKeyWord(keyWord);
+		return listeVente;
+	}
+	
+	
 	public List<Categorie> selectionnerCategorie() throws BusinessException{
 		List<Categorie> listeCategorie = new ArrayList<>();
 		listeCategorie = venteDAO.selectCatagory();
