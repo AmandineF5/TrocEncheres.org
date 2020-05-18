@@ -31,7 +31,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String SELECTALL_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ? AND ventes.publiee=0";
 	
 	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ? AND ventes.publiee=1";
-	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE no_categorie = ? AND ventes.publiee=1";
+	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_categorie = ? AND ventes.publiee=1";
 	
 	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ?";
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
@@ -388,6 +388,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_KEYWORD_SQL);){			
 			ResultSet rs;
 			state.setString(1, keyWord);
+			state.setString(2, keyWord);
 			rs = state.executeQuery();
 			while (rs.next()) {
 				if (rs.getInt("no_vente")!=vente.getNoVente()) {
@@ -447,7 +448,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					vente.setNoVente(rs.getInt("no_vente"));
 					vente.setNomArticle(rs.getString("nomarticle"));
 					vente.setDescription(rs.getString("description"));
-					vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
 					
