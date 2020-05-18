@@ -41,8 +41,8 @@
 				<div class="navbar-end">
 					<div class="navbar-item">
 						<div class="buttons">
-							<a class="button is-light">Vendre un article</a> <a
-								class="button is-light">Mon profil</a> <a
+							<a class="button is-light" href="/TrocEnchere.org/NouvelleVente">Vendre un article</a> <a
+								class="button is-light" href="/TrocEnchere.org/afficher-compte">Mon profil</a> <a
 								class="button is-primary"> <strong>Déconnexion</strong></a>
 						</div>
 					</div>
@@ -136,7 +136,7 @@
 						<label class="label">Prix:</label>${ventes.prixVente}
 				    	<label class="label">Fin de l'enchère:</label>${ventes.dateFinEncheres}
 				    	<label class="label">Retrait:</label>${ventes.lieuRetrait.rue} ${ventes.lieuRetrait.codePostal} ${ventes.lieuRetrait.ville}
-				    	<label class="label">Vendeur:</label><a href="/TrocEnchere.org/DetailVenteEncherir?noUtilisateur=${ventes.vendeur.noUtilisateur}">${ventes.vendeur.pseudo}</a>
+				    	<label class="label">Vendeur:</label><a href="/TrocEnchere.org/afficher-compte?noUtilisateur=${ventes.vendeur.noUtilisateur}">${ventes.vendeur.pseudo}</a>
 				 	</div>					
 				</c:forEach>
 				
