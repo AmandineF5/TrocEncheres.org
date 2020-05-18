@@ -20,12 +20,7 @@
 
 <body>
 
-<header>
-	<div>
-		<img src="./images/banner.png" alt="banniere">
-	</div>
-</header>
-	
+<%@ include file="./fragments/header.html" %>
 <main>
 	<div class="subtitle">
 	 	<h1>Bonjour !</h1>
@@ -118,12 +113,7 @@
 		</form>
 	
 </main>
-
-
-
-
-
-
+<%@ include file="./fragments/script.html" %>
 </body>
 
 </html>

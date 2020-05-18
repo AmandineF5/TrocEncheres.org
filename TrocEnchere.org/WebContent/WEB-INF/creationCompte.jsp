@@ -14,11 +14,7 @@
 <title>Troc-Enchères création de compte</title>
 </head>
 <body>
-	<header>
-		<div>
-			<img src="./images/banner.png" alt="banniere">
-		</div>
-	</header>
+	<%@ include file="./fragments/header.html" %>
 	<main>
 		<div class="subtitle is-medium">
 	 		<h1>Bienvenue chez TrocEnchères.org</h1>
@@ -166,8 +162,6 @@
 		
 		</form>
 	</main>
-
-</body>
-</html>
+<%@ include file="./fragments/script.html" %>
 </body>
 </html>

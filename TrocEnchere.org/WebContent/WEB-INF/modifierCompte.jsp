@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -12,17 +12,18 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="./main.css">
+<link rel="stylesheet" href="./CSS/main.css">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-<title>Troc-Enchères modification de compte</title>
+<title>Troc-EnchÃ¨res modification de compte</title>
 </head>
 <body>
-	<header>
-		<div>Troc-Enchères</div>
-	</header>
+	<%@ include file="./fragments/header.html" %>
 	<main>
+		<div class="subtitle is-medium">
+	 		<h1>Modifier mon profil</h1>
+	 	</div>
 		<div>
 			<c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
 				<c:forEach var="err" items="${listeCodesErreur}">
@@ -30,7 +31,7 @@
 				</c:forEach>
 			</c:if>
 		</div>
-		<div class="subtitle is-medium">Mon Profil</div>
+	
 		<form action="/TrocEnchere.org/ModifierCompte" method="post">
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
@@ -38,7 +39,7 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="pseudoUtilisateur" value="${utilisateur.getPseudo()}">
+						<input type="text" class="input is-rounded" name="pseudoUtilisateur" value="${utilisateur.getPseudo()}" required>
 					</div>
 				</div>
 			</div>
@@ -49,18 +50,18 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="nomUtilisateur" value="${utilisateur.getNom()}">
+						<input type="text" class="input is-rounded" name="nomUtilisateur" value="${utilisateur.getNom()}" required>
 					</div>
 				</div>
 			</div>
 
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
-					<label class="label">Prénom:</label>
+					<label class="label">PrÃ©nom:</label>
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="prenomUtilisateur" value="${utilisateur.getPrenom()}">
+						<input type="text" class="input is-rounded" name="prenomUtilisateur" value="${utilisateur.getPrenom()}" required>
 					</div>
 				</div>
 			</div>
@@ -71,19 +72,19 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="email" class="input" name="emailUtilisateur"
-							value="${utilisateur.getEmail()}">
+						<input type="email" class="input is-rounded" name="emailUtilisateur"
+							value="${utilisateur.getEmail()}" required>
 					</div>
 				</div>
 			</div>
 
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
-					<label class="label">Téléphone:</label>
+					<label class="label">TÃ©lÃ©phone:</label>
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="telUtilisateur" value="${utilisateur.getTelephone()}">
+						<input type="text" class="input is-rounded" name="telUtilisateur" value="${utilisateur.getTelephone()}" required>
 					</div>
 				</div>
 			</div>
@@ -94,7 +95,7 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="rueUtilisateur" value="${utilisateur.getRue()}">
+						<input type="text" class="input is-rounded" name="rueUtilisateur" value="${utilisateur.getRue()}" required>
 					</div>
 				</div>
 			</div>
@@ -105,7 +106,7 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="cpUtilisateur" value="${utilisateur.getCodePostal()}">
+						<input type="text" class="input is-rounded" name="cpUtilisateur" value="${utilisateur.getCodePostal()}" required>
 					</div>
 				</div>
 			</div>
@@ -116,7 +117,7 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="text" class="input" name="villeUtilisateur" value="${utilisateur.getVille()}">
+						<input type="text" class="input is-rounded" name="villeUtilisateur" value="${utilisateur.getVille()}" required>
 					</div>
 				</div>
 			</div>
@@ -128,7 +129,7 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="password" class="input" name="mdpUtilisateur">
+						<input type="password" class="input is-rounded" name="mdpUtilisateur" required>
 					</div>
 				</div>
 			</div>
@@ -139,7 +140,7 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="password" class="input" name="confMdpUtilisateur">
+						<input type="password" class="input is-rounded" name="confMdpUtilisateur" required>
 					</div>
 				</div>
 			</div>
@@ -149,7 +150,7 @@
 
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
-					<label class="label">Crédit:</label>
+					<label class="label">CrÃ©dit:</label>
 				</div>
 				<div class="field-body">
 					<div class="field">
@@ -162,10 +163,10 @@
 			<div class="field-body">
 				<div class="field">
 					<div class="control">
-						<button type="submit" class="button is-primary" name="bouton"
+						<button type="submit" class="button main-button is-rounded" name="bouton"
 							value="enregistrer">Enregistrer</button>
 						<a href=""><button type="submit"
-								class="button is-primary is-light" name="bouton" value="retour">Retour</button></a>
+								class="button main-button is-rounded is-light" name="bouton" value="retour">Retour</button></a>
 						<%--rediriger vers Acceuil --%>
 					</div>
 				</div>
@@ -177,7 +178,6 @@
 
 	</main>
 
-</body>
-</html>
+<%@ include file="./fragments/script.html" %>
 </body>
 </html>
