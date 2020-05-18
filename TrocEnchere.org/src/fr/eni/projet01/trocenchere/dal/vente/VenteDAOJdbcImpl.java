@@ -171,6 +171,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
+					vente.setNomImage(rs.getString("nomImage"));
+					vente.setPublie(rs.getBoolean("publiee"));
 					
 					Retrait retrait = new Retrait();
 					retrait.setRue(rs.getString("rue"));
@@ -182,6 +184,21 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					categorie.setNoCategorie(rs.getInt("no_categorie"));
 					categorie.setLibelle(rs.getString("libelle"));
 					vente.setCategorieArticle(categorie);
+					
+					Utilisateur utilisateur = new Utilisateur();
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setNom(rs.getNString("nom"));
+					utilisateur.setPrenom(rs.getNString("prenom"));
+					utilisateur.setEmail(rs.getNString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
+					utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+					vente.setVendeur(utilisateur);
 					
 					listeVentes.add(vente);					
 				}				
