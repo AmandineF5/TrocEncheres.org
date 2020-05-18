@@ -60,28 +60,28 @@
 					<h3>Filtres :</h3>
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input type="checkbox">Mes ventes
+							<label class="checkbox"> <input name="mesVentes" type="checkbox">Mes ventes
 							</label>
 						</div>
 					</div>
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input type="checkbox">Mes enchères en cours
+							<label class="checkbox"> <input name="mesEnchères" type="checkbox">Mes enchères en cours
 							</label>
 						</div>
 					</div>
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input type="checkbox">Mes acquisitions
+							<label class="checkbox"> <input name="mesAcquisitions" type="checkbox">Mes acquisitions
 							</label>
 						</div>
 					</div>
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input type="checkbox">Autres enchères
+							<label class="checkbox"> <input name="autresEnchères" type="checkbox">Autres enchères
 							</label>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 
 				<div class="field"> <!-- BARRE DE RECHERCHE -->
 					<div class="control">
-						<input class="input is-primary" type="text"
+						<input name="venteByKeyword" class="input is-primary" type="text"
 							placeholder="Le nom de l'article contient">
 					</div>
 				</div>
@@ -127,6 +127,7 @@
 
 		<section>
 			<!-- AFFICHAGE D'ANNONCES AU HASARD ? OU RESULTATS ? -->
+			${mesVentes}
 
 		</section>
 

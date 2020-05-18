@@ -70,8 +70,8 @@ public class Accueil extends HttpServlet {
 			if (request.getParameter("mesEnchères")!=null) {
 				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateur.getNoUtilisateur());				
 			}
-			if (request.getParameter("noCategorie")!=null) {
-				int noCategorie = Integer.parseInt(request.getParameter("noCategorie"));
+			if (request.getParameter("categorie")!=null) {
+				int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
 				venteByKeyword = vM.selectionnerVenteByCategory(noCategorie);
 			}
 			if (request.getParameter("venteByKeyword")!=null) {
