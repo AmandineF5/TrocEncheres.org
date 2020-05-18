@@ -46,7 +46,6 @@ public class Accueil extends HttpServlet {
 		}		
 		request.setAttribute("categories", categories);	
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-
 	}
 
 	/**

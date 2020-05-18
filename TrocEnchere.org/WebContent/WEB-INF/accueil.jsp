@@ -104,6 +104,7 @@
 						<div class="control">
 							<div class="select is-primary">
 								<select name="categorie" size="1">
+									<option value="toutes"></option>
 									<option value="toutes">Toutes</option>
     								<c:forEach var="cat" items="${categories}" >
 	    								<option value="${cat.noCategorie} ">${cat.libelle} </option>
@@ -127,8 +128,20 @@
 
 		<section>
 			<!-- AFFICHAGE D'ANNONCES AU HASARD ? OU RESULTATS ? -->
-			${mesVentes}
-
+			<div>
+				<c:forEach var="ventes" items="${mesVentes}">
+					<div class="field-label is-normal">						
+						<label class="label"><a href="/TrocEnchere.org/DetailVenteEncherir?noVente=${ventes.noVente}">${ventes.nomArticle}</a></label>
+				    	<label class="label">Description:</label>${ventes.getDescription()}
+						<label class="label">Prix:</label>${ventes.prixVente}
+				    	<label class="label">Fin de l'enchère:</label>${ventes.dateFinEncheres}
+				    	<label class="label">Retrait:</label>${ventes.lieuRetrait}
+				    	<label class="label">Vendeur:</label>${ventes.vendeur}
+				 	</div>
+					
+				</c:forEach>
+				
+			</div>
 		</section>
 
 
