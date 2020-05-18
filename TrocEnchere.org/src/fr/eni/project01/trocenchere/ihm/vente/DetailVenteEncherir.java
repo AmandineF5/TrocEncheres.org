@@ -38,14 +38,13 @@ public class DetailVenteEncherir extends HttpServlet {
 				//get noVente from incoming page which should arrive in a parameter
 				//getting the id
 				//test
-				int noVenteAAfficher = 2;
+				int noVenteAAfficher = 12;
 				//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 					
 				//find the Vente in the database
 				Vente venteAAfficher = new Vente();
 				try {
 					 venteAAfficher = vM.selectionnerVenteById(noVenteAAfficher);
-					 System.out.println(venteAAfficher.getVendeur());
 					 
 				} catch (BusinessException e) {
 					e.printStackTrace();
@@ -105,11 +104,10 @@ public class DetailVenteEncherir extends HttpServlet {
 		}
 		
 		//get local date
-		ZoneId zonedId = ZoneId.of( "Europe/Paris" );
-		LocalDate today = LocalDate.now( zonedId );
+		LocalDate date = LocalDate.parse("2020-05-15");
 		
 		//new bid
-		Enchere newEnchere = new Enchere(today, venteConcerne, user, enchere);
+		Enchere newEnchere = new Enchere(date, venteConcerne, user, enchere);
 		
 		//insert into db
 		try {

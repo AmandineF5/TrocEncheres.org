@@ -48,7 +48,7 @@
 				<div class="field">
 					<c:choose>
 						<c:when test="${enchere.points == null}">
-   			 			${vente.miseAPrix}
+   			 			0
   						</c:when>
 						<c:otherwise>
    						 ${enchere.points} pts par ${enchere.getEncherit().getPseudo()}
@@ -100,6 +100,14 @@
 						class="field">${vente.vendeur.pseudo}</div></a>
 			</div>
 		</div>
+		
+		<c:if test="${message!=null && message.length()>0 }">
+		 	<p>${message}</p>
+		  </c:if>
+
+		<c:if test = "${utilisateur.credit < enchere.points+1 } }">
+		Vous n'avez pas assez de credit
+		</c:if>
 
 		<form action="/TrocEnchere.org/DetailVenteEncherir" method="post">
 			<div class="field is-horizontal">
@@ -108,11 +116,13 @@
 				</div>
 				<div class="field-body">
 					<div class="field">
-						<input type="number" class="input" size="30" name="encherir"
+						<input type="number" class="input" name="encherir"
 							max="${utilisateur.credit}" min="${enchere.points+1}"
 							value="${enchere.points+1}">.
+						<input type="hidden" name="noVente" value="${vente.noVente}">
+						
 					</div>
-					<input type="hidden" name="noVente" value="${vente.noVente}">
+					
 				</div>
 				<div class="field-body">
 					<div class="field">
