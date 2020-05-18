@@ -25,14 +25,6 @@
 	<main>
 		<div class="subtitle is-medium">Détail Vente</div>
 
-		<div>
-			<c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
-				<c:forEach var="err" items="${listeCodesErreur}">
-					<li>${err}</li>
-				</c:forEach>
-			</c:if>
-		</div>
-
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
 				<label class="label">Article:</label>
@@ -52,7 +44,7 @@
 				<div class="field">
 					<c:choose>
 						<c:when test="${enchere.points == null}">
-   			 			${vente.miseAPrix}
+   			 			0
   						</c:when>
 						<c:otherwise>
    						 ${enchere.points} pts par ${enchere.getEncherit().getPseudo()}
@@ -102,6 +94,10 @@
 				<div class="field">${vente.vendeur.pseudo}</div>
 			</div>
 		</div>
+		
+		<c:if test="${message!=null && message.length()>0 }">
+		 	<p>${message}</p>
+		  </c:if>
 
 		<div class="field-body">
 			<div class="field">
