@@ -2,6 +2,7 @@
 <!-- CORENTIN ET LESLIE / LUNDI 18 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,12 +103,12 @@
 					<div class="field">
 						<div class="control">
 							<div class="select is-primary">
-								<select>
-									<option>Toutes</option>
-									<option>catégorie n°1</option>
-									<option>catégorie n°2</option>
-									<option>catégorie n°3</option>
-									</select>
+								<select name="categorie" size="1">
+									<option value="toutes">Toutes</option>
+    								<c:forEach var="cat" items="${categories}" >
+	    								<option value="${cat.noCategorie} ">${cat.libelle} </option>
+	    								</c:forEach>
+    								</select>
 								</div>
 							</div>
 						</div>
