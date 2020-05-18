@@ -41,18 +41,9 @@
 				<div class="field">${vente.nomArticle}</div>
 			</div>
 		</div>
-
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Description:</label>
-			</div>
-			<div class="field-body">
-				<div class="field">
-					<p>${vente.description}</p>
-				</div>
-			</div>
-		</div>
-
+		
+		<div><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet à vendre"></div>
+		
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
 				<label class="label">Meilleure offre:</label>
