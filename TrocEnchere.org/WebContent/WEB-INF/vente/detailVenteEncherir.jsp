@@ -25,14 +25,6 @@
 	<main>
 		<div class="subtitle is-medium">Détail Vente</div>
 
-		<div>
-			<c:if test="${listeCodesErreur!=null && listeCodesErreur.size()>0 }">
-				<c:forEach var="err" items="${listeCodesErreur}">
-					<li>${err}</li>
-				</c:forEach>
-			</c:if>
-		</div>
-
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
 				<label class="label">Article:</label>
@@ -41,9 +33,13 @@
 				<div class="field">${vente.nomArticle}</div>
 			</div>
 		</div>
-		
-		<div class="field is-horizontal"><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet à vendre"></div>
-		
+
+		<div class="field is-horizontal">
+			<img
+				src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}"
+				alt="Photo d'objet à vendre">
+		</div>
+
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
 				<label class="label">Meilleure offre:</label>
@@ -99,33 +95,38 @@
 				<label class="label">Vendeur:</label>
 			</div>
 			<div class="field-body">
-				<a href="${pageContext.request.contextPath}/afficher-compte?id=${vente.vendeur.noUtilisateur}"><div class="field">${vente.vendeur.pseudo}</div></a>
+				<a
+					href="${pageContext.request.contextPath}/afficher-compte?id=${vente.vendeur.noUtilisateur}"><div
+						class="field">${vente.vendeur.pseudo}</div></a>
 			</div>
 		</div>
 
 		<form action="/TrocEnchere.org/DetailVenteEncherir" method="post">
-		 <div class="field is-horizontal">
-  			<div class="field-label is-normal">
-			    <label class="label">Ma proposition:</label>
-			 </div>
-			 <div class="field-body">
-    			<div class="field">
-			    	<input type="number" class="input" name="encherir" max="${utilisateur.credit}" min="${enchere.points}">
-		 		</div>
-		 	</div>
-		<div class="field-body">
-			<div class="field">
-				<div class="control">
-					<button type="submit" class="button is-primary" name="encherir">Enchérir</button>
+			<div class="field is-horizontal">
+				<div class="field-label is-normal">
+					<label class="label">Ma proposition:</label>
+				</div>
+				<div class="field-body">
+					<div class="field">
+						<input type="number" class="input" size="30" name="encherir"
+							max="${utilisateur.credit}" min="${enchere.points+1}"
+							value="${enchere.points+1}">.
+					</div>
+					<input type="hidden" name="noVente" value="${vente.noVente}">
+				</div>
+				<div class="field-body">
+					<div class="field">
+						<div class="control">
+							<button type="submit" class="button is-primary" name="encherir">Enchérir</button>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		</div>
 		</form>
-		
+
 		<a href=""><button type="submit"
-							class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
-					<%--rediriger vers diapo 7 detail vente --%>
+				class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
+		<%--rediriger vers diapo 7 detail vente --%>
 
 	</main>
 
