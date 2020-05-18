@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		
-		<div><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet à vendre"></div>
+		<div class="field is-horizontal"><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet à vendre"></div>
 		
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -107,7 +107,7 @@
 			<div class="field">
 				<div class="control">
 					<form action="/TrocEnchere.org/DetailVente" method="post">
-					<button type="submit" class="button is-primary" name="delete">Annuler la vente</button>
+					<button type="submit" class="button is-primary" name="delete" value="notnull">Annuler la vente</button>
 					</form>
 					
 					<a href=""><button type="submit"
