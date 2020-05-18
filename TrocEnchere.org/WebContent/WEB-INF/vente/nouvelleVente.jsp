@@ -22,7 +22,7 @@
 	 		Nouvelle vente
 	 	</div>
 	 	
-		<form action="/TrocEnchere.org/NouvelleVente" method="post">
+		<form action="/TrocEnchere.org/NouvelleVente" method="post" > <!-- enctype="multipart/form-data" -->
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
 			    <label class="label">Article:</label>
