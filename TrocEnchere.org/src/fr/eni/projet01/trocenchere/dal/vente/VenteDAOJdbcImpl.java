@@ -17,18 +17,21 @@ import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
-//fait par Corentin
-//modifier par Leslie, Janet
+//fait par Corentin et Amandine
+//modifié par Leslie, Janet
 public class VenteDAOJdbcImpl implements VenteDAO {
 	
 	private static final String INSERT_VENTES_SQL = "INSERT INTO ventes(nomarticle, description, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, publiee, nomImage) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String INSERT_RETRAITS_SQL = "INSERT INTO retraits(no_vente, rue, code_postal, ville) VALUES (?,?,?,?)";
 
-	private static final String SELECTBYID_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ?";
-	private static final String SELECTALL_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ?";
+	private static final String SELECTBYID_VENTES_PUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ? AND ventes.publiee=1";
+	private static final String SELECTALL_VENTES_PUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ? AND ventes.publiee=1";
 	
-	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ?";
-	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE no_categorie = ?";
+	private static final String SELECTBYID_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ? AND ventes.publiee=0";
+	private static final String SELECTALL_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ? AND ventes.publiee=0";
+	
+	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ? AND ventes.publiee=1";
+	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE no_categorie = ? AND ventes.publiee=1";
 	
 	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ?";
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
@@ -37,6 +40,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	
 	private static final String UPDATE_VENTES_SQL = "UPDATE ventes SET points=? WHERE no_vente=?";
 
+	/**
+	 * @author créé par Amandine
+	 * @author modifié par Leslie et Amandine
+	 * @param un objet vente
+	 * @return une vente avec son numéro de vente (id)
+	 */
 	public Vente insert(Vente vente) throws BusinessException {
  		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection()){
@@ -83,6 +92,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return vente;
 	}
 	
+	/**
+	 * @author créé par Amandine
+	 * @param numéro de vente et prix de la vente (points)
+	 * @return vide
+	 */
 	public void update (int noVente, Integer points) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement state= cnx.prepareStatement(UPDATE_VENTES_SQL);){			
@@ -100,10 +114,16 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		
 	}
 
+	/**
+	 * @author créé par Amandine
+	 * @author modifié par Leslie et Amandine
+	 * @param numéro de vente
+	 * @return une vente publiée 
+	 */
 	public Vente selectById(int noVente) throws BusinessException {
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement state= cnx.prepareStatement(SELECTBYID_VENTES_SQL);){			
+				PreparedStatement state= cnx.prepareStatement(SELECTBYID_VENTES_PUBLIEES_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noVente);
 			rs = state.executeQuery();
@@ -154,12 +174,146 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return vente;
 	}
 	
+	/**
+	 * @author créé par Amandine
+	 * @author modifié par Leslie et Amandine
+	 * @param numéro d'utilisateur
+	 * @return liste de vente publiée classée par le numéro d'utilisateur (vendeur)
+	 */
 	public List<Vente> selectAll(int noUtilisateur) throws BusinessException {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
-				PreparedStatement state= cnx.prepareStatement(SELECTALL_VENTES_SQL);){			
+				PreparedStatement state= cnx.prepareStatement(SELECTALL_VENTES_PUBLIEES_SQL);){			
+			ResultSet rs;
+			state.setInt(1, noUtilisateur);
+			rs = state.executeQuery();
+			while (rs.next()) {
+				if (rs.getInt("no_vente")!=vente.getNoVente()) {
+					vente = new Vente();
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					vente.setNomImage(rs.getString("nomImage"));
+					vente.setPublie(rs.getBoolean("publiee"));
+					
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					vente.setLieuRetrait(retrait);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
+					Utilisateur utilisateur = new Utilisateur();
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setNom(rs.getNString("nom"));
+					utilisateur.setPrenom(rs.getNString("prenom"));
+					utilisateur.setEmail(rs.getNString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
+					utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+					vente.setVendeur(utilisateur);
+					
+					listeVentes.add(vente);					
+				}				
+			}
+			
+			rs.close();	
+			
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: id inconnu");
+			throw be;
+		}
+		
+		return listeVentes;
+	}
+	
+	/**
+	 * @author créé par Amandine
+	 * @author 
+	 * @param numéro de vente
+	 * @return une vente publiée 
+	 */
+	public Vente selectByIdNonPublic(int noVente) throws BusinessException {
+		Vente vente = new Vente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECTBYID_VENTES_NONPUBLIEES_SQL);){			
+			ResultSet rs;
+			state.setInt(1, noVente);
+			rs = state.executeQuery();
+			rs.next();
+			vente.setNomArticle(rs.getString("nomarticle"));
+			vente.setDescription(rs.getString("description"));
+			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+			vente.setMiseAPrix(rs.getInt("prix_initial"));
+			vente.setPrixVente(rs.getInt("prix_vente"));
+			vente.setNomImage(rs.getString("nomImage"));
+			vente.setPublie(rs.getBoolean("publiee"));
+			
+			Retrait retrait = new Retrait();
+			retrait.setRue(rs.getString("rue"));
+			retrait.setCodePostal(rs.getString("code_postal"));
+			retrait.setVille(rs.getString("ville"));
+			vente.setLieuRetrait(retrait);
+			
+			Categorie categorie = new Categorie();
+			categorie.setNoCategorie(rs.getInt("no_categorie"));
+			categorie.setLibelle(rs.getString("libelle"));
+			vente.setCategorieArticle(categorie);
+			
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			utilisateur.setPseudo(rs.getString("pseudo"));
+			utilisateur.setNom(rs.getNString("nom"));
+			utilisateur.setPrenom(rs.getNString("prenom"));
+			utilisateur.setEmail(rs.getNString("email"));
+			utilisateur.setTelephone(rs.getString("telephone"));
+			utilisateur.setRue(rs.getString("rue"));
+			utilisateur.setCodePostal(rs.getString("code_postal"));
+			utilisateur.setVille(rs.getString("ville"));
+			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+			utilisateur.setCredit(rs.getInt("credit"));
+			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+			vente.setVendeur(utilisateur);
+			
+			rs.close();	
+			
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: id inconnu");
+			throw be;
+		}
+		
+		return vente;
+	}
+	
+	/**
+	 * @author créé par Amandine
+	 * @author modifié par Leslie et Amandine
+	 * @param numéro d'utilisateur
+	 * @return liste de vente publiée classée par le numéro d'utilisateur (vendeur)
+	 */
+	public List<Vente> selectAllNonPublic(int noUtilisateur) throws BusinessException {
+		List<Vente> listeVentes = new ArrayList<Vente>();
+		Vente vente = new Vente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECTALL_VENTES_NONPUBLIEES_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
@@ -216,8 +370,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return listeVentes;
 	}
 
-	
-	
+	/**
+	 * @author créé par Corentin
+	 * @author modifié par Leslie et Amandine
+	 * @param mot-clé
+	 * @return liste de vente publiée classée par mot-clé
+	 */
 	@Override
 	public List<Vente> searchByKeyWord(String keyWord) throws BusinessException {
 		

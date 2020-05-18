@@ -26,7 +26,7 @@ public interface VenteDAO {
 	public void update (int noVente, Integer points) throws BusinessException;
 	
 	
-	public Vente selectById (int noVente) throws BusinessException;
+public Vente selectById (int noVente) throws BusinessException;
 	
 	/**
 	 * Récupère toutes les ventes publiées par un utilisateur
@@ -37,10 +37,27 @@ public interface VenteDAO {
 	public  List<Vente> selectAll (int noUtilisateur) throws BusinessException;
 	
 	/**
+	 * Chercher et récupère toutes les ventes non publiées comportant le mot clé
+	 * @param keyWord
+	 * @return une liste de vente
+	 */
+	
+public Vente selectByIdNonPublic (int noVente) throws BusinessException;
+	
+	/**
+	 * Récupère toutes les ventes non publiées par un utilisateur
+	 * @param noUtilisateur
+	 * @return la liste des ventes appartenant à l'utilisateur
+	 * @throws BusinessException 
+	 */
+	public  List<Vente> selectAllNonPublic (int noUtilisateur) throws BusinessException;
+	
+	/**
 	 * Chercher et récupère toutes les ventes publiées comportant le mot clé
 	 * @param keyWord
 	 * @return une liste de vente
 	 */
+	
 	public List<Vente> searchByKeyWord (String keyWord)throws BusinessException;
 	
 	/**
