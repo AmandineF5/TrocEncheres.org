@@ -77,7 +77,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="number" class="input" name="prixInitial" >
+			    	<input type="number" class="input" name="prixInitial" min="0">
 		 		</div>
 		 	</div>
 		 </div>
