@@ -28,7 +28,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String SELECTALL_VENTES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE ventes.no_utilisateur = ?";
 	
 	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE nomarticle LIKE ? OR description LIKE ?";
-	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE libelle = ?";
+	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie WHERE no_categorie = ?";
 	
 	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ?";
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
@@ -265,8 +265,14 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return listeVente;
 	}
 
+	/**
+	 * @author Corentin
+	 * @author modifié par Leslie et Amandine
+	 * @param numéro de la catégorie
+	 * @return liste de vente publiée classée par catégorie
+	 */
 	@Override
-	public List<Vente> searchByCatagory(String libelle) throws BusinessException {
+	public List<Vente> searchByCatagory(int noCategorie) throws BusinessException {
 		
 		List<Vente> listeVente = new ArrayList<Vente>();
 		Vente vente = new Vente();
@@ -274,7 +280,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_CATEGORY_SQL);){			
 			ResultSet rs;
-			state.setString(1, libelle);
+			state.setInt(1, noCategorie);
 			rs = state.executeQuery();
 			while (rs.next()) {
 				if (rs.getInt("no_vente")!=vente.getNoVente()) {

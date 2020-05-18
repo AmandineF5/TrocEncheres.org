@@ -46,9 +46,9 @@ public class VenteManager {
 	 * @return une liste de ventes publiées classées par catégorie
 	 * @throws BusinessException
 	 */
-	public List<Vente> selectionnerVenteByCategory(String libelle) throws BusinessException {
+	public List<Vente> selectionnerVenteByCategory(int noCategorie) throws BusinessException {
 		List<Vente> listeVente = new ArrayList<Vente>();
-		listeVente = venteDAO.searchByCatagory(libelle);
+		listeVente = venteDAO.searchByCatagory(noCategorie);
 		return listeVente;	
 	}
 	/**
