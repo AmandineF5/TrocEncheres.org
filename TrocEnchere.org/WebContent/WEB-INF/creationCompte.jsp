@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -8,18 +8,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="./CSS/main.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-<title>Troc-Enchères création de compte</title>
+<title>Troc-EnchÃ¨res crÃ©ation de compte</title>
 </head>
 <body>
 	<header>
-		<div>Troc-Enchères</div>
+		<div>
+			<img src="./images/banner.png" alt="banniere">
+		</div>
 	</header>
 	<main>
 		<div class="subtitle is-medium">
-	 		Créer un compte
+	 		<h1>Bienvenue chez TrocEnchÃ¨res.org</h1>
+	 	</div>
+	 	<div class="subtitle is-small">
+	 		<h2>Veuillez remplir les champs ci-dessous</h2>
 	 	</div>
   	
 	  	<div>
@@ -37,7 +42,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="pseudoUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="pseudoUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -48,18 +53,18 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="nomUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="nomUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
 		 
 		  <div class="field is-horizontal">
   			<div class="field-label is-normal">
-			    <label class="label">Prénom:</label>
+			    <label class="label">PrÃ©nom:</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="prenomUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="prenomUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -70,18 +75,18 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="email" class="input" name="emailUtilisateur" placeholder="xxx@yyy.zzz" >
+			    	<input type="email" class="input is-rounded" name="emailUtilisateur" placeholder="xxx@yyy.zzz" required>
 		 		</div>
 		 	</div>
 		 </div>
 		 
 		  <div class="field is-horizontal">
   			<div class="field-label is-normal">
-			    <label class="label">Téléphone:</label>
+			    <label class="label">TÃ©lÃ©phone:</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="telUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="telUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -92,7 +97,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="rueUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="rueUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -103,7 +108,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="cpUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="cpUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -114,7 +119,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="villeUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="villeUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -126,7 +131,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="password" class="input" name="mdpUtilisateur" >
+			    	<input type="password" class="input is-rounded" name="mdpUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -137,7 +142,7 @@
 			 </div>
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="password" class="input" name="confMdpUtilisateur" >
+			    	<input type="password" class="input is-rounded" name="confMdpUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -145,12 +150,16 @@
 		 	<p>${message}</p>
 		  </c:if>
 		  
+		  <div>
+			<input type="checkbox" id="terms" name="terms">
+		  	<label class="text-small-pad" > Â« J'accepte les Conditions GÃ©nÃ©rales de Vente et les Conditions GÃ©nÃ©rales d'Utilisation Â»</label>
+		</div>
 		 
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-				  <button type="submit" class="button is-primary" name="bouton" value="valider">Valider</button>
-				  <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="annuler">Annuler</button></a> <%--rediriger vers l'accueil --%>
+				  <button type="submit" class="button main-button is-rounded" name="bouton" value="valider">Valider</button>
+				  <a href=""><button type="submit" class="button main-button is-rounded is-light" name="bouton" value="annuler">Annuler</button></a> <%--rediriger vers l'accueil --%>
 			  </div>
 			</div>
 		</div>

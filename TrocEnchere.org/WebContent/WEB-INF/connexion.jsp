@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="./CSS/main.css">
+	<link rel="stylesheet" href="./CSS/connexion.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <title>Troc-Enchères connexion</title>
@@ -57,7 +58,7 @@
 			 
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="text" class="input" name="pseudoUtilisateur" >
+			    	<input type="text" class="input is-rounded" name="pseudoUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -69,7 +70,7 @@
 			 
 			 <div class="field-body">
     			<div class="field">
-			    	<input type="password" class="input" name="mdpUtilisateur" >
+			    	<input type="password" class="input is-rounded" name="mdpUtilisateur" required>
 		 		</div>
 		 	</div>
 		 </div>
@@ -80,20 +81,28 @@
 			  </c:if>
 		  </div>
 		 
-		 <div class="field-body">
-		    <div class="field">
-		      <div class="control">
-				  <button type="submit" class="button main-button" name="bouton" value="valider">Connexion</button>
-			  </div>
+		 <div> 
+		 
+		 </div>
+		 <div class="columns">
+			 <div class="field-body column">
+			    <div class="field">
+			      <div class="control">
+					  <button type="submit" class="button main-button is-rounded" name="bouton" value="valider">Connexion</button>
+				  </div>
+				</div>
+			</div>
+			<div class="column">
+				<div>
+					<input type="checkbox" id="souvenir" name="souvenir">
+				  	<label class="text-small-pad" for="souvenir">Se souvenir de moi</label>
+				</div>
+				<div class="text-small-pad" >
+					<a href="url/vers/page/récupération/mdp" class="italic">Mot de passe oublié</a>
+				</div>
 			</div>
 		</div>
 		
-		<div>
-		  <input type="checkbox" id="souvenir" name="souvenir">
-		  <label for="souvenir">Se souvenir de moi</label>
-		</div>
-		
-		<a href="url/vers/page/récupération/mdp" class="italic">Mot de passe oublié</a>
 				
 	</form>
 
@@ -102,7 +111,7 @@
 		<div class="field-body">
 			    <div class="field">
 			      <div class="control">
-					  <button type="submit" class="button main-button" name="bouton" value="valider">Créer un nouveau compte</button>
+					  <button type="submit" class="button main-button big-button is-rounded" name="bouton" value="valider">Créer un nouveau compte</button>
 				  </div>
 				</div>
 			</div>

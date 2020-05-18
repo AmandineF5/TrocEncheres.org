@@ -39,14 +39,17 @@ table,
 td,
 textarea,
 input,
-iframe {
+iframe,
+header {
 	max-width: 100%;
 }
 
 	/* conserver le ratio des images */
 
-img {
+img,
+header  {
 	height: auto;
+	text-align: center;
 }
 	
 	/* gestion des mots longs */
@@ -82,14 +85,25 @@ body:before {
 }
 
 h1 {
-	font-size: min(5vw, 40px);
+	font-size: min(5vw, 37px);
 	color: #7f8c8d;
 	text-align: center;
 }
 
 h2 {
-	font-size: min(4vw, 30px);
+	font-size: min(4vw, 27px);
 	color: #7f8c8d;
+	text-align: center;
+}
+
+label {
+	font-size: min(3vw, 13px);
+	text-align: center;
+}
+
+.text-small-pad {
+	margin: 0.5px 1 px;
+	padding: 0.5px 1 px;
 	text-align: center;
 }
 
@@ -105,6 +119,27 @@ a {
 }
 
 .main-button {
+	height: min(8em, 40px);
+	font-size: min(6vw, 15px);
+	font-weight: bold;
 	background-color: #f39c12;
 }
+
+
+.big-button {
+	margin-top: 2em;
+	height: min(10em, 50px);
+	font-size: min(6vw, 25px);
+	
+}
+
+.control {
+	justify-content: center;
+	text-align: center;
+}
+
+header {
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
 

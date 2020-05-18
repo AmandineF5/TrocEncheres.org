@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+.columns {
+	max-width: 100%;
+	display: flex;
+}
+
+label {
+	margin-bottom: 0;
+}
