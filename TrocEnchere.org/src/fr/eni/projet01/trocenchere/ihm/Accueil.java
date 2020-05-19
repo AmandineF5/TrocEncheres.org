@@ -141,18 +141,14 @@ public class Accueil extends HttpServlet {
 			}
 			
 			if (request.getParameter("venteByKeyword")!=null) {
-				venteByKeyword = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
-				
-				
-				
+				resultatAAfficher = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
+
 			}
 			
 			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
 				//cas toutes catégories
 				
-				
-				
-	
+
 			} else {
 				//cas 1 catégorie
 				int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
