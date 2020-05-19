@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="./main.css">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-
+<!-- created by Janet -->
 <title>Troc-Enchères Détail Vente</title>
 </head>
 <body>
@@ -96,7 +96,7 @@
 			</div>
 			<div class="field-body">
 				<a
-					href="${pageContext.request.contextPath}/afficher-compte?id=${vente.vendeur.noUtilisateur}"><div
+					href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}"><div
 						class="field">${vente.vendeur.pseudo}</div></a>
 			</div>
 		</div>

@@ -134,6 +134,12 @@ public class VenteManager {
 	public void mettreAJourPrixVente (int noVente, Integer points) throws BusinessException {
 		venteDAO.update(noVente, points);
 	}
+	
+	public List<Vente> selectionnerToutesVentes() throws BusinessException{
+		List<Vente> listeVente = new ArrayList<Vente>();
+		listeVente = venteDAO.selectAll();
+		return listeVente;
+	}
 }
 
 	

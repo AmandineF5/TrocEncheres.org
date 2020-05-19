@@ -7,26 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
+import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Enchere;
+import fr.eni.projet01.trocenchere.bo.Retrait;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 //Amandine
-//modified Janet
+//Janet
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String INSERT_ENCHERE_SQL = "INSERT INTO encheres(date_enchere, no_acheteur, no_vente, points) VALUES (?,?,?,?)";
 
-	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE ventes.no_vente = ? ORDER BY points DESC";
-	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? ORDER BY points DESC";
+	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE ventes.no_vente = ? ORDER BY points DESC";
+	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? ORDER BY points DESC";
 
-	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
+	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
 
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
+	
+	private static final String UPDATE_ENCHERES_SQL = "UPDATE enchere SET points=? WHERE encheres.no_acheteur=? AND encheres.no_vente=?";
 
+	@Override
 	public Enchere selectOneByUserIdVenteId(int noUtilisateur, int noVente) throws BusinessException {
 
 		Enchere enchere = new Enchere();
@@ -64,6 +69,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 				vente.setMiseAPrix(rs.getInt("prix_initial"));
 				vente.setPrixVente(rs.getInt("prix_vente"));
+				
+				Retrait retrait = new Retrait();
+				retrait.setRue(rs.getString("rue"));
+				retrait.setCodePostal(rs.getString("code_postal"));
+				retrait.setVille(rs.getString("ville"));
+				vente.setLieuRetrait(retrait);
+				
+				Categorie categorie = new Categorie();
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+				vente.setCategorieArticle(categorie);
+				
 				enchere.setConcerne(vente);
 
 				enchere.setPoints(rs.getInt("points"));
@@ -93,7 +110,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_vente")!=enchere.getConcerne().getNoVente() && noUtilisateur!=enchere.getEncherit().getNoUtilisateur()) {
+				if (rs.getInt("no_vente")!=enchere.getConcerne().getNoVente()) {
 					
 					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
 			
@@ -108,6 +125,19 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
+					
+					
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					vente.setLieuRetrait(retrait);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
 					enchere.setConcerne(vente);
 			
 					enchere.setPoints(rs.getInt("points"));
@@ -140,7 +170,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			state.setInt(1, noVente);
 			rs = state.executeQuery();
 			while (rs.next()) {
-				if (noVente!=enchere.getConcerne().getNoVente() && rs.getInt("no_acheteur")!=enchere.getEncherit().getNoUtilisateur()) {
+				
 					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
 		
 					UtilisateurManager um = new UtilisateurManager();
@@ -154,12 +184,24 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
+	
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					vente.setLieuRetrait(retrait);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
 					enchere.setConcerne(vente);
 		
 					enchere.setPoints(rs.getInt("points"));
-					
+					System.out.println(enchere);
 					listeEnchere.add(enchere);
-				}
+				
 			}
 			rs.close();
 			
@@ -217,6 +259,26 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			throw be;
 		}
 
+	}
+	@Override
+	public void updateEnchere(Enchere newEnchere) throws BusinessException {
+		int points = newEnchere.getPoints();
+		int acheteur = newEnchere.getEncherit().getNoUtilisateur();
+		int vente = newEnchere.getConcerne().getNoVente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement state= cnx.prepareStatement(UPDATE_ENCHERES_SQL);){			
+			state.setInt(1, points);
+			state.setInt(2, acheteur);
+			state.setInt(3, vente);
+	
+			state.execute();
+			
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: mise à jour des points impossible");
+			throw be;
+		}
 	}
 
 }
