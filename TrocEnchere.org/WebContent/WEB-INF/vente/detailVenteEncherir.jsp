@@ -101,13 +101,11 @@
 			</div>
 		</div>
 
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
+		
 				<c:if test="${message!=null && message.length()>0 }">
 					<p>${message}</p>
 				</c:if>
-			</div>
-		</div>
+		
 
 		<form action="/TrocEnchere.org/DetailVenteEncherir" method="post">
 			<div class="field is-horizontal">
@@ -135,10 +133,9 @@
 			</div>
 		</form>
 
-		<a href=""><button type="submit"
+		<a href="${pageContext.request.contextPath}/Accueil"><button type="submit"
 				class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
-		<%--rediriger vers diapo 7 detail vente --%>
-
+		
 	</main>
 
 </body>
