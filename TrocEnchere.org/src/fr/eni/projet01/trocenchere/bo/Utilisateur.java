@@ -1,3 +1,6 @@
+
+// CORENTIN
+
 package fr.eni.projet01.trocenchere.bo;
 
 public class Utilisateur {
@@ -21,7 +24,7 @@ public class Utilisateur {
 		this(noUtilisateur,pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse,credit,false);
 	}
 	
-	//constructeur sans n°UTILISATEUR -> généré automatiquement en entrant dans la BDD
+	//constructeur sans nï¿½UTILISATEUR -> gï¿½nï¿½rï¿½ automatiquement en entrant dans la BDD
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Integer credit, boolean administrateur) {
 		this.pseudo = pseudo;

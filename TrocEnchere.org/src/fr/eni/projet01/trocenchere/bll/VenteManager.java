@@ -1,3 +1,6 @@
+
+// AMANDINE ET LESLIE
+
 package fr.eni.projet01.trocenchere.bll;
 
 import java.util.ArrayList;

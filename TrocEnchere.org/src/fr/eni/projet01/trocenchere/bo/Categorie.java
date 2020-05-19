@@ -1,3 +1,6 @@
+
+// LESLIE
+
 package fr.eni.projet01.trocenchere.bo;
 
 public class Categorie {

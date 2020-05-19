@@ -1,3 +1,6 @@
+
+// AMANDINE
+
 package fr.eni.projet01.trocenchere.erreurs;
 
 import java.util.ArrayList;

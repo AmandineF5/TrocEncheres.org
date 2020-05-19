@@ -1,3 +1,6 @@
+
+// LESLIE
+
 package fr.eni.projet01.trocenchere.bo;
 
 public class Retrait {
@@ -6,7 +9,7 @@ public class Retrait {
 	private String ville;
 	
 	/**
-	 * Constructeur avec tous les éléments
+	 * Constructeur avec tous les ï¿½lï¿½ments
 	 * @param rue
 	 * @param codePostal
 	 * @param ville

@@ -1,3 +1,6 @@
+
+// TOUT LE MONDE
+
 package fr.eni.projet01.trocenchere.dal;
 
 import fr.eni.projet01.trocenchere.dal.enchere.EnchereDAO;

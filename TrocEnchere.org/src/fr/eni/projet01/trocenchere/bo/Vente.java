@@ -1,10 +1,13 @@
+
+// JANET
+
 package fr.eni.projet01.trocenchere.bo;
 
 import java.time.LocalDate;
 
 /**
  * 
- * @author coren
+ * @author jaja
  *
  */
 public class Vente {

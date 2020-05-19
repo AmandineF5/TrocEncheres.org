@@ -1,3 +1,6 @@
+
+// CREE PAR AMANDINE ET CORENTIN, RETOUCHE PAR TOUT LE MONDE
+
 package fr.eni.projet01.trocenchere.dal.vente;
 
 import java.sql.Connection;

@@ -1,3 +1,6 @@
+
+// AMANDINE ET JANET
+
 package fr.eni.projet01.trocenchere.bll;
 
 import java.util.ArrayList;

@@ -1,3 +1,6 @@
+
+// LESLIE ET JANET	
+
 package fr.eni.projet01.trocenchere.bo;
 
 import java.time.LocalDate;

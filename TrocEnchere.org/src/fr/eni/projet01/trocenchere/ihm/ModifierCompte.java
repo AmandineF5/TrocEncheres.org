@@ -1,3 +1,6 @@
+
+// JANET
+
 package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;

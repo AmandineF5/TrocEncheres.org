@@ -1,3 +1,6 @@
+
+// JANET
+
 package fr.eni.projet01.trocenchere.dal;
 
 import java.io.IOException;
@@ -30,7 +33,7 @@ public class TestPool extends HttpServlet {
              Context context = new InitialContext();
             DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
             Connection cnx = dataSource.getConnection();
-            out.print("La connexion est " + (cnx.isClosed()?"fermée":"ouverte")+".");
+            out.print("La connexion est " + (cnx.isClosed()?"fermï¿½e":"ouverte")+".");
             cnx.close();
 
 

@@ -1,3 +1,6 @@
+
+// JANET ET LESLIE
+
 package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;

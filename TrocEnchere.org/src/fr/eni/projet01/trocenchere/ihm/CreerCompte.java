@@ -1,3 +1,6 @@
+
+// CREE PAR CORENTIN, RETOUCHE PAR AMANDINE
+
 package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;
