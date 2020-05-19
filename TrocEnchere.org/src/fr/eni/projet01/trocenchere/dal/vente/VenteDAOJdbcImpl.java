@@ -39,7 +39,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	
 	private static final String SELECTALL_CATEGORIES_SQL = "SELECT * FROM categories";
 	
-	private static final String UPDATE_VENTES_SQL = "UPDATE ventes SET points=? WHERE no_vente=?";
+	private static final String UPDATE_VENTES_SQL = "UPDATE ventes SET prix_vente=? WHERE no_vente=?";
 	
 	private static final String SELECT_ALL_VENTES = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur";
 
