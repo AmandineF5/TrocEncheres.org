@@ -43,7 +43,7 @@
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input class="squarebox" name="mesEnchères" type="checkbox">Mes enchères en cours
+							<label class="checkbox"> <input class="squarebox" name="mesEncheres" type="checkbox">Mes enchères en cours
 							</label>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input class="squarebox" name="autresEnchères" type="checkbox">Autres enchères
+							<label class="checkbox"> <input class="squarebox" name="autresEncheres" type="checkbox">Autres enchères
 							</label>
 						</div>
 					</div>
@@ -101,17 +101,44 @@
 
 		<section>
 			<!-- AFFICHAGE D'ANNONCES AU HASARD ? OU RESULTATS ? -->
-			<div>
+			<h3 style="text-align:center">Les dernières ventes récentes</h3>
+			<div class="columns">
 				<c:forEach var="ventes" items="${mesVentes}">
-					<div class="field-label is-normal">						
-						<label class="label"><a href="/TrocEnchere.org/DetailVenteEncherir?noVente=${ventes.noVente}">${ventes.nomArticle}</a></label>
-				    	<label class="label">Classement:</label>
-				    	<label class="label">Description:</label>${ventes.getDescription()}
-						<label class="label">Prix:</label>${ventes.prixVente}
-				    	<label class="label">Fin de l'enchère:</label>${ventes.dateFinEncheres}
-				    	<label class="label">Retrait:</label>${ventes.lieuRetrait.rue} ${ventes.lieuRetrait.codePostal} ${ventes.lieuRetrait.ville}
-				    	<label class="label">Vendeur:</label><a href="/TrocEnchere.org/afficher-compte?noUtilisateur=${ventes.vendeur.noUtilisateur}">${ventes.vendeur.pseudo}</a>
-				 	</div>					
+					<table class="column">
+					    <thead>
+					        <tr>
+					            <th>Nom de l'article: </th>
+					            <th><a  href="/TrocEnchere.org/DetailVenteEncherir?noVente=${ventes.noVente}">${ventes.nomArticle}</a> </th>
+					        </tr>
+					    </thead>
+					    <tbody>
+					        <tr>
+					            <td>Classement:</td>
+					            <td></td>
+					        </tr>
+					         <tr>
+					            <td>Description: </td>
+					            <td>${ventes.getDescription()}</td>
+					        </tr>
+					         <tr>
+					            <td>Prix: </td>
+					            <td>${ventes.prixVente}</td>
+					        </tr>
+					         <tr>
+					            <td>Fin de l'enchère: </td>
+					            <td>${ventes.dateFinEncheres}</td>
+					        </tr>
+					         <tr>
+					            <td>Retrait: </td>
+					            <td>${ventes.lieuRetrait.rue} ${ventes.lieuRetrait.codePostal} ${ventes.lieuRetrait.ville}</td>
+					        </tr>
+					         <tr>
+					            <td>Vendeur: </td>
+					            <td><a href="/TrocEnchere.org/afficher-compte?noUtilisateur=${ventes.vendeur.noUtilisateur}">${ventes.vendeur.pseudo}</a></td>
+					        </tr>
+					    </tbody>
+					</table>
+				
 				</c:forEach>
 				
 			</div>

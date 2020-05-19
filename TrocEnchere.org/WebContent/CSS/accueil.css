@@ -27,3 +27,16 @@ select {
 	display: block;
 	text-align: center;
 }
+
+.columns {
+	display: flex;
+	justify-content:center;
+}
+
+.column {
+	flex-grow: 0.4;
+}
+
+th, td {
+	padding: 1em 2em;
+}

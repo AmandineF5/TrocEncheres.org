@@ -99,6 +99,7 @@ h2 {
 h3 {
 	font-size: min(4vw, 30px);
 	color: #7f8c8d;
+	margin-top: 2em;
 }
 
 checkbox, label {
