@@ -1,7 +1,7 @@
 package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,27 +53,66 @@ public class Accueil extends HttpServlet {
 
 		Utilisateur utilisateur = extractedUserSession(request);		
 		request.setAttribute("utilisateur", utilisateur);
+		
+		
 		List<Vente> mesVentes = new ArrayList<Vente>();
 		List<Enchere> mesEnchères = new ArrayList<Enchere>();
+		List<Vente> mesAcquisitions = new ArrayList<Vente>();
+		List<Vente> autresEnchères = new ArrayList<Vente>();
 		List<Vente> venteByKeyword = new ArrayList<Vente>();
 		List<Vente> venteByCategory = new ArrayList<Vente>();
 		
+		LocalDate ajd = LocalDate.now(); 
+
+		
+		List resultatAAfficher = new ArrayList();  //puis add les différentes ventes succèsivement en fct de ce qui a été coché
+		//OU initialiser resultatAAfficher sur toutes ventes puis retirer ce qui ne correspond pas ?
+		
 		try {
-			if (request.getParameter("mesVentes")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {
-				mesVentes = vM.selectionnerVenteUtilisateur(utilisateur.getNoUtilisateur());				
+			if (request.getParameter("mesVentes")!=null ) {  //tout ce que l'utilisateur est en train de vendre OU a déjà vendu !
+				mesVentes = vM.selectionnerVenteUtilisateur(utilisateur.getNoUtilisateur());
+				for (Vente vente : mesVentes) {
+						resultatAAfficher.add(vente);
+				}
 			}
-			if (request.getParameter("mesEnchères")!=null) {
-				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateur.getNoUtilisateur());				
+			
+			if (request.getParameter("mesEnchères")!=null) {  //tout ce que l'utilisateur est en train d'acheter (date_de_fin > ajd ET au moins une enchère !)
+				//if (vente.getDateFinEncheres().isBefore(ajd)) {  //ventes en cours
+				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateur.getNoUtilisateur());
+				for (Enchere enchere : mesEnchères) {
+					resultatAAfficher.add(enchere);
+					
+				}
 			}
-			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
-				//créer fonction selectAll sans parametre
-			} else {				
-				int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
-				venteByCategory = vM.selectionnerVenteByCategory(noCategorie);	
-			}			
+			
+			if (request.getParameter("mesAcquisitions")!=null) {  //tout ce que l'utilisateur a déjà acheté ! (date_de_fin < ajd ET dernier encheriseur !)
+				mesVentes = vM.selectionnerVenteUtilisateur(utilisateur.getNoUtilisateur());
+				for (Vente vente : mesVentes) {
+					Enchere dernierEncheriseur = eM.trouverHighestBid(vente.getNoVente());
+					if (vente.getDateFinEncheres().isBefore(ajd)) { //ventes terminées
+					}
+				}
+			}
+			
+			if (request.getParameter("autresEnchères")!=null) { // = toutes enchères - les miennes
+				
+			}
+			
 			if (request.getParameter("venteByKeyword")!=null) {
 				venteByKeyword = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
 			}
+			
+			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
+				//cas toutes catégories
+				
+				
+				
+	
+			} else {
+				//cas 1 catégorie
+				int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
+				venteByCategory = vM.selectionnerVenteByCategory(noCategorie);	
+			}			
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();
