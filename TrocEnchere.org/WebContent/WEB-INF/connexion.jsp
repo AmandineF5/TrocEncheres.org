@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="./CSS/connexion.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-<title>Troc-Enchères connexion</title>
+<title>Troc-EnchÃ¨res connexion</title>
 
 </head>
 
@@ -24,7 +24,7 @@
 <main>
 	<div class="subtitle">
 	 	<h1>Bonjour !</h1>
-		<h2>Connectez-vous pour découvrir toutes nos fonctionnalités.</h2>
+		<h2>Connectez-vous pour dÃ©couvrir toutes nos fonctionnalitÃ©s.</h2>
  	</div>
 	
 	<div>
@@ -93,7 +93,7 @@
 				  	<label class="text-small-pad" for="souvenir">Se souvenir de moi</label>
 				</div>
 				<div class="text-small-pad" >
-					<a href="url/vers/page/récupération/mdp" class="italic">Mot de passe oublié</a>
+					<a href="url/vers/page/rÃ©cupÃ©ration/mdp" class="italic">Mot de passe oubliÃ©</a>
 				</div>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 		<div class="field-body">
 			    <div class="field">
 			      <div class="control">
-					  <button type="submit" class="button main-button big-button is-rounded" name="bouton" value="valider">Créer un nouveau compte</button>
+					  <button type="submit" class="button main-button big-button is-rounded" name="bouton" value="valider">CrÃ©er un nouveau compte</button>
 				  </div>
 				</div>
 			</div>

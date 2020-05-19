@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class DeconnecterCompte
- */
-@WebServlet("/DeconnecterCompte")
 public class DeconnecterCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
