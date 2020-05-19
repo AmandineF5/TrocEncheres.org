@@ -19,15 +19,15 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
  * @author Leslie
  * Servlet implementation class MesVentesVendues
  */
-@WebServlet("/MesVentesVendues")
-public class MesVentesVendues extends HttpServlet {
+@WebServlet("/MesArticlesVendus")
+public class MesArticlesVendus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	VenteManager vM = new VenteManager();
     EnchereManager eM = new EnchereManager();   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MesVentesVendues() {
+    public MesArticlesVendus() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,18 +38,18 @@ public class MesVentesVendues extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int noVenteAAfficher = 17;//Integer.parseInt(request.getParameter("noVente"));
 		Vente venteAAfficher = new Vente();
-		Enchere enchèreRemportee = new Enchere();
+		//Enchere enchèreRemportee = new Enchere();
 		try {
-			enchèreRemportee = eM.trouverHighestBid(noVenteAAfficher);
+			//enchèreRemportee = eM.trouverHighestBid(noVenteAAfficher);
 			venteAAfficher = vM.selectionnerVenteById(noVenteAAfficher);
 			request.setAttribute("vente", venteAAfficher);
-			request.setAttribute("enchere", enchèreRemportee);
+			//request.setAttribute("enchere", enchèreRemportee);
 			 
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeErreur());
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vente/mesVentesVendues.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vente/mesArticlesVendus.jsp");
 		rd.forward(request, response);
 	}
 
