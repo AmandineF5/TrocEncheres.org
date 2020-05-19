@@ -47,13 +47,7 @@ public class EnchereManager {
 		
 		return enchereDAO.selectOneByUserIdVenteId(noUtilisateur, noVente);
 	}
-	
-	//test
-	public Enchere selectEnchereByUserId (int noUtilisateur) throws BusinessException{
-		
-		return enchereDAO.selectOneByUserId(noUtilisateur);
-	}
-	
+
 	public  List<Enchere> selectionnerEnchereByIdUser (int noUtilisateur) throws BusinessException {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		listeEnchere = enchereDAO.selectByUserId(noUtilisateur);

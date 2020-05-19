@@ -7,14 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
-import fr.eni.projet01.trocenchere.bll.VenteManager;
-import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Enchere;
-import fr.eni.projet01.trocenchere.bo.Retrait;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
-import fr.eni.projet01.trocenchere.dal.UtilisateurDAOJdbcImpl;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 //Amandine
@@ -27,7 +23,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE ventes.no_vente = ? ORDER BY points DESC";
 	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? ORDER BY points DESC";
 
-	private static final String SELECTONEBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur WHERE encheres.no_acheteur = ? ";
 	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
 
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
@@ -97,26 +92,31 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
-			rs.next();
-			enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-
-			UtilisateurManager um = new UtilisateurManager();
-			Utilisateur user = um.selectionnerUtilisateurById(noUtilisateur);
-			enchere.setEncherit(user);
-
-			Vente vente = new Vente();
-			vente.setNoVente(rs.getInt("no_vente"));
-			vente.setNomArticle(rs.getString("nomarticle"));
-			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-			vente.setMiseAPrix(rs.getInt("prix_initial"));
-			vente.setPrixVente(rs.getInt("prix_vente"));
-			enchere.setConcerne(vente);
-
-			enchere.setPoints(rs.getInt("points"));
-
+			while (rs.next()) {
+				if (rs.getInt("no_vente")!=enchere.getConcerne().getNoVente() && noUtilisateur!=enchere.getEncherit().getNoUtilisateur()) {
+					
+					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+			
+					UtilisateurManager um = new UtilisateurManager();
+					Utilisateur user = um.selectionnerUtilisateurById(noUtilisateur);
+					enchere.setEncherit(user);
+			
+					Vente vente = new Vente();
+					vente.setNoVente(rs.getInt("no_vente"));
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					enchere.setConcerne(vente);
+			
+					enchere.setPoints(rs.getInt("points"));
+					
+					listeEnchere.add(enchere);			
+				}
+				
+			}
 			rs.close();
-
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -128,58 +128,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	}
 
-	// test
-	@Override
-	public List<Enchere> selectOneByUserId(int noUtilisateur) throws BusinessException {
-		List<Enchere> ListeByUser = new ArrayList<Enchere>();
-		Enchere enchere = new Enchere();
-		try (Connection cnx = ConnectionProvider.getConnection();
-				// Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
-			PreparedStatement state = cnx.prepareStatement(SELECTONEBY_UTILISATEURID_VENTES_SQL);) {
-			ResultSet rs;
-			state.setInt(1, noUtilisateur);
-			rs = state.executeQuery();
-			rs.next();
-			enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-			utilisateur.setPseudo(rs.getString("pseudo"));
-			utilisateur.setNom(rs.getNString("nom"));
-			utilisateur.setPrenom(rs.getNString("prenom"));
-			utilisateur.setEmail(rs.getNString("email"));
-			utilisateur.setTelephone(rs.getString("telephone"));
-			utilisateur.setRue(rs.getString("rue"));
-			utilisateur.setCodePostal(rs.getString("code_postal"));
-			utilisateur.setVille(rs.getString("ville"));
-			utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-			utilisateur.setCredit(rs.getInt("credit"));
-			utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
-			enchere.setEncherit(utilisateur);
-
-			Vente vente = new Vente();
-			vente.setNoVente(rs.getInt("no_vente"));
-			vente.setNomArticle(rs.getString("nomarticle"));
-			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-			vente.setMiseAPrix(rs.getInt("prix_initial"));
-			vente.setPrixVente(rs.getInt("prix_vente"));
-			enchere.setConcerne(vente);
-
-			enchere.setPoints(rs.getInt("points"));
-
-			rs.close();
-
-		} catch (Exception e) {
-			BusinessException be = new BusinessException();
-			e.printStackTrace();
-			be.ajouterErreur("Erreur: id inconnu");
-			throw be;
-		}
-
-		return;
-
-	}
 
 	@Override
 	public List<Enchere> selectByVenteId(int noVente) throws BusinessException {
@@ -191,26 +139,30 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs;
 			state.setInt(1, noVente);
 			rs = state.executeQuery();
-			rs.next();
-			enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-
-			UtilisateurManager um = new UtilisateurManager();
-			Utilisateur user = um.selectionnerUtilisateurById(rs.getInt("no_acheteur"));
-			enchere.setEncherit(user);
-
-			Vente vente = new Vente();
-			vente.setNoVente(noVente);
-			vente.setNomArticle(rs.getString("nomarticle"));
-			vente.setDescription(rs.getString("description"));
-			vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-			vente.setMiseAPrix(rs.getInt("prix_initial"));
-			vente.setPrixVente(rs.getInt("prix_vente"));
-			enchere.setConcerne(vente);
-
-			enchere.setPoints(rs.getInt("points"));
-
+			while (rs.next()) {
+				if (noVente!=enchere.getConcerne().getNoVente() && rs.getInt("no_acheteur")!=enchere.getEncherit().getNoUtilisateur()) {
+					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+		
+					UtilisateurManager um = new UtilisateurManager();
+					Utilisateur user = um.selectionnerUtilisateurById(rs.getInt("no_acheteur"));
+					enchere.setEncherit(user);
+		
+					Vente vente = new Vente();
+					vente.setNoVente(noVente);
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					enchere.setConcerne(vente);
+		
+					enchere.setPoints(rs.getInt("points"));
+					
+					listeEnchere.add(enchere);
+				}
+			}
 			rs.close();
-
+			
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();

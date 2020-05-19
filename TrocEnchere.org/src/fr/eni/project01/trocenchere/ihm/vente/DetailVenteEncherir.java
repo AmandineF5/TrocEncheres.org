@@ -59,7 +59,7 @@ public class DetailVenteEncherir extends HttpServlet {
 				//find the highest bid by id no
 				Enchere highestEnchere = new Enchere();
 				try {
-					highestEnchere = eM.selectEnchereByUserId(2);
+					highestEnchere = eM.trouverHighestBid(2);
 				
 					//highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
 				} catch (BusinessException e) {

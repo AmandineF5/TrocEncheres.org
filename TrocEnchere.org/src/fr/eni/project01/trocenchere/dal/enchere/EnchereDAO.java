@@ -8,10 +8,10 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public interface EnchereDAO {
 
-	public List<Enchere> selectByUserId(int noUtilisateur) throws BusinessException;
+	public List<Enchere> selectByUserId (int noUtilisateur) throws BusinessException;
 	public List<Enchere> selectByVenteId(int noVente) throws BusinessException;
 	public void insert(Enchere newEnchere) throws BusinessException;
 	public void delete(int noVente) throws BusinessException;
-	public Enchere selectEnchereByUserIdEtNoVente (int noUtilisateur, int noVente) throws BusinessException;
+	public Enchere selectOneByUserIdVenteId (int noUtilisateur, int noVente) throws BusinessException;
 	
 }
