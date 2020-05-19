@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/* Créé par Amandine */
+
+.checkbox {
+	color : black;
+	font-size: min(3vw, 15px);
+	padding-left: 2vw;
+	vertical-align: center;
+}
+
+.squarebox {
+	
+	box-shadow: 1px 1px 1px #bdc3c7;
+}
+
+input[type="checkbox"] {
+	margin-right: 2vw;
+	border-radius: 2px;
+}
+
+select {
+	text-align: center;
+}
+
+.categorie {
+	display: block;
+	text-align: center;
+}

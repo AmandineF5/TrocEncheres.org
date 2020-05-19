@@ -96,10 +96,16 @@ h2 {
 	text-align: center;
 }
 
-label {
-	font-size: min(3vw, 13px);
+h3 {
+	font-size: min(4vw, 30px);
+	color: #7f8c8d;
+}
+
+checkbox, label {
+	font-size: min(3.5vw, 13px);
 	text-align: center;
 }
+
 
 .text-small-pad {
 	margin: 0.5px 1 px;
@@ -122,6 +128,7 @@ a, a:visited {
 	font-size: min(6vw, 15px);
 	font-weight: bold;
 	background-color: #f39c12;
+	margin-top: 2vw;
 }
 
 

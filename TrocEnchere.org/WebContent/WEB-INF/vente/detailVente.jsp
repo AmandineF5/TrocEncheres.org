@@ -12,16 +12,14 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="./main.css">
+<link rel="stylesheet" href="CSS/main.css">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <title>Troc-Enchères Détail Vente</title>
 </head>
 <body>
-	<header>
-		<div>Troc-Enchères</div>
-	</header>
+	<%@ include file="../fragments/header.html" %>
 	<main>
 		<div class="subtitle is-medium">Détail Vente</div>
 
@@ -60,7 +58,7 @@
 			<div class="field-label is-normal">
 				<label class="label">Mise à prix:</label>
 			</div>
-			<div class="field-body">${vente.miseAPrix}</div>
+			<div class="field-body is-rounded">${vente.miseAPrix}</div>
 		</div>
 
 		<div class="field is-horizontal">
@@ -68,7 +66,7 @@
 				<label class="label">Fin de l'enchère:</label>
 			</div>
 			<div class="field-body">
-				<div class="field">${vente.dateFinEncheres}</div>
+				<div class="field is-rounded">${vente.dateFinEncheres}</div>
 			</div>
 		</div>
 
@@ -77,7 +75,7 @@
 				<label class="label">Retrait:</label>
 			</div>
 			<div class="field-body">
-				<div class="field">
+				<div class="field is-rounded">
 					${vente.getLieuRetrait().getRue()}<br />
 					${vente.getLieuRetrait().getCodePostal()}
 					${vente.getLieuRetrait().getVille()}
@@ -91,7 +89,7 @@
 				<label class="label">Vendeur:</label>
 			</div>
 			<div class="field-body">
-				<div class="field">${vente.vendeur.pseudo}</div>
+				<div class="field is-rounded">${vente.vendeur.pseudo}</div>
 			</div>
 		</div>
 		
@@ -103,16 +101,16 @@
 			<div class="field">
 				<div class="control">
 					<form action="/TrocEnchere.org/DetailVente" method="post">
-					<button type="submit" class="button is-primary" name="delete" value="${vente.noVente}">Annuler la vente</button>
+					<button type="submit" class="button main-button is-rounded" name="delete" value="${vente.noVente}">Annuler la vente</button>
 					</form>
 					
 					<a href="/TrocEnchere.org/accueil"><button type="submit"
-							class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
+							class="button main-button is-rounded is-light" name="bouton" value="retour">Back</button></a>
 				</div>
 			</div>
 		</div>
 
 	</main>
-
+<%@ include file="../fragments/script.html" %>
 </body>
 </html>
