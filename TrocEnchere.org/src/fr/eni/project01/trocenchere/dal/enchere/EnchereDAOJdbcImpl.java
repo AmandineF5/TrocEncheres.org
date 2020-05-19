@@ -28,13 +28,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
 
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
-	
-	private static final String UPDATE_ENCHERES_SQL = "UPDATE enchere SET points=? WHERE encheres.no_acheteur=? AND encheres.no_vente=?";
+
+	private static final String UPDATE_ENCHERES_SQL = "UPDATE encheres SET points=? WHERE no_acheteur=? AND no_vente=?";
 
 	@Override
 	public Enchere selectOneByUserIdVenteId(int noUtilisateur, int noVente) throws BusinessException {
 
-		Enchere enchere = new Enchere();
+		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement state = cnx.prepareStatement(SELECTBY_UTILISATEURID_VENTESID_SQL);) {
 			ResultSet rs;
@@ -42,49 +42,53 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			state.setInt(2, noVente);
 			rs = state.executeQuery();
 
-			if (rs == null) {
-				enchere = null;
-			} else {
-				rs.next();
-				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-				Utilisateur utilisateur = new Utilisateur();
-				utilisateur.setNoUtilisateur(noUtilisateur);
-				utilisateur.setPseudo(rs.getString("pseudo"));
-				utilisateur.setNom(rs.getNString("nom"));
-				utilisateur.setPrenom(rs.getNString("prenom"));
-				utilisateur.setEmail(rs.getNString("email"));
-				utilisateur.setTelephone(rs.getString("telephone"));
-				utilisateur.setRue(rs.getString("rue"));
-				utilisateur.setCodePostal(rs.getString("code_postal"));
-				utilisateur.setVille(rs.getString("ville"));
-				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-				utilisateur.setCredit(rs.getInt("credit"));
-				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
-				enchere.setEncherit(utilisateur);
-
-				Vente vente = new Vente();
-				vente.setNoVente(noVente);
-				vente.setNomArticle(rs.getString("nomarticle"));
-				vente.setDescription(rs.getString("description"));
-				vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-				vente.setMiseAPrix(rs.getInt("prix_initial"));
-				vente.setPrixVente(rs.getInt("prix_vente"));
+			if (rs.next()) {
 				
-				Retrait retrait = new Retrait();
-				retrait.setRue(rs.getString("rue"));
-				retrait.setCodePostal(rs.getString("code_postal"));
-				retrait.setVille(rs.getString("ville"));
-				vente.setLieuRetrait(retrait);
-				
-				Categorie categorie = new Categorie();
-				categorie.setNoCategorie(rs.getInt("no_categorie"));
-				categorie.setLibelle(rs.getString("libelle"));
-				vente.setCategorieArticle(categorie);
-				
-				enchere.setConcerne(vente);
 
-				enchere.setPoints(rs.getInt("points"));
+				if ((rs.getDate("date_enchere").toLocalDate()) != null) {
 
+					enchere = new Enchere();
+					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+
+					Utilisateur utilisateur = new Utilisateur();
+					utilisateur.setNoUtilisateur(noUtilisateur);
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setNom(rs.getNString("nom"));
+					utilisateur.setPrenom(rs.getNString("prenom"));
+					utilisateur.setEmail(rs.getNString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
+					utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+					enchere.setEncherit(utilisateur);
+
+					Vente vente = new Vente();
+					vente.setNoVente(noVente);
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					vente.setLieuRetrait(retrait);
+
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+
+					enchere.setConcerne(vente);
+
+					enchere.setPoints(rs.getInt("points"));
+
+				}
 				rs.close();
 			}
 
@@ -110,14 +114,14 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_vente")!=enchere.getConcerne().getNoVente()) {
-					
+				if (rs.getInt("no_vente") != enchere.getConcerne().getNoVente()) {
+
 					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-			
+
 					UtilisateurManager um = new UtilisateurManager();
 					Utilisateur user = um.selectionnerUtilisateurById(noUtilisateur);
 					enchere.setEncherit(user);
-			
+
 					Vente vente = new Vente();
 					vente.setNoVente(rs.getInt("no_vente"));
 					vente.setNomArticle(rs.getString("nomarticle"));
@@ -125,26 +129,25 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
-					
-					
+
 					Retrait retrait = new Retrait();
 					retrait.setRue(rs.getString("rue"));
 					retrait.setCodePostal(rs.getString("code_postal"));
 					retrait.setVille(rs.getString("ville"));
 					vente.setLieuRetrait(retrait);
-					
+
 					Categorie categorie = new Categorie();
 					categorie.setNoCategorie(rs.getInt("no_categorie"));
 					categorie.setLibelle(rs.getString("libelle"));
 					vente.setCategorieArticle(categorie);
-					
+
 					enchere.setConcerne(vente);
-			
+
 					enchere.setPoints(rs.getInt("points"));
-					
-					listeEnchere.add(enchere);			
+
+					listeEnchere.add(enchere);
 				}
-				
+
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -158,7 +161,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	}
 
-
 	@Override
 	public List<Enchere> selectByVenteId(int noVente) throws BusinessException {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
@@ -170,41 +172,40 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			state.setInt(1, noVente);
 			rs = state.executeQuery();
 			while (rs.next()) {
-				
-					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-		
-					UtilisateurManager um = new UtilisateurManager();
-					Utilisateur user = um.selectionnerUtilisateurById(rs.getInt("no_acheteur"));
-					enchere.setEncherit(user);
-		
-					Vente vente = new Vente();
-					vente.setNoVente(noVente);
-					vente.setNomArticle(rs.getString("nomarticle"));
-					vente.setDescription(rs.getString("description"));
-					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
-					vente.setMiseAPrix(rs.getInt("prix_initial"));
-					vente.setPrixVente(rs.getInt("prix_vente"));
-	
-					Retrait retrait = new Retrait();
-					retrait.setRue(rs.getString("rue"));
-					retrait.setCodePostal(rs.getString("code_postal"));
-					retrait.setVille(rs.getString("ville"));
-					vente.setLieuRetrait(retrait);
-					
-					Categorie categorie = new Categorie();
-					categorie.setNoCategorie(rs.getInt("no_categorie"));
-					categorie.setLibelle(rs.getString("libelle"));
-					vente.setCategorieArticle(categorie);
-					
-					enchere.setConcerne(vente);
-		
-					enchere.setPoints(rs.getInt("points"));
-					System.out.println(enchere);
-					listeEnchere.add(enchere);
-				
+
+				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+
+				UtilisateurManager um = new UtilisateurManager();
+				Utilisateur user = um.selectionnerUtilisateurById(rs.getInt("no_acheteur"));
+				enchere.setEncherit(user);
+
+				Vente vente = new Vente();
+				vente.setNoVente(noVente);
+				vente.setNomArticle(rs.getString("nomarticle"));
+				vente.setDescription(rs.getString("description"));
+				vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				vente.setMiseAPrix(rs.getInt("prix_initial"));
+				vente.setPrixVente(rs.getInt("prix_vente"));
+
+				Retrait retrait = new Retrait();
+				retrait.setRue(rs.getString("rue"));
+				retrait.setCodePostal(rs.getString("code_postal"));
+				retrait.setVille(rs.getString("ville"));
+				vente.setLieuRetrait(retrait);
+
+				Categorie categorie = new Categorie();
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+				vente.setCategorieArticle(categorie);
+
+				enchere.setConcerne(vente);
+
+				enchere.setPoints(rs.getInt("points"));
+				listeEnchere.add(enchere);
+
 			}
 			rs.close();
-			
+
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -260,19 +261,20 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		}
 
 	}
+
 	@Override
 	public void updateEnchere(Enchere newEnchere) throws BusinessException {
 		int points = newEnchere.getPoints();
 		int acheteur = newEnchere.getEncherit().getNoUtilisateur();
 		int vente = newEnchere.getConcerne().getNoVente();
 		try (Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement state= cnx.prepareStatement(UPDATE_ENCHERES_SQL);){			
+				PreparedStatement state = cnx.prepareStatement(UPDATE_ENCHERES_SQL);) {
 			state.setInt(1, points);
 			state.setInt(2, acheteur);
 			state.setInt(3, vente);
-	
+
 			state.execute();
-			
+
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
