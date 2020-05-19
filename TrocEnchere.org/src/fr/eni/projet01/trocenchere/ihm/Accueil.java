@@ -50,9 +50,9 @@ public class Accueil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//doGet(request, response);
-
-		Utilisateur utilisateur = extractedUserSession(request);		
-		request.setAttribute("utilisateur", utilisateur);
+		
+		Utilisateur utilisateurSession = extractedUserSession(request);		
+		request.setAttribute("utilisateur", utilisateurSession);
 		
 		
 		List<Vente> mesVentes = new ArrayList<Vente>();
@@ -62,40 +62,42 @@ public class Accueil extends HttpServlet {
 		List<Vente> venteByKeyword = new ArrayList<Vente>();
 		List<Vente> venteByCategory = new ArrayList<Vente>();
 		
-		LocalDate ajd = LocalDate.now(); 
+		LocalDate ajd = LocalDate.now();
 
-		
-		List resultatAAfficher = new ArrayList();  //puis add les différentes ventes succèsivement en fct de ce qui a été coché
-		//OU initialiser resultatAAfficher sur toutes ventes puis retirer ce qui ne correspond pas ?
+		List<Vente> resultatAAfficher = new ArrayList<>();  //puis add les différentes ventes succèsivement en fct de ce qui a été coché
 		
 		try {
 			if (request.getParameter("mesVentes")!=null ) {  //tout ce que l'utilisateur est en train de vendre OU a déjà vendu !
-				mesVentes = vM.selectionnerVenteUtilisateur(utilisateur.getNoUtilisateur());
+				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());
 				for (Vente vente : mesVentes) {
 						resultatAAfficher.add(vente);
 				}
 			}
 			
-			if (request.getParameter("mesEnchères")!=null) {  //tout ce que l'utilisateur est en train d'acheter (date_de_fin > ajd ET au moins une enchère !)
-				//if (vente.getDateFinEncheres().isBefore(ajd)) {  //ventes en cours
-				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateur.getNoUtilisateur());
+			if (request.getParameter("mesEncheres")!=null) {  //tout ce que l'utilisateur est en train d'acheter (date_de_fin > ajd ET au moins une enchère !)
+				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
 				for (Enchere enchere : mesEnchères) {
-					resultatAAfficher.add(enchere);
-					
-				}
-			}
-			
-			if (request.getParameter("mesAcquisitions")!=null) {  //tout ce que l'utilisateur a déjà acheté ! (date_de_fin < ajd ET dernier encheriseur !)
-				mesVentes = vM.selectionnerVenteUtilisateur(utilisateur.getNoUtilisateur());
-				for (Vente vente : mesVentes) {
-					Enchere dernierEncheriseur = eM.trouverHighestBid(vente.getNoVente());
-					if (vente.getDateFinEncheres().isBefore(ajd)) { //ventes terminées
+					Vente vente = enchere.getConcerne();
+					System.out.println(vente);
+					if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
+						resultatAAfficher.add(vente);
 					}
 				}
 			}
 			
-			if (request.getParameter("autresEnchères")!=null) { // = toutes enchères - les miennes
-				
+			if (request.getParameter("mesAcquisitions")!=null) {  //tout ce que l'utilisateur a déjà acheté ! (date_de_fin < ajd ET dernier encheriseur !)
+				List<Vente> lesVentes = vM.selectionnerToutesVentes();
+				for (Vente vente : lesVentes) {
+					Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
+					Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
+					if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+						resultatAAfficher.add(vente);
+					}
+				}
+			}
+			
+			if (request.getParameter("autresEncheres")!=null) { // = toutes vente - mesVentes - mesEncheres - mesAcquisitions
+				resultatAAfficher = vM.selectionnerToutesVentes();
 			}
 			
 			if (request.getParameter("venteByKeyword")!=null) {
@@ -120,7 +122,7 @@ public class Accueil extends HttpServlet {
 		
 		//Définir les informations à renvoyer à la JSP (accueil.jsp)
 		request.setAttribute("mesVentes", mesVentes);
-		request.setAttribute("mesEnchères", mesEnchères);
+		request.setAttribute("mesEncheres", mesEnchères);
 		request.setAttribute("venteByCategory", venteByCategory);
 		request.setAttribute("venteByKeyword", venteByKeyword);
 		
