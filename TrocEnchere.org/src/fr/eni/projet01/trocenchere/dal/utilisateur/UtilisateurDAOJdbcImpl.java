@@ -1,7 +1,7 @@
 
 // JANET ET LESLIE
 
-package fr.eni.projet01.trocenchere.dal;
+package fr.eni.projet01.trocenchere.dal.utilisateur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +13,7 @@ import java.util.List;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{

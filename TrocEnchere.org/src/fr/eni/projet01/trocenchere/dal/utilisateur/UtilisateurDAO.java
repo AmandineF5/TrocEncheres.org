@@ -1,7 +1,7 @@
 
 // JANET
 
-package fr.eni.projet01.trocenchere.dal;
+package fr.eni.projet01.trocenchere.dal.utilisateur;
 
 
 

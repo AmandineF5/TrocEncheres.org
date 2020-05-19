@@ -4,6 +4,7 @@
 package fr.eni.projet01.trocenchere.dal;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
+import fr.eni.projet01.trocenchere.dal.utilisateur.UtilisateurDAOJdbcImpl;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class TestDal {

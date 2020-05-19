@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.dal.DAOFactory;
-import fr.eni.projet01.trocenchere.dal.UtilisateurDAO;
+import fr.eni.projet01.trocenchere.dal.utilisateur.UtilisateurDAO;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class UtilisateurManager {

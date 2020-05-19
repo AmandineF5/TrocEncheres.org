@@ -5,6 +5,8 @@ package fr.eni.projet01.trocenchere.dal;
 
 import fr.eni.projet01.trocenchere.dal.enchere.EnchereDAO;
 import fr.eni.projet01.trocenchere.dal.enchere.EnchereDAOJdbcImpl;
+import fr.eni.projet01.trocenchere.dal.utilisateur.UtilisateurDAO;
+import fr.eni.projet01.trocenchere.dal.utilisateur.UtilisateurDAOJdbcImpl;
 import fr.eni.projet01.trocenchere.dal.vente.VenteDAO;
 import fr.eni.projet01.trocenchere.dal.vente.VenteDAOJdbcImpl;
 
