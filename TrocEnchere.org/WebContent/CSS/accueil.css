@@ -31,12 +31,29 @@ select {
 .columns {
 	display: flex;
 	justify-content:center;
+	flex-wrap: wrap;
+	width: 100%;
+	
 }
 
 .column {
-	flex-grow: 0.4;
+	flex-grow: 1;
+	padding-left: 4em;
+	
 }
 
 th, td {
-	padding: 1em 2em;
+	padding: 1em;
+	font-size: min(3em, 10px);
+}
+
+
+table {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #bdc3c7;
+	box-shadow: 1px 1px 1px #bdc3c7;
+	border-radius: 3px;
+	margin: 1em 2em;
+	
 }
