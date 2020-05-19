@@ -25,9 +25,8 @@ public class EnchereManager {
 		int noSale = enchere.getConcerne().getNoVente();
 		Enchere test = selectEnchereByUserIdEtNoVente(noUser, noSale);
 		if (test != null) {
-			//update
+		enchereDAO.updateEnchere(enchere);
 		}else
-		
 		this.enchereDAO.insert(enchere);
 		Integer points = enchere.getPoints();
 		Vente vente = enchere.getConcerne();

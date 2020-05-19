@@ -16,7 +16,7 @@ import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 //Amandine
-//modified Janet
+//Janet
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
@@ -28,7 +28,10 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
 
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
+	
+	private static final String UPDATE_ENCHERES_SQL = "UPDATE enchere SET points=? WHERE encheres.no_acheteur=? AND encheres.no_vente=?";
 
+	@Override
 	public Enchere selectOneByUserIdVenteId(int noUtilisateur, int noVente) throws BusinessException {
 
 		Enchere enchere = new Enchere();
@@ -256,6 +259,26 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			throw be;
 		}
 
+	}
+	@Override
+	public void updateEnchere(Enchere newEnchere) throws BusinessException {
+		int points = newEnchere.getPoints();
+		int acheteur = newEnchere.getEncherit().getNoUtilisateur();
+		int vente = newEnchere.getConcerne().getNoVente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement state= cnx.prepareStatement(UPDATE_ENCHERES_SQL);){			
+			state.setInt(1, points);
+			state.setInt(2, acheteur);
+			state.setInt(3, vente);
+	
+			state.execute();
+			
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: mise à jour des points impossible");
+			throw be;
+		}
 	}
 
 }
