@@ -14,11 +14,11 @@
 <title>Troc-Enchères Vente terminée</title>
 </head>
 <body>
-<header>
+	<header>
 		<div>Troc-Enchères</div>
+		<div class="subtitle is-medium">${enchere.getEncherit().getPseudo()}? a remporté l'enchère</div>
 	</header>
 	<main>
-		<div class="subtitle is-medium">${enchere.getEncherit().getPseudo()}? a remporté l'enchère</div>
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -46,7 +46,7 @@
 			</div>
 			<div class="field-body">
 				<div class="field">
-   					${enchere.points} pts par <a href="/TrocEnchere.org/ContactAcheteur?Acheteur=${enchere.encherit}">?${enchere.getEncherit().getPseudo()}</a>
+   					${enchere.points} pts par <a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}">?${enchere.getEncherit().getPseudo()}</a>
 				</div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 			</div>
 			<div class="field-body">
 				<div class="field">
-					${vente.getLieuRetrait().getRue()}<br />
+					${vente.getLieuRetrait().getRue()}
 					${vente.getLieuRetrait().getCodePostal()}
 					${vente.getLieuRetrait().getVille()}
 				</div>
@@ -96,11 +96,11 @@
 		<div class="field-body">
 			<div class="field">
 				<div class="control">
-					<form action="/TrocEnchere.org/MesVentesVendues" method="post">
+					<form action="/TrocEnchere.org/MesArticlesVendus" method="post">
 					<button type="submit" class="button is-primary" name="validationRetrait" value="">Retrait effectué</button> <!-- button qui débite l'acheteur et crédite le vendeur? -->
 					</form>
-					<a href="/TrocEnchere.org/ContactAcheteur?Acheteur=${enchere.encherit}"><button type="submit" class="button is-primary is-light" name="bouton" value="annuler">Contacter ?${enchere.encherit.pseudo}</button></a>
-					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
+					<a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}"><button type="submit" class="button is-primary is-light" name="Contacter">Contacter ?${enchere.encherit.pseudo}</button></a>
+					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button is-primary is-light" name="retour" value="retour">Back</button></a>
 				</div>
 			</div>
 		</div>
