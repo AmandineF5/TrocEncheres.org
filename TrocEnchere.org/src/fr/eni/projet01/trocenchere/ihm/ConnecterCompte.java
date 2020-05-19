@@ -2,6 +2,7 @@ package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Base64;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,7 +41,9 @@ public class ConnecterCompte extends HttpServlet {
 			if (loginOK) {
 				HttpSession session = request.getSession();
 	            session.setAttribute("utilisateur", ut);
-	            Cookie pseudoUtilisateur = new Cookie("pseudo", ut.getPseudo());
+	            String pseudoForCookie = ut.getPseudo();
+	            String encodedpseudoForCookie = Base64.getEncoder().encodeToString(pseudoForCookie.getBytes()); //pour autoriser les espaces dans le pseudo
+	            Cookie pseudoUtilisateur = new Cookie("pseudo", encodedpseudoForCookie);
 	            response.addCookie(pseudoUtilisateur);
 	            // lien vers servlet de gestion du compte;
 	            response.sendRedirect("/TrocEnchere.org/accueil");
