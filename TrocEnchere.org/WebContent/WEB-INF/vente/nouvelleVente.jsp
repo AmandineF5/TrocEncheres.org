@@ -14,7 +14,7 @@
 <title>Troc-Enchères Nouvelle vente</title>
 </head>
 <body>
-	<%@ include file="../fragments/header.html" %>
+	<%@ include file="../fragments/header.jsp" %>
 	<main>
 		<div class="subtitle is-medium">
 	 		<h1>Déposez votre annonce</h1>

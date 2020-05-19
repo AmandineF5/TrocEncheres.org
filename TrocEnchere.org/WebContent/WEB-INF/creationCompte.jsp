@@ -14,7 +14,7 @@
 <title>Troc-Enchères création de compte</title>
 </head>
 <body>
-	<%@ include file="./fragments/header.html" %>
+	<%@ include file="./fragments/header.jsp" %>
 	<main>
 		<div class="subtitle is-medium">
 	 		<h1>Bienvenue chez TrocEnchères.org</h1>

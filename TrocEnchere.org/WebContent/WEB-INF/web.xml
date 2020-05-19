@@ -62,6 +62,16 @@
   	<url-pattern>/ConnecterCompte</url-pattern>
   </servlet-mapping>
   
+    <!-- connexion compte -->
+   <servlet>  <!-- servlet -->
+  	<servlet-name>DeconnecterCompte</servlet-name>
+  	<servlet-class>fr.eni.projet01.trocenchere.ihm.DeconnecterCompte</servlet-class>  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DeconnecterCompte</servlet-name>
+  	<url-pattern>/DeconnecterCompte</url-pattern>
+  </servlet-mapping>
+  
     <servlet>  <!-- JSP -->
 	  <servlet-name>connexion</servlet-name>
 	  <jsp-file>/WEB-INF/connexion.jsp</jsp-file>

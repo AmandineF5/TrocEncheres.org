@@ -20,7 +20,7 @@
 
 <body>
 
-<%@ include file="./fragments/header.html" %>
+<%@ include file="./fragments/header.jsp" %>
 <main>
 	<div class="subtitle">
 	 	<h1>Bonjour !</h1>

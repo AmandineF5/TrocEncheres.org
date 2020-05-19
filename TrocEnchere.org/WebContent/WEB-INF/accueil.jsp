@@ -24,7 +24,7 @@
 
 <body>
 
-	<%@ include file="./fragments/header.html" %>
+	<%@ include file="./fragments/header.jsp" %>
 
 	<main>
 		<h1>Bienvenue sur TrocEnchères.org</h1>
@@ -119,6 +119,6 @@
 
 
 	</main>
-
+<%@ include file="./fragments/script.html" %>
 </body>
 </html>

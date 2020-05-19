@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <header>
 	<div>
 		<img src="./images/banner.png" alt="banniere">
@@ -24,13 +27,13 @@
 		      
 		      	 <ul id="sousmenu1" style="display:none">
 				     <li class="nav-item sousmenu">
-				     	 <a class="nav-link" href="<%=request.getContextPath()%>/ModifierCompte%>">Modifier mon profil</a>
+				     	 <a class="nav-link" href="/TrocEnchere.org/ModifierCompte">Modifier mon profil</a>
 				     </li>
 				     <li class="nav-item sousmenu">
-				      	<a class="nav-link" href="<%=request.getContextPath()%>/ConnecterCompte%>">Connexion</a>
+				      	<a class="nav-link" href="/TrocEnchere.org/ConnecterCompte">Connexion</a>
 				     </li>
 				     <li class="nav-item sousmenu">
-				      <a class="nav-link" href="<%=request.getContextPath()%>/DeconnecterCompte%>">Déconnexion</a>
+				      <a class="nav-link" href="/TrocEnchere.org/DeconnecterCompte">DÃ©connexion</a>
 				    </li>
 			    </ul>
 		    </li>
@@ -38,4 +41,3 @@
 		</div>
 	</nav>
 </header>
-	

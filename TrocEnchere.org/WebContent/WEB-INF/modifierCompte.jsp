@@ -19,7 +19,7 @@
 <title>Troc-Enchères modification de compte</title>
 </head>
 <body>
-	<%@ include file="./fragments/header.html" %>
+	<%@ include file="./fragments/header.jsp %>
 	<main>
 		<div class="subtitle is-medium">
 	 		<h1>Modifier mon profil</h1>

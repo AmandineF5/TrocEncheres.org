@@ -17,7 +17,7 @@
 
 <body>
 
-	<%@ include file="./fragments/header.html" %>
+	<%@ include file="./fragments/header.jsp" %>
 	
 	<main>
 		<div class="subtitle is-medium">
