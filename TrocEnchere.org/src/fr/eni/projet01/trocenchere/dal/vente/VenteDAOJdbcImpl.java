@@ -396,7 +396,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					vente.setNoVente(rs.getInt("no_vente"));
 					vente.setNomArticle(rs.getString("nomarticle"));
 					vente.setDescription(rs.getString("description"));
-					vente.setDateFinEncheres(rs.getDate("date_fin_echeres").toLocalDate());
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
 					
