@@ -15,10 +15,7 @@
 		      <a class="nav-link" href="#" style="font-weight: bold">Accueil</a>
 		    </li>
 		     <li class="nav-item">
-		      <a class="nav-link" href="#">Vendre</a>
-		    </li>
-		    <li class="nav-item">
-		      <a class="nav-link" href="#">Acheter</a>
+		      <a class="nav-link" href="/TrocEnchere.org/NouvelleVente">Déposer une vente</a>
 		    </li>
 		     <li class="nav-item">
 		     	<div class="nav-link" id="menu1" onclick="afficheMenu(this)">
