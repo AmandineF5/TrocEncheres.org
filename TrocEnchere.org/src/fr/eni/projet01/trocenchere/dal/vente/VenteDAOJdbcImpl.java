@@ -3,6 +3,7 @@ package fr.eni.projet01.trocenchere.dal.vente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,6 +40,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String SELECTALL_CATEGORIES_SQL = "SELECT * FROM categories";
 	
 	private static final String UPDATE_VENTES_SQL = "UPDATE ventes SET points=? WHERE no_vente=?";
+	
+	private static final String SELECT_ALL_VENTES = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur";
 
 	/**
 	 * @author créé par Amandine
@@ -46,7 +49,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	 * @param un objet vente
 	 * @return une vente avec son numéro de vente (id)
 	 */
-	public Vente insert(Vente vente) throws BusinessException {
+ 	public Vente insert(Vente vente) throws BusinessException {
  		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement state = cnx.prepareStatement(INSERT_VENTES_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -565,4 +568,64 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		
 		return listeCategorie;
 	}
+	
+	/**
+	 * @author créé par Corentin et Leslie
+	 * @return liste de vente publiée
+	 */
+	@Override
+	public List<Vente> selectAll() throws BusinessException {
+		List<Vente> listeVente = new ArrayList<Vente>();
+		Vente vente = new Vente();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state= cnx.prepareStatement(SELECT_ALL_VENTES);){			
+			ResultSet rs = state.executeQuery();			
+			while (rs.next()) {
+				if (rs.getInt("no_vente")!=vente.getNoVente()) {
+					vente = new Vente();
+					vente.setNoVente(rs.getInt("no_vente"));
+					vente.setNomArticle(rs.getString("nomarticle"));
+					vente.setDescription(rs.getString("description"));
+					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setPrixVente(rs.getInt("prix_vente"));
+					vente.setNomImage(rs.getString("nomImage"));
+					vente.setPublie(rs.getBoolean("publiee"));
+					
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue"));
+					retrait.setCodePostal(rs.getString("code_postal"));
+					retrait.setVille(rs.getString("ville"));
+					vente.setLieuRetrait(retrait);
+					
+					Categorie categorie = new Categorie();
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
+					categorie.setLibelle(rs.getString("libelle"));
+					vente.setCategorieArticle(categorie);
+					
+					Utilisateur utilisateur = new Utilisateur();
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setNom(rs.getNString("nom"));
+					utilisateur.setPrenom(rs.getNString("prenom"));
+					utilisateur.setEmail(rs.getNString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
+					utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+					vente.setVendeur(utilisateur);
+					
+					listeVente.add(vente);					
+				}			
+			}	
+			rs.close();	
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+		return listeVente;
+}
 }
