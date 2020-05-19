@@ -60,6 +60,7 @@ public class DetailVenteEncherir extends HttpServlet {
 				Enchere highestEnchere = new Enchere();
 				try {
 					highestEnchere = eM.selectEnchereByUserId(2);
+				
 					//highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
 				} catch (BusinessException e) {
 					e.printStackTrace();
@@ -97,22 +98,22 @@ public class DetailVenteEncherir extends HttpServlet {
 		HttpSession session = request.getSession();
 		//get bid from jsp
 		int enchere = Integer.parseInt(request.getParameter("encherir"));
-		
+		System.out.println(enchere);
 		//get user
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
-		
-		//get noVent
-		int noVenteConcerne = Integer.parseInt(request.getParameter("noVente"));
+		System.out.println(user);
+		//get noVent pour chercher dans le base de donner
+		//int noVenteConcerne = Integer.parseInt(request.getParameter("noVente"));
 		//get Vent
 		Vente venteConcerne = (Vente) session.getAttribute("VenteConcerne");
-		
+		System.out.println(venteConcerne);
 		
 		//get local date
 		LocalDate date = LocalDate.parse("2020-05-15");
-		
+		System.out.println(date);
 		//new bid
 		Enchere newEnchere = new Enchere(date, venteConcerne, user, enchere);
-		
+		System.out.println(newEnchere);
 		//insert into db
 		try {
 			eM.ajouterEnchere(newEnchere);

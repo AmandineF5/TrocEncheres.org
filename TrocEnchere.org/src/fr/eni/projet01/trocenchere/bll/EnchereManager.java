@@ -21,6 +21,13 @@ public class EnchereManager {
 	}
 
 	public void ajouterEnchere (Enchere enchere) throws BusinessException {
+		int noUser = enchere.getEncherit().getNoUtilisateur();
+		int noSale = enchere.getConcerne().getNoVente();
+		Enchere test = selectEnchereByUserIdEtNoVente(noUser, noSale);
+		if (test != null) {
+			//update
+		}else
+		
 		this.enchereDAO.insert(enchere);
 		Integer points = enchere.getPoints();
 		Vente vente = enchere.getConcerne();
@@ -35,6 +42,13 @@ public class EnchereManager {
 		
 	}
 	
+	//varification que il n'y a pas deja un enchere par l'utilisateur pour ce produit
+	public Enchere selectEnchereByUserIdEtNoVente (int noUtilisateur, int noVente) throws BusinessException{
+		
+		return enchereDAO.selectOneByUserIdVenteId(noUtilisateur, noVente);
+	}
+	
+	//test
 	public Enchere selectEnchereByUserId (int noUtilisateur) throws BusinessException{
 		
 		return enchereDAO.selectOneByUserId(noUtilisateur);
@@ -84,7 +98,10 @@ public class EnchereManager {
 	public Enchere trouverHighestBid (int noVente) throws BusinessException {
 		Enchere highestBid=null;
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
-		listeEnchere = this.selectionnerEnchereByIdVente(noVente);
+		listeEnchere = enchereDAO.selectByVenteId(noVente);
+		for(Enchere e : listeEnchere) {
+			System.out.println(e);
+		}
 		//problem here out of bounds exception
 		highestBid = listeEnchere.get(0);	
 		return highestBid;

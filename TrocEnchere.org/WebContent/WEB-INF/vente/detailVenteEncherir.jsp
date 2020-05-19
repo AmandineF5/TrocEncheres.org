@@ -118,7 +118,8 @@
 					<div class="field">
 						<input type="number" class="input" name="encherir"
 							max="${utilisateur.credit}" min="${enchere.points+1}"
-							value="${enchere.points+1}">. <input type="hidden"
+							value="${enchere.points+1}"> 
+							<input type="hidden"
 							name="noVente" value="${vente.noVente}">
 
 					</div>

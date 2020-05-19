@@ -135,6 +135,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			vente.setPrixVente(rs.getInt("prix_vente"));
 			vente.setNomImage(rs.getString("nomImage"));
 			vente.setPublie(rs.getBoolean("publiee"));
+			vente.setNoVente(noVente);
 			
 			Retrait retrait = new Retrait();
 			retrait.setRue(rs.getString("rue"));
