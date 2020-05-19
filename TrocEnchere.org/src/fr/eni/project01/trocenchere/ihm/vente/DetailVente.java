@@ -37,7 +37,7 @@ public class DetailVente extends HttpServlet {
 		//get noVente from incoming page
 		
 		//getting cookie
-		//String noVente = (String) request.getAttribute("NoVente");
+		//String noVente = (String) request.getAttribute("noVente");
 		int noVenteAAfficher = getNoVenteDeSession(request);
 		
 		//find the Vente in the database
