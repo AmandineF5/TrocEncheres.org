@@ -50,6 +50,8 @@ public class DetailVenteEncherir extends HttpServlet {
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur", e.getListeErreur());
 				}
+				//Set vente in session for the post
+				session.setAttribute("VenteConcerne", venteAAfficher);
 				
 				//set vente as attribute
 				request.setAttribute("vente", venteAAfficher);
@@ -57,7 +59,8 @@ public class DetailVenteEncherir extends HttpServlet {
 				//find the highest bid by id no
 				Enchere highestEnchere = new Enchere();
 				try {
-					highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
+					highestEnchere = eM.selectEnchereByUserId(2);
+					//highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
 				} catch (BusinessException e) {
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur", e.getListeErreur());
@@ -70,6 +73,14 @@ public class DetailVenteEncherir extends HttpServlet {
 				Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
 				//send user to the jsp
 				request.setAttribute("utilisateur", user);
+				
+				//block bidding if credit is not ok
+				String message = null;
+				if(user.getCredit()<highestEnchere.getPoints()) {
+					message = "Vous n'avez pas assez de credit";
+		            request.setAttribute("message", message);
+				}
+				
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vente/detailVenteEncherir.jsp");
 				rd.forward(request, response);
@@ -93,15 +104,8 @@ public class DetailVenteEncherir extends HttpServlet {
 		//get noVent
 		int noVenteConcerne = Integer.parseInt(request.getParameter("noVente"));
 		//get Vent
-		Vente venteConcerne = new Vente();
-		try {
-			 venteConcerne = vM.selectionnerVenteById(noVenteConcerne);
-			 System.out.println(venteConcerne.getVendeur());
-			 
-		} catch (BusinessException e) {
-			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeErreur());
-		}
+		Vente venteConcerne = (Vente) session.getAttribute("VenteConcerne");
+		
 		
 		//get local date
 		LocalDate date = LocalDate.parse("2020-05-15");
