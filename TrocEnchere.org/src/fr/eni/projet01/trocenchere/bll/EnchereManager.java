@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.sun.javafx.binding.StringFormatter;
 
-import fr.eni.project01.trocenchere.dal.enchere.EnchereDAO;
 import fr.eni.projet01.trocenchere.bo.Enchere;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.DAOFactory;
+import fr.eni.projet01.trocenchere.dal.enchere.EnchereDAO;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 public class EnchereManager {
