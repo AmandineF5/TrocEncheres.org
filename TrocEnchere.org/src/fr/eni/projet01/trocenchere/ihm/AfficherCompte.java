@@ -15,6 +15,8 @@ import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
 /**
+ * @author Janet
+ * modifié par Leslie
  * Servlet implementation class AfficherCompte
  */
 public class AfficherCompte extends HttpServlet {
@@ -31,6 +33,19 @@ public class AfficherCompte extends HttpServlet {
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		UtilisateurManager UM = new UtilisateurManager();
 		
+		if (request.getParameter("noUtilisateur")!=null) {
+			int noUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
+			Utilisateur vendeur;
+			try {
+				vendeur = UM.selectionnerUtilisateurById(noUtilisateur);
+				request.setAttribute("utilisateur", vendeur);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+		} else {
+			request.setAttribute("utilisateur", utilisateur);
+		}
+		
 		//pour tester si aucune session chargée !
 //		Utilisateur utilisateur = null;
 //		try {
@@ -39,9 +54,7 @@ public class AfficherCompte extends HttpServlet {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		request.setAttribute("utilisateur",utilisateur);
-		
+
 		rd.forward(request, response);
 		
 		

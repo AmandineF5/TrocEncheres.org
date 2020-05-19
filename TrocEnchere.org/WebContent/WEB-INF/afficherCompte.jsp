@@ -120,7 +120,7 @@
 		<div class="field-body">
 		    <div class="field">
 		      <div class="control">
-				 <a href=""><button type="submit" class="button is-primary is-light" name="bouton" value="annuler">Annuler</button></a> <%--rediriger vers l'accueil --%>
+				 <a href="/TrocEnchere.org/accueil"><button type="submit" class="button is-primary is-light" name="bouton" value="retour">Retour</button></a>
 			  </div>
 			</div>
 		</div>
