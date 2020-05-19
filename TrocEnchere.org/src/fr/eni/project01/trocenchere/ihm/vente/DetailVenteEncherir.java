@@ -37,8 +37,9 @@ public class DetailVenteEncherir extends HttpServlet {
 				HttpSession session = request.getSession();
 				//get noVente from incoming page which should arrive in a parameter
 				//getting the id
-				//test
+				//for test
 				int noVenteAAfficher = 12;
+				
 				//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 					
 				//find the Vente in the database
@@ -58,10 +59,11 @@ public class DetailVenteEncherir extends HttpServlet {
 				
 				//find the highest bid by id no
 				Enchere highestEnchere = new Enchere();
+
 				try {
-					highestEnchere = eM.trouverHighestBid(2);
 				
-					//highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
+					highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
+
 				} catch (BusinessException e) {
 					e.printStackTrace();
 					request.setAttribute("listeCodesErreur", e.getListeErreur());
@@ -97,23 +99,19 @@ public class DetailVenteEncherir extends HttpServlet {
 		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		//get bid from jsp
-		int enchere = Integer.parseInt(request.getParameter("encherir"));
-		System.out.println(enchere);
+		int bid = Integer.parseInt(request.getParameter("encherir"));
 		//get user
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
-		System.out.println(user);
-		//get noVent pour chercher dans le base de donner
-		//int noVenteConcerne = Integer.parseInt(request.getParameter("noVente"));
 		//get Vent
 		Vente venteConcerne = (Vente) session.getAttribute("VenteConcerne");
 		System.out.println(venteConcerne);
-		
 		//get local date
-		LocalDate date = LocalDate.parse("2020-05-15");
+		LocalDate date = LocalDate.parse("2020-05-21");
+				
+				//LocalDate.now();
 		System.out.println(date);
 		//new bid
-		Enchere newEnchere = new Enchere(date, venteConcerne, user, enchere);
-		System.out.println(newEnchere);
+		Enchere newEnchere = new Enchere(date, venteConcerne, user, bid);
 		//insert into db
 		try {
 			eM.ajouterEnchere(newEnchere);
