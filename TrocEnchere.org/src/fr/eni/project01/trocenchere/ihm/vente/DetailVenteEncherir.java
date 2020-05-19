@@ -38,7 +38,7 @@ public class DetailVenteEncherir extends HttpServlet {
 				//get noVente from incoming page which should arrive in a parameter
 				//getting the id
 				//for test
-				int noVenteAAfficher = 12;
+				int noVenteAAfficher = 3;
 				
 				//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 					
