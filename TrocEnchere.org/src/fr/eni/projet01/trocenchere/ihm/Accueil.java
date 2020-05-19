@@ -41,6 +41,14 @@ public class Accueil extends HttpServlet {
 		//Récupérer et afficher les catégories
 		List<Categorie> categories = toutesCategorie();		
 		request.setAttribute("categories", categories);	
+		//affichage de toutes les ventes
+		try {
+			List<Vente> lesVentes = vM.selectionnerToutesVentes();
+			request.setAttribute("mesVentes", lesVentes);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
 
@@ -67,6 +75,14 @@ public class Accueil extends HttpServlet {
 		List<Vente> resultatAAfficher = new ArrayList<>();  //puis add les différentes ventes succèsivement en fct de ce qui a été coché
 		
 		try {
+			//l'utilisateur n'a coché aucun des 4 filtres NI de mot-clef
+			if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null 
+					&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+				resultatAAfficher = vM.selectionnerToutesVentes();
+			}
+			
+			
+			
 			if (request.getParameter("mesVentes")!=null ) {  //tout ce que l'utilisateur est en train de vendre OU a déjà vendu !
 				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());
 				for (Vente vente : mesVentes) {
@@ -97,11 +113,38 @@ public class Accueil extends HttpServlet {
 			}
 			
 			if (request.getParameter("autresEncheres")!=null) { // = toutes vente - mesVentes - mesEncheres - mesAcquisitions
-				resultatAAfficher = vM.selectionnerToutesVentes();
+				
+				resultatAAfficher = vM.selectionnerToutesVentes();  //on sélectionne ABSOLUMENT toutes les ventes du site
+				
+				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());  //on retire mesVentes
+				for (Vente vente : mesVentes) {
+						resultatAAfficher.remove(vente);
+				}
+				
+				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
+				for (Enchere enchere : mesEnchères) {
+					Vente vente = enchere.getConcerne();
+					System.out.println(vente);
+					if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
+						resultatAAfficher.remove(vente);
+					}
+				}
+				
+				List<Vente> lesVentes = vM.selectionnerToutesVentes();  //on retire mesAcquisitions
+				for (Vente vente : lesVentes) {
+					Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
+					Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
+					if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+						resultatAAfficher.remove(vente);
+					}
+				}
 			}
 			
 			if (request.getParameter("venteByKeyword")!=null) {
 				venteByKeyword = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
+				
+				
+				
 			}
 			
 			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
@@ -121,10 +164,8 @@ public class Accueil extends HttpServlet {
 		}
 		
 		//Définir les informations à renvoyer à la JSP (accueil.jsp)
-		request.setAttribute("mesVentes", mesVentes);
-		request.setAttribute("mesEncheres", mesEnchères);
-		request.setAttribute("venteByCategory", venteByCategory);
-		request.setAttribute("venteByKeyword", venteByKeyword);
+		request.setAttribute("mesVentes", resultatAAfficher);  //à changer le nom de l'attibut plus tard
+		
 		
 		//Récupérer et afficher les catégories
 		List<Categorie> categories = toutesCategorie();			
