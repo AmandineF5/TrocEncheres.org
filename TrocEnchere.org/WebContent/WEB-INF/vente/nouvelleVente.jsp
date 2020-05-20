@@ -24,6 +24,9 @@
 	 	</div>
 	 	
 		<form action="/TrocEnchere.org/NouvelleVente" method="post" > <!-- enctype="multipart/form-data" -->
+		   <div class="rubrique">
+		 	<h2>Informations sur l'objet à vendre</h2>
+		  </div>
 		   <div class="field is-horizontal">
   			 <div class="field-label is-normal">
 			    <label class="label">Article:</label>
@@ -85,7 +88,7 @@
 		 
 		  <div class="field is-horizontal">
   			<div class="field-label is-normal">
-			    <label class="label">Fin de l'enchére:</label>
+			    <label class="label">Fin de l'enchère:</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
@@ -95,7 +98,10 @@
 		 </div>
 		 
 		 <fieldset>
+		 <div class="rubrique">
 		 	<h2>Retrait</h2>
+		 </div>
+		 	
 			 
 			 <div class="field is-horizontal">
 	  			<div class="field-label is-normal">

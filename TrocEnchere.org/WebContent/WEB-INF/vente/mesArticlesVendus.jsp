@@ -66,25 +66,28 @@
 			</div>
 		</div>
 
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Retrait:</label>
+		<div class="side-side">
+			<div class="side1">
+				<img src="images/delivery.png" style="max-width:50%" alt="retrait">
+			
 			</div>
-			<div class="field-body">
-				<div class="field">
-					${vente.getLieuRetrait().getRue()}
-					${vente.getLieuRetrait().getCodePostal()}
-					${vente.getLieuRetrait().getVille()}
+			<div class="field is-horizontal side2">
+				<div class="field-label is-normal side2a">
+					<h4>Retrait:</h4>
 				</div>
-			</div>
-		</div>
-
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Vendeur:</label>
-			</div>
-			<div class="field-body">
-				<div class="field">${vente.vendeur.pseudo}</div>
+				<div class="field-body">
+					<div class="field is-rounded">
+						${vente.getLieuRetrait().getRue()}<br />
+						${vente.getLieuRetrait().getCodePostal()}
+						${vente.getLieuRetrait().getVille()}
+	
+					</div>
+				</div>
+				<div class="side2b">
+					<h4>Vendeur: ${vente.vendeur.pseudo}</h4>
+				</div>
+					
+				
 			</div>
 		</div>
 		
@@ -96,12 +99,12 @@
 			<div class="field">
 				<div class="control">
 					<form action="/TrocEnchere.org/MesArticlesVendus" method="post">
-					<input type="hidden" name="venteNo" value="${vente.noVente}">
-					<input type="hidden" name="enchereValue" value="${enchere.points}">
-					<button type="submit" class="button is-primary" name="validationRetrait">Retrait effectué</button> <!-- button qui débite l'acheteur et crédite le vendeur? -->
+					<input type="hidden" class="is-rounded" name="venteNo" value="${vente.noVente}">
+					<input type="hidden" class="is-rounded" name="enchereValue" value="${enchere.points}">
+					<button type="submit" class="main-button is-rounded" name="validationRetrait">Retrait effectué</button> <!-- button qui débite l'acheteur et crédite le vendeur? -->
 					</form>
 					<a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}&noVente=${vente.noVente}"><button type="submit" class="button is-primary is-light" name="Contacter">Contacter ${enchere.encherit.pseudo}</button></a>
-					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button is-primary is-light" name="retour" value="retour">Back</button></a>
+					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button main-button is-rounded is-light" name="retour" value="retour">Back</button></a>
 				</div>
 			</div>
 		</div>

@@ -51,7 +51,8 @@ public class Accueil extends HttpServlet {
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-		
+		String titre = "Top classement des ventes en cours";
+		request.setAttribute("titre", titre);
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
 
@@ -238,6 +239,9 @@ public class Accueil extends HttpServlet {
 		//Récupérer et afficher les catégories
 		List<Categorie> categories = toutesCategorie();			
 		request.setAttribute("categories", categories);	
+		
+		String titre = "Résultat de votre recherche";
+		request.setAttribute("titre", titre);
 		
 		String servletToCall = this.redirectionVente();
 		request.setAttribute("servletToCall", servletToCall);

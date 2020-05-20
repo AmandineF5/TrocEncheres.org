@@ -73,7 +73,7 @@
 
 				<div class="field ">
 		  			<div class="field-label is-normal">
-					    <label class="label">Catégorie:</label>
+					    <label class="label label-categorie">Catégorie:</label>
 					 </div>
 					 <div class="field-body">
 		    			<div class="select is-rounded categorie">
@@ -101,9 +101,11 @@
 
 		<section>
 			<!-- AFFICHAGE D'ANNONCES AU HASARD ? OU RESULTATS ? -->
-			<h3 style="text-align:center">Les dernières ventes récentes</h3>
+			<h3 style="text-align:center">${titre}</h3>
 			<div class="columns">
+				
 				<c:forEach var="ventes" items="${mesVentes}">
+					
 					<table class="column">
 					    <thead>
 					        <tr>

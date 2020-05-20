@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			<a href="/TrocEnchere.org/MesArticlesVendus?noVente=${noVente}"><button type="submit" class="button is-primary is-light" name="retour" value="retour">Back</button></a>
+			<a href="/TrocEnchere.org/MesArticlesVendus?noVente=${noVente}"><button type="submit" class="button main-button is-rounded  is-light" name="retour" value="retour">Back</button></a>
 		</main>
 		<%@ include file="../fragments/script.html" %>
 	</body>

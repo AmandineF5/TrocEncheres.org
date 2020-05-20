@@ -64,15 +64,6 @@ th {
 	word-wrap: break-word; /* passage à la ligne forcé */
 }
 	
-	
-	/* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
-
-.element1,
-.element2 {
-	float: none;
-	width: auto;
-}
-
 	/* Un message personnalisé */
 
 body:before {
@@ -81,7 +72,7 @@ body:before {
 	text-align: center;
 	font-style: italic;
 	color: #777;
-	font-size: min(3vw, 15px);
+	font-size: min(2vw, 15px);
 }
 
 h1 {
@@ -100,6 +91,7 @@ h3 {
 	font-size: min(4vw, 30px);
 	color: #7f8c8d;
 	margin-top: 2em;
+	margin-bottom: 2.2em;
 }
 
 checkbox, label {
@@ -177,9 +169,50 @@ header {
 
 .userco a{
 	padding: 0;
-	margin:-1.8vw;
+	
 }
 
 .userco a {
 	color: #34495e;
 }
+
+.userco p {
+	color: #34495e;
+	margin: 0;
+	text-align: right;
+}
+
+.rubrique {
+	background-color: #7f8fa6;
+	box-shadow: 1px 1px 3px #bdc3c7;
+	margin: 2vw 0;
+}
+
+.rubrique h2 {
+ 	color: black;
+	font-weight: bold;
+	font-size: min(1.2em, 22px);
+	padding: 1vw;
+ }
+ 
+ .side-side {
+ 	display: flex;
+ 	justify-content: flex-start;
+ 	align-items: center;
+ }
+ 
+ .side1{
+  	text-align: left;
+  	float: left;
+ }
+ .side2{
+ 	float: left;
+  	text-align: left;
+  	vertical-align: center;
+  	
+ }
+ .side2b {
+ 	flex-basis: 1;
+ 	padding-left: 2em;
+ }
+

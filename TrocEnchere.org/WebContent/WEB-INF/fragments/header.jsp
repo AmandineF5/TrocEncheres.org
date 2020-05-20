@@ -39,8 +39,9 @@
 		</div>
 		<div class="userco">
 			<c:if test="${!empty sessionScope.utilisateur.pseudo}"> 
-			  	<p>Connecté(e) en tant que ${sessionScope.utilisateur.pseudo}</p><br>
-			  	<a class="nav-link" href="/TrocEnchere.org/DeconnecterCompte" style="font-style: italic">Déconnexion</a>
+			  	<p>Connecté(e) en tant que ${sessionScope.utilisateur.pseudo}<br>
+			  	<a class="nav-link" href="/TrocEnchere.org/DeconnecterCompte" style="font-style: italic">Déconnexion</a></p>
+			  	
 			 </c:if>
 		</div>
 	</nav>

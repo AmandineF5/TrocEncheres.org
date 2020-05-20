@@ -22,9 +22,11 @@
 <title>Troc-Enchères Détail Vente</title>
 </head>
 <body>
-	<%@ include file="../fragments/header.html" %>
+	<%@ include file="../fragments/header.jsp" %>
 	<main>
-		<div class="subtitle is-medium">Détail Vente</div>
+		<div class="rubrique">
+		 	<h2>Détails de la vente</h2>
+		  </div>
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -72,29 +74,31 @@
 				<div class="field is-rounded">${vente.dateFinEncheres}</div>
 			</div>
 		</div>
-
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Retrait:</label>
+		<div class="side-side">
+			<div class="side1">
+				<img src="images/delivery.png" style="max-width:50%" alt="retrait">
+			
 			</div>
-			<div class="field-body">
-				<div class="field is-rounded">
-					${vente.getLieuRetrait().getRue()}<br />
-					${vente.getLieuRetrait().getCodePostal()}
-					${vente.getLieuRetrait().getVille()}
-
+			<div class="field is-horizontal side2">
+				<div class="field-label is-normal side2a">
+					<h4>Retrait:</h4>
 				</div>
+				<div class="field-body">
+					<div class="field is-rounded">
+						${vente.getLieuRetrait().getRue()}<br />
+						${vente.getLieuRetrait().getCodePostal()}
+						${vente.getLieuRetrait().getVille()}
+	
+					</div>
+				</div>
+				<div class="side2b">
+					<h4>Vendeur: ${vente.vendeur.pseudo}</h4>
+				</div>
+					
+				
 			</div>
 		</div>
 
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Vendeur:</label>
-			</div>
-			<div class="field-body">
-				<div class="field is-rounded">${vente.vendeur.pseudo}</div>
-			</div>
-		</div>
 		
 		<c:if test="${message!=null && message.length()>0 }">
 		 	<p>${message}</p>

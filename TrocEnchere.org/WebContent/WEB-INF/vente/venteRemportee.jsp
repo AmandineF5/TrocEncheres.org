@@ -92,7 +92,7 @@
 		<div class="field-body">
 			<div class="field">
 				<div class="control">
-					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button is-primary is-light" name="retour" value="retour">Back</button></a>
+					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button main-button is-rounded is-light" name="retour" value="retour">Back</button></a>
 				</div>
 			</div>
 		</div>
