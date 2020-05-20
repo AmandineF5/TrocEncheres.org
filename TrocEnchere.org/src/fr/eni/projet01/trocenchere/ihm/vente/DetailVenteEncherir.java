@@ -44,7 +44,7 @@ public class DetailVenteEncherir extends HttpServlet {
 				//getting the id
 				
 				//for testing only
-				int noVenteAAfficher = 5;
+				int noVenteAAfficher = 8;
 				// the right code for receiving the noVente
 				//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 					
@@ -69,9 +69,6 @@ public class DetailVenteEncherir extends HttpServlet {
 
 				try {
 					
-					//correct code, but highest Enchere is not working
-					//does not update
-					// does not return list when there is no bid
 					highestEnchere = eM.trouverHighestBid(noVenteAAfficher);
 
 				} catch (BusinessException e) {
@@ -87,8 +84,14 @@ public class DetailVenteEncherir extends HttpServlet {
 				//send user to the jsp
 				request.setAttribute("utilisateur", user);
 				
-				//block bidding if credit is not ok
 				String message = null;
+				//notify user if they are currently the highest bidder
+				if(user.getNoUtilisateur() == highestEnchere.getEncherit().getNoUtilisateur()) {
+					message = "Vous avez actuellement la meilleure enchére";
+					request.setAttribute("message", message);
+				}
+				
+				//block bidding if credit is not ok
 				if(user.getCredit()<highestEnchere.getPoints()) {
 					message = "Vous n'avez pas assez de credit";
 		            request.setAttribute("message", message);
@@ -114,7 +117,6 @@ public class DetailVenteEncherir extends HttpServlet {
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
 		//get Vent
 		Vente venteConcerne = (Vente) session.getAttribute("VenteConcerne");
-		System.out.println(venteConcerne);
 		//get local date
 		LocalDate date = LocalDate.now();
 		//new bid
@@ -137,9 +139,12 @@ public class DetailVenteEncherir extends HttpServlet {
 			//update in session
 			session.setAttribute("utilisateur", user);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+		//set noVente in parameters to be sent to the next page
+		//get noVente
+		int venteID = venteConcerne.getNoVente();
+		request.setAttribute("noVente", venteID);
 		
 		response.sendRedirect(request.getContextPath()+"/DetailVenteAnnulerEncherir");
 		
