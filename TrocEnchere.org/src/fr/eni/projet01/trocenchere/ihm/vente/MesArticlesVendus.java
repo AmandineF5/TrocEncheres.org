@@ -44,7 +44,11 @@ public class MesArticlesVendus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
+		//to test
+		int noVenteAAfficher = 12;
+				
+		//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
+		
 		Vente venteAAfficher = new Vente();
 		Enchere enchèreRemportee = new Enchere();
 		try {
