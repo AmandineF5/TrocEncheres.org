@@ -42,7 +42,17 @@ public class EnchereManager {
 				vm.mettreAJourPrixVente(noVente, points);
 			}
 		}
-
+	}
+	
+	public boolean verifierEnchereExistant(int noUser, int noSale) throws BusinessException{
+		boolean doesExist;
+		Enchere test = selectEnchereByUserIdEtNoVente(noUser, noSale);
+		if(test != null) {
+			doesExist = true;
+		}else {
+			doesExist = false;
+		}
+		return doesExist;
 	}
 	
 	public void deleteUserbid(int noVente, int noUtilisateur) throws BusinessException {
