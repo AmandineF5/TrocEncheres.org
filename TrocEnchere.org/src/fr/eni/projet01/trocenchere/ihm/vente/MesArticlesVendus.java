@@ -39,14 +39,14 @@ public class MesArticlesVendus extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int noVenteAAfficher = 17;//Integer.parseInt(request.getParameter("noVente"));
+		int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 		Vente venteAAfficher = new Vente();
-		//Enchere enchèreRemportee = new Enchere();
+		Enchere enchèreRemportee = new Enchere();
 		try {
-			//enchèreRemportee = eM.trouverHighestBid(noVenteAAfficher);
+			enchèreRemportee = eM.trouverHighestBid(noVenteAAfficher);
 			venteAAfficher = vM.selectionnerVenteById(noVenteAAfficher);
 			request.setAttribute("vente", venteAAfficher);
-			//request.setAttribute("enchere", enchèreRemportee);
+			request.setAttribute("enchere", enchèreRemportee);
 			 
 		} catch (BusinessException e) {
 			e.printStackTrace();

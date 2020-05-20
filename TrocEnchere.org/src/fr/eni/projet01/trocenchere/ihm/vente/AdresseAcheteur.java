@@ -35,13 +35,15 @@ public class AdresseAcheteur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int noAcheteur = 2;//Integer.parseInt(request.getParameter("Acheteur"));
+		int noAcheteur = Integer.parseInt(request.getParameter("Acheteur"));
+		int noVente = Integer.parseInt(request.getParameter("noVente"));
 		Utilisateur acheteur = new Utilisateur();
 		try {
 			acheteur = uM.selectionnerUtilisateurById(noAcheteur);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
+		request.setAttribute("noVente", noVente);
 		request.setAttribute("acheteur", acheteur);
 		request.getRequestDispatcher("/WEB-INF/vente/adresseAcheteur.jsp").forward(request, response);
 	}

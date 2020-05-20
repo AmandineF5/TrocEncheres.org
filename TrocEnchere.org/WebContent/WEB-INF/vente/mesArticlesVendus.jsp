@@ -98,7 +98,7 @@
 					<form action="/TrocEnchere.org/MesArticlesVendus" method="post">
 					<button type="submit" class="button is-primary" name="validationRetrait" value="">Retrait effectué</button> <!-- button qui débite l'acheteur et crédite le vendeur? -->
 					</form>
-					<a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}"><button type="submit" class="button is-primary is-light" name="Contacter">Contacter ?${enchere.encherit.pseudo}</button></a>
+					<a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}&noVente=${vente.noVente}"><button type="submit" class="button is-primary is-light" name="Contacter">Contacter ?${enchere.encherit.pseudo}</button></a>
 					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button is-primary is-light" name="retour" value="retour">Back</button></a>
 				</div>
 			</div>
