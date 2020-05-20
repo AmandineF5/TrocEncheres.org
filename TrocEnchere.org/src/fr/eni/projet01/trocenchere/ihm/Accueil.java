@@ -58,6 +58,7 @@ public class Accueil extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//doGet(request, response);
@@ -78,75 +79,146 @@ public class Accueil extends HttpServlet {
 		List<Vente> resultatAAfficher = new ArrayList<>();  //puis add les différentes ventes succèsivement en fct de ce qui a été coché
 		
 		try {
-			//l'utilisateur n'a coché aucun des 4 filtres NI de mot-clef
-			if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null 
-					&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+			String[] filtresChk = request.getParameterValues("filtre");
+			List<String> listFiltres = new ArrayList<String>();
+			
+			for (String s : filtresChk) {
+				if (s!=null) {
+					listFiltres.add(s);
+				}
+			}
+			
+			if (listFiltres==null && listFiltres.size()==0) {
 				resultatAAfficher = vM.selectionnerToutesVentes();
-			}
-			
-			
-			
-			if (request.getParameter("mesVentes")!=null ) {  //tout ce que l'utilisateur est en train de vendre OU a déjà vendu !
-				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());
-				for (Vente vente : mesVentes) {
-						resultatAAfficher.add(vente);
-				}
-			}
-			
-			if (request.getParameter("mesEncheres")!=null) {  //tout ce que l'utilisateur est en train d'acheter (date_de_fin > ajd ET au moins une enchère !)
-				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
-				for (Enchere enchere : mesEnchères) {
-					Vente vente = enchere.getConcerne();
-					System.out.println(vente);
-					if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
-						resultatAAfficher.add(vente);
+			} else if (listFiltres!=null && listFiltres.size()>0) {
+				
+				for (String s : listFiltres) {
+					if (s.equals("mesVentes")) {
+						mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());
+						for (Vente vente : mesVentes) {
+								resultatAAfficher.add(vente); 
+						}
 					}
-				}
+					if (s.equals("mesEncheres")) {
+						mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
+						for (Enchere enchere : mesEnchères) {
+							Vente vente = enchere.getConcerne();
+							System.out.println(vente);
+							if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
+								resultatAAfficher.add(vente);
+							} 
+						}
+					}
+					if (s.equals("mesAcquisitions")) {
+						List<Vente> lesVentes = vM.selectionnerToutesVentes();
+						for (Vente vente : lesVentes) {
+							Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
+							Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
+							if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+								resultatAAfficher.add(vente);
+							}
+						}
+					}
+					if (s.equals("autresEncheres")) {
+						resultatAAfficher = vM.selectionnerToutesVentes();  //on sélectionne ABSOLUMENT toutes les ventes du site
+						
+						mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());  //on retire mesVentes
+						for (Vente vente : mesVentes) {
+								resultatAAfficher.remove(vente);
+						}
+						
+						mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
+						for (Enchere enchere : mesEnchères) {
+							Vente vente = enchere.getConcerne();
+							System.out.println(vente);
+							if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
+								resultatAAfficher.remove(vente);
+							}
+						}
+						
+						List<Vente> lesVentes = vM.selectionnerToutesVentes();  //on retire mesAcquisitions
+						for (Vente vente : lesVentes) {
+							Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
+							Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
+							if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+								resultatAAfficher.remove(vente);
+							}
+						}
+					}
+				
+				
 			}
 			
-			if (request.getParameter("mesAcquisitions")!=null) {  //tout ce que l'utilisateur a déjà acheté ! (date_de_fin < ajd ET dernier encheriseur !)
-				List<Vente> lesVentes = vM.selectionnerToutesVentes();
-				for (Vente vente : lesVentes) {
-					Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
-					Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
-					if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
-						resultatAAfficher.add(vente);
-					}
-				}
-			}
+			//l'utilisateur n'a coché aucun des 4 filtres NI de mot-clef
+//			if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null 
+//					&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+//				resultatAAfficher = vM.selectionnerToutesVentes();
+//			}
+//			
+//			
+//			
+//			if (request.getParameter("mesVentes").equals("mesVentes") ) {  //tout ce que l'utilisateur est en train de vendre OU a déjà vendu !
+//				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());
+//				for (Vente vente : mesVentes) {
+//						resultatAAfficher.add(vente); 
+//				}
+//			}
+//			
+//			if (request.getParameter("mesEncheres")!=null) {  //tout ce que l'utilisateur est en train d'acheter (date_de_fin > ajd ET au moins une enchère !)
+//				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
+//				for (Enchere enchere : mesEnchères) {
+//					Vente vente = enchere.getConcerne();
+//					System.out.println(vente);
+//					if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
+//						resultatAAfficher.add(vente);
+//					}
+//				}
+//			}
+//			
+//			if (request.getParameter("mesAcquisitions")!=null) {  //tout ce que l'utilisateur a déjà acheté ! (date_de_fin < ajd ET dernier encheriseur !)
+//				List<Vente> lesVentes = vM.selectionnerToutesVentes();
+//				for (Vente vente : lesVentes) {
+//					Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
+//					Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
+//					if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+//						resultatAAfficher.add(vente);
+//					}
+//				}
+//			}
+//			
+//			if (request.getParameter("autresEncheres")!=null) { // = toutes vente - mesVentes - mesEncheres - mesAcquisitions
+//				
+//				resultatAAfficher = vM.selectionnerToutesVentes();  //on sélectionne ABSOLUMENT toutes les ventes du site
+//				
+//				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());  //on retire mesVentes
+//				for (Vente vente : mesVentes) {
+//						resultatAAfficher.remove(vente);
+//				}
+//				
+//				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
+//				for (Enchere enchere : mesEnchères) {
+//					Vente vente = enchere.getConcerne();
+//					System.out.println(vente);
+//					if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
+//						resultatAAfficher.remove(vente);
+//					}
+//				}
+//				
+//				List<Vente> lesVentes = vM.selectionnerToutesVentes();  //on retire mesAcquisitions
+//				for (Vente vente : lesVentes) {
+//					Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
+//					Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
+//					if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+//						resultatAAfficher.remove(vente);
+//					}
+//				}
+//			}
 			
-			if (request.getParameter("autresEncheres")!=null) { // = toutes vente - mesVentes - mesEncheres - mesAcquisitions
-				
-				resultatAAfficher = vM.selectionnerToutesVentes();  //on sélectionne ABSOLUMENT toutes les ventes du site
-				
-				mesVentes = vM.selectionnerVenteUtilisateur(utilisateurSession.getNoUtilisateur());  //on retire mesVentes
-				for (Vente vente : mesVentes) {
-						resultatAAfficher.remove(vente);
-				}
-				
-				mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
-				for (Enchere enchere : mesEnchères) {
-					Vente vente = enchere.getConcerne();
-					System.out.println(vente);
-					if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
-						resultatAAfficher.remove(vente);
-					}
-				}
-				
-				List<Vente> lesVentes = vM.selectionnerToutesVentes();  //on retire mesAcquisitions
-				for (Vente vente : lesVentes) {
-					Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
-					Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
-					if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
-						resultatAAfficher.remove(vente);
-					}
-				}
-			}
 			
-			if (request.getParameter("venteByKeyword")!=null) {
+			
+			if (request.getParameter("venteByKeyword").length()>0) {
 				
-				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null 
-					&& request.getParameter("autresEncheres") == null) {
+				if (listFiltres==null && listFiltres.size()==0) {
 					resultatAAfficher = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
 				} else {
 					List<Vente> listeVenteMotCle = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
@@ -175,8 +247,7 @@ public class Accueil extends HttpServlet {
 			
 			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {	//cas toutes catégories
 				
-				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null //rien coché pour les autres filtres
-						&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+				if (listFiltres==null && listFiltres.size()==0) {  
 					resultatAAfficher = vM.selectionnerToutesVentes();
 					
 				} else {  //au moins 1 filtre appliqué => resultatAAfficher reste le même
@@ -185,8 +256,7 @@ public class Accueil extends HttpServlet {
 
 			} else {  //cas 1 catégorie
 				
-				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null //rien coché pour les autres filtres
-						&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+				if (request.getParameter("categorie").trim().length()>0 && listFiltres==null && listFiltres.size()==0 && request.getParameter("venteByKeyword").length()==0) {  
 					int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
 					resultatAAfficher = vM.selectionnerVenteByCategory(noCategorie);	
 					
@@ -216,7 +286,7 @@ public class Accueil extends HttpServlet {
 				}
 				
 			}			
-			
+					}
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}

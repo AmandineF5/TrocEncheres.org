@@ -36,28 +36,28 @@
 					<h3>Filtres :</h3>
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input class="squarebox" name="mesVentes" type="checkbox">Mes ventes
+							<label class="checkbox"> <input class="squarebox" name="filtre" value="mesVentes" type="checkbox">Mes ventes
 							</label>
 						</div>
 					</div>
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input class="squarebox" name="mesEncheres" type="checkbox">Mes enchères en cours
+							<label class="checkbox"> <input class="squarebox" name="filtre" value="mesEncheres" type="checkbox">Mes enchères en cours
 							</label>
 						</div>
 					</div>
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input class="squarebox" name="mesAcquisitions" type="checkbox">Mes acquisitions
+							<label class="checkbox"> <input class="squarebox" name="filtre" value="mesAcquisitions" type="checkbox">Mes acquisitions
 							</label>
 						</div>
 					</div>
 
 					<div class="field-body">
 						<div class="field">
-							<label class="checkbox"> <input class="squarebox" name="autresEncheres" type="checkbox">Autres enchères
+							<label class="checkbox"> <input class="squarebox" name="filtre" value="autresEncheres"  type="checkbox">Autres enchères
 							</label>
 						</div>
 					</div>
@@ -67,7 +67,7 @@
 				<div class="field"> <!-- BARRE DE RECHERCHE -->
 					<div class="control">
 						<input name="venteByKeyword" class="input is-rounded" type="text"
-							placeholder="Le nom de l'article contient">
+							placeholder="Le nom de l'article contient" >
 					</div>
 				</div>
 
