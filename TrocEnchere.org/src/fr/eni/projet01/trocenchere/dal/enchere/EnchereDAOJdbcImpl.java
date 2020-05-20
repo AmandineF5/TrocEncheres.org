@@ -31,6 +31,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
 
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
+	private static final String DELETE_ONE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente =? AND no_acheteur =?";
 
 	private static final String UPDATE_ENCHERES_SQL = "UPDATE encheres SET points=? WHERE no_acheteur=? AND no_vente=?";
 
@@ -254,6 +255,24 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				PreparedStatement state = cnx.prepareStatement(DELETE_ENCHERES_SQL)) {
 
 			state.setInt(1, noVente);
+			state.executeUpdate();
+
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: supression impossible car n° de vente inconnu");
+			throw be;
+		}
+
+	}
+	
+	@Override
+	public void deleteOne(int noVente, int noAcheteur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state = cnx.prepareStatement(DELETE_ONE_ENCHERES_SQL)) {
+
+			state.setInt(1, noVente);
+			state.setInt(2, noAcheteur);
 			state.executeUpdate();
 
 		} catch (Exception e) {
