@@ -42,11 +42,7 @@ public class DetailVenteEncherir extends HttpServlet {
 				HttpSession session = request.getSession();
 				//get noVente from incoming page which should arrive in a parameter
 				//getting the id
-				
-				//for testing only
-				int noVenteAAfficher = 8;
-				// the right code for receiving the noVente
-				//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
+				int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 					
 				//find the Vente in the database
 				Vente venteAAfficher = new Vente();
