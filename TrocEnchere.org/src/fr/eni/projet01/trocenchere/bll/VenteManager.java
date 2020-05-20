@@ -97,6 +97,11 @@ public class VenteManager {
 	}
 	
 	
+	public void supprimerVenteUser (int noVendeur) throws BusinessException {
+		venteDAO.deleteUser(noVendeur);
+	}
+	
+	
 	/**
 	 * @author Leslie
 	 * selectionnerVenteByCategory / searchByCatagory

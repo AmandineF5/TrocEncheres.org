@@ -253,9 +253,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 					PreparedStatement state = cnx.prepareStatement(DELETE_USER_SQL)){
 				state.setInt(1, noUtilisateur);
 				state.executeUpdate();
-//				test sans pool de connection
-//				cnx.commit();
-//				fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
+				
 			} catch (Exception e) {
 				BusinessException be = new BusinessException();
 				e.printStackTrace();

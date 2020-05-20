@@ -22,7 +22,7 @@
 <title>Troc-Enchères modification de compte</title>
 </head>
 <body>
-	<%@ include file="./fragments/header.jsp %>
+	<%@ include file="./fragments/header.jsp" %>
 	<main>
 		<div class="subtitle is-medium">
 	 		<h1>Modifier mon profil</h1>
@@ -175,6 +175,9 @@
 				</div>
 			</div>
 
+		</form>
+		<form action="/TrocEnchere.org/SupprimerCompte" method="post">
+			<button type="submit" class="button main-button is-rounded" name="bouton" value="delete">Supprimer mon compte</button>
 		</form>
 
 

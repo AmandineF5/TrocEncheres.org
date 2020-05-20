@@ -39,7 +39,7 @@ public class ModifierCompte extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// call manager
-		UtilisateurManager UM = new UtilisateurManager();
+		UtilisateurManager um = new UtilisateurManager();
 		// get current user through session
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
@@ -65,22 +65,20 @@ public class ModifierCompte extends HttpServlet {
 		String confMdpUtilisateur = request.getParameter("confMdpUtilisateur");
 
 		String messageErreur = "Les mots de passe sont différents";
-		RequestDispatcher rd = null;
-
-	
+			
 		
 		// comparaison mot de passe
 		if (mdpUtilisateur.equals(confMdpUtilisateur)) {
 			try {
-				UM.mettreAJourUtilisateur(newUtilisateur);
+				um.mettreAJourUtilisateur(newUtilisateur);
 				// update user in session
 				// set new one
 				session.setAttribute("utilisateur", newUtilisateur);
 				// send to affichage compte
 				response.sendRedirect(request.getContextPath()+"/afficherCompte");
-			} catch (BusinessException e) {
-				e.printStackTrace();
-				request.setAttribute("listeCodesErreur", e.getListeErreur());
+			} catch (BusinessException e2) {
+				e2.printStackTrace();
+				request.setAttribute("listeCodesErreur", e2.getListeErreur());
 			}
 
 		}else {

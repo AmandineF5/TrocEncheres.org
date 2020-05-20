@@ -89,5 +89,7 @@ public interface VenteDAO {
 	 * @return une liste de Categorie
 	 * @throws BusinessException
 	 */
-	public List<Categorie> selectCatagory()throws BusinessException;
+	public List<Categorie> selectCatagory() throws BusinessException;
+
+	public void deleteUser(int noVendeur) throws BusinessException;
 }

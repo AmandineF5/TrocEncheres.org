@@ -32,6 +32,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String DELETE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente = ?";
 	private static final String DELETE_ONE_ENCHERES_SQL = "DELETE FROM encheres WHERE no_vente =? AND no_acheteur =?";
+	private static final String DELETE_ENCHERES_USER_SQL = "DELETE FROM encheres WHERE no_acheteur =?";
 
 	private static final String UPDATE_ENCHERES_SQL = "UPDATE encheres SET points=? WHERE no_acheteur=? AND no_vente=?";
 
@@ -263,6 +264,22 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
 			be.ajouterErreur("Erreur: supression impossible car n° de vente inconnu");
+			throw be;
+		}
+
+	}
+	
+	public void deleteUser(int noAcheteur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement state = cnx.prepareStatement(DELETE_ENCHERES_USER_SQL)) {
+
+			state.setInt(1, noAcheteur);
+			state.executeUpdate();
+
+		} catch (Exception e) {
+			BusinessException be = new BusinessException();
+			e.printStackTrace();
+			be.ajouterErreur("Erreur: supression impossible car n° d'utilisateur inconnu");
 			throw be;
 		}
 

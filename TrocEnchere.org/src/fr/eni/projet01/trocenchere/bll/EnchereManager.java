@@ -72,6 +72,10 @@ public class EnchereManager {
 	public void supprimerEnchere(int noVente) throws BusinessException {
 		this.enchereDAO.delete(noVente);
 	}
+	
+	public void supprimerEnchereUtilisateur(int noAcheteur) throws BusinessException {
+		this.enchereDAO.deleteUser(noAcheteur);
+	}
 
 	public String trouverClassementEnchere(int noVente, int noUtilisateurSession) throws BusinessException {
 		String classement = null;

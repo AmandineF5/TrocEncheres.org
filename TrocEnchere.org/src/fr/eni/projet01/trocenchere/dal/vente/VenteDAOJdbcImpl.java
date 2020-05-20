@@ -39,6 +39,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	
 	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ?";
 	private static final String DELETE_RETRAITS_SQL = "DELETE FROM retraits WHERE no_vente = ?";
+	private static final String DELETE_VENTES_USER_SQL = "DELETE FROM ventes WHERE no_utilisateur = ?";
 	
 	private static final String SELECTALL_CATEGORIES_SQL = "SELECT * FROM categories";
 	
@@ -521,7 +522,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	}
 
 	@Override
-	public void delete(int noVente) throws BusinessException {
+public void delete(int noVente) throws BusinessException {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
 			//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
@@ -541,6 +542,23 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			throw be;
 		}
 	}
+	
+	public void deleteUser(int noVendeur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
+				PreparedStatement state = cnx.prepareStatement(DELETE_VENTES_USER_SQL)){
+				
+				state.setInt(1, noVendeur);
+				state.executeUpdate();
+				
+			} catch (Exception e) {
+				BusinessException be = new BusinessException();
+				e.printStackTrace();
+				be.ajouterErreur("Erreur: supression ompossible car n° de vente inconnu");
+				throw be;
+			}
+		}
+
 
 	@Override
 	public List<Categorie> selectCatagory() throws BusinessException {
