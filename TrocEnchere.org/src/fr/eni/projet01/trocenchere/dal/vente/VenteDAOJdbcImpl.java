@@ -81,7 +81,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			state.setInt(1, vente.getNoVente());
 			state.setString(2, retrait.getRue());
 			state.setString(3, retrait.getCodePostal());
-			state.setString(4, retrait.getRue());
+			state.setString(4, retrait.getVille());
 			
 			vente.setLieuRetrait(retrait);
 			
