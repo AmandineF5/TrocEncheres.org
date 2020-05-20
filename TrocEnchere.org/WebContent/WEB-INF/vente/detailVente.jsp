@@ -1,8 +1,8 @@
 
 <!-- JANET -->
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -19,12 +19,12 @@
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-<title>Troc-Enchères Détail Vente</title>
+<title>Troc-EnchÃ¨res DÃ©tail Vente</title>
 </head>
 <body>
 	<%@ include file="../fragments/header.html" %>
 	<main>
-		<div class="subtitle is-medium">Détail Vente</div>
+		<div class="subtitle is-medium">DÃ©tail Vente</div>
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		
-		<div class="field is-horizontal"><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet à vendre"></div>
+		<div class="field is-horizontal"><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet Ã  vendre"></div>
 		
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -59,14 +59,14 @@
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
-				<label class="label">Mise à prix:</label>
+				<label class="label">Mise Ã  prix:</label>
 			</div>
 			<div class="field-body is-rounded">${vente.miseAPrix}</div>
 		</div>
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
-				<label class="label">Fin de l'enchère:</label>
+				<label class="label">Fin de l'enchÃ¨re:</label>
 			</div>
 			<div class="field-body">
 				<div class="field is-rounded">${vente.dateFinEncheres}</div>

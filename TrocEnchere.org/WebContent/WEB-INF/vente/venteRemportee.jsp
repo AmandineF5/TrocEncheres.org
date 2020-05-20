@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,15 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="CSS/main.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<title>Troc-Enchères Vente terminée</title>
+<title>Troc-EnchÃ¨res Vente terminÃ©e</title>
 </head>
 <body>
-	<header>
-		<div>Troc-Enchères</div>
-		<div class="subtitle is-medium">Vous avez remporté la vente</div>
-	</header>
+	<%@ include file="../fragments/header.jsp" %>
 	<main>
 
 		<div class="field is-horizontal">
@@ -37,7 +34,7 @@
 		 	</div>
 		 </div>
 		 
-		<div class="field is-horizontal"><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet à vendre"></div>
+		<div class="field is-horizontal"><img src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}" alt="Photo d'objet Ã  vendre"></div>
 		
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -52,7 +49,7 @@
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
-				<label class="label">Mise à prix:</label>
+				<label class="label">Mise Ã  prix:</label>
 			</div>
 			<div class="field-body">${vente.miseAPrix}</div>
 		</div>
@@ -101,6 +98,6 @@
 		</div>
 
 	</main>
-
+<%@ include file="../fragments/script.html" %>
 </body>
 </html>

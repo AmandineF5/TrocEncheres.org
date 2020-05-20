@@ -1,8 +1,8 @@
 
 <!-- JANET -->
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -15,18 +15,16 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="./main.css">
+<link rel="stylesheet" href="CSS/main.css">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <!-- created by Janet -->
-<title>Troc-Enchères Détail Vente</title>
+<title>Troc-EnchÃ¨res DÃ©tail Vente</title>
 </head>
 <body>
-	<header>
-		<div>Troc-Enchères</div>
-	</header>
+	<%@ include file="../fragments/header.jsp" %>
 	<main>
-		<div class="subtitle is-medium">Détail Vente</div>
+		<div class="subtitle is-medium">DÃ©tail Vente</div>
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
@@ -40,7 +38,7 @@
 		<div class="field is-horizontal">
 			<img
 				src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}"
-				alt="Photo d'objet à vendre">
+				alt="Photo d'objet Ã  vendre">
 		</div>
 
 		<div class="field is-horizontal">
@@ -65,14 +63,14 @@
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
-				<label class="label">Mise à prix:</label>
+				<label class="label">Mise Ã  prix:</label>
 			</div>
 			<div class="field-body">${vente.miseAPrix}</div>
 		</div>
 
 		<div class="field is-horizontal">
 			<div class="field-label is-normal">
-				<label class="label">Fin de l'enchère:</label>
+				<label class="label">Fin de l'enchÃ¨re:</label>
 			</div>
 			<div class="field-body">
 				<div class="field">${vente.dateFinEncheres}</div>
@@ -99,8 +97,8 @@
 			</div>
 			<div class="field-body">
 				<a
-					href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}"><div
-						class="field">${vente.vendeur.pseudo}</div></a>
+					href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
+						class="field">${vente.vendeur.pseudo}</a>
 			</div>
 		</div>
 
@@ -129,7 +127,7 @@
 				<div class="field-body">
 					<div class="field">
 						<div class="control">
-							<button type="submit" class="button is-primary" name="encherir">Enchérir</button>
+							<button type="submit" class="button is-primary" name="encherir">EnchÃ©rir</button>
 						</div>
 					</div>
 				</div>
@@ -140,6 +138,6 @@
 				class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
 		
 	</main>
-
+<%@ include file="../fragments/script.html" %>
 </body>
 </html>
