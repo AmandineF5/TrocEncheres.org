@@ -168,7 +168,7 @@
 					<div class="control">
 						<button type="submit" class="button main-button is-rounded" name="bouton"
 							value="enregistrer">Enregistrer</button>
-						<a href=""><button type="submit"
+						<a href="${pageContext.request.contextPath}/Accueil"><button type="submit"
 								class="button main-button is-rounded is-light" name="bouton" value="retour">Retour</button></a>
 						<%--rediriger vers Acceuil --%>
 					</div>
