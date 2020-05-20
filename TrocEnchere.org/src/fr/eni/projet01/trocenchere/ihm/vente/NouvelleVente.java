@@ -31,6 +31,8 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 
+import fr.eni.projet01.trocenchere.bll.EnchereManager;
+
 //import org.apache.commons.fileupload.FileItem;
 //import org.apache.commons.fileupload.FileItemIterator;
 //import org.apache.commons.fileupload.FileItemStream;
@@ -41,6 +43,7 @@ import org.apache.tomcat.util.http.fileupload.FileItemIterator;
 import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
 import fr.eni.projet01.trocenchere.bo.Categorie;
+import fr.eni.projet01.trocenchere.bo.Enchere;
 import fr.eni.projet01.trocenchere.bo.Retrait;
 import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
@@ -106,11 +109,13 @@ public class NouvelleVente extends HttpServlet {
         LocalDate date2 =  LocalDate.parse(date1);
         //LocalDateTime dateFinEncheres = date.atTime(0, 0);
         newVente.setDateFinEncheres(date2);
-				
-		newVente.setMiseAPrix(Integer.parseInt(request.getParameter("prixInitial")));		
-		newVente.setPrixVente(Integer.parseInt(request.getParameter("prixInitial")));		
+		
+        int prix = Integer.parseInt(request.getParameter("prixInitial"));
+		newVente.setMiseAPrix(prix);		
+		newVente.setPrixVente(prix);		
 				
 		int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
+		
 		
 		Categorie newCategarieChoisi = new Categorie(noCategorie, "");
 		newVente.setCategorieArticle(newCategarieChoisi);
@@ -146,6 +151,15 @@ public class NouvelleVente extends HttpServlet {
 		
 		try {
 			venteAAfficher = vM.ajouterVente(newVente);
+			Enchere debutEnchere = new Enchere();
+			debutEnchere.setConcerne(venteAAfficher);
+			LocalDate today = LocalDate.now();
+			debutEnchere.setDateEnchere(today);
+			debutEnchere.setEncherit(extractedUserSession(request));
+			debutEnchere.setPoints(prix);
+			
+			EnchereManager em = new EnchereManager();
+			em.ajouterEnchere(debutEnchere);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}

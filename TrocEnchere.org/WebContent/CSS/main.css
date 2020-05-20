@@ -162,4 +162,28 @@ header {
 
 .navbar {
 	min-height:0;
+
+}
+
+.userco {
+	font-size: min(0.6em, 12px);
+	color: #7f8c8d;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+	width: 50%;
+	text-align: right;
+}
+
+a, p {
+	padding: 0;
+	margin:-1.8vw;
+}
+
+.nav-link {
+	padding: 0;
+}
+
+.userco a {
+	color: #34495e;
 }
