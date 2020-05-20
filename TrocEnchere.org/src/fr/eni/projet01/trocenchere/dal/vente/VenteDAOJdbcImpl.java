@@ -34,7 +34,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static final String SELECTBYID_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_vente = ? AND ventes.publiee=0";
 	private static final String SELECTALL_VENTES_NONPUBLIEES_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_utilisateur = ? AND ventes.publiee=0";
 	
-	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE nomarticle LIKE %?% OR description LIKE %?% AND ventes.publiee=1";
+	private static final String SEARCH_BY_KEYWORD_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE nomarticle LIKE ? OR description LIKE ? AND ventes.publiee=1";
 	private static final String SEARCH_BY_CATEGORY_SQL = "SELECT * FROM ventes INNER JOIN retraits ON ventes.no_vente = retraits.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = ventes.no_utilisateur WHERE ventes.no_categorie = ? AND ventes.publiee=1";
 	
 	private static final String DELETE_VENTES_SQL = "DELETE FROM ventes WHERE no_vente = ?";
@@ -394,6 +394,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_KEYWORD_SQL);){			
 			ResultSet rs;
+			keyWord = "%"+keyWord+"%";
 			state.setString(1, keyWord);
 			state.setString(2, keyWord);
 			rs = state.executeQuery();
