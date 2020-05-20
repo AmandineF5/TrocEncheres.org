@@ -269,6 +269,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	}
 	
+	@Override
 	public void deleteUser(int noAcheteur) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement state = cnx.prepareStatement(DELETE_ENCHERES_USER_SQL)) {

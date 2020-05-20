@@ -109,14 +109,10 @@
 					<table class="column">
 					    <thead>
 					        <tr>
-					            <th colspan="2"><a  href="/TrocEnchere.org/${servletToCall}?noVente=${ventes.noVente}">${ventes.nomArticle}</a> </th>
+					            <th colspan="2"><a  href="/TrocEnchere.org/${ventes.toCall}?noVente=${ventes.noVente}">${ventes.nomArticle}</a> </th>
 					        </tr>
 					    </thead>
 					    <tbody>
-					        <tr>
-					            <td>Classement:</td>
-					            <td></td>
-					        </tr>
 					         <tr>
 					            <td>Description: </td>
 					            <td>${ventes.getDescription()}</td>
