@@ -107,7 +107,7 @@
 					<table class="column">
 					    <thead>
 					        <tr>
-					            <th colspan="2"><a  href="/TrocEnchere.org/DetailVenteEncherir?noVente=${ventes.noVente}">${ventes.nomArticle}</a> </th>
+					            <th colspan="2"><a  href="/TrocEnchere.org/${servletToCall}?noVente=${ventes.noVente}">${ventes.nomArticle}</a> </th>
 					        </tr>
 					    </thead>
 					    <tbody>
