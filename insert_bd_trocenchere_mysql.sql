@@ -9,7 +9,7 @@ DELETE FROM `encheres`;
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'didine', 'Foulet', 'Amandine', 'amande.foul@hotmail.com', '0601020304', '25 rue des fous', '35380', 'Maxent', 'didine', '500', b'0');
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'coco', 'Villiermet', 'Corentin', 'coco.vivi@b.com', '0606060606', 'Chez Wam', '35200', 'Rennes-Alma', 'coco', '10000', b'0');
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'jaja', 'Bembnister', 'Janet', 'jaja.bemb@gmal.com', '0708090605', '3 place de la Constitution', '35000', 'Rennes-Cleunay', 'jaja', '500', b'0');
-INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'lili', 'Bileckot', 'Leslie', 'les.bileck@youpi.fr', '0609040302', '18 rue du Pommier', '35000', 'Rennes-Brequigny', 'lili', '0', b'0');
+INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'lili', 'Bileckot', 'Leslie', 'les.bileck@youpi.fr', '0609040302', '18 rue du Pommier', '35200', 'Rennes-Brequigny', 'lili', '0', b'0');
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'Mr Patate', 'Hendricks', 'Jimmy', 'j.hendricks@rock.com', '0647389235', '25 rue des mecs cool', '35000', 'Rennes-Centre', 'jaimelafrite', '100', b'0');
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'Kiss cool', 'De Niro', 'Robert', 'rdn@hotmail.com', '0764928465', '4 rue des clodos', '75000', 'Paris', 'trucmuch', '10', b'0');
 
@@ -29,7 +29,46 @@ INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_enchere
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'chapeau melon', 'un seul objet ! pas deux...', '2020-05-25', '20', '30', '1', '13'), (NULL, 'bottes de cuir', 'cuir ! cuir-moustache !, marque Hermès', '2020-05-26', '5000', '5000', '1', '13'), (NULL, 'gilet', 'pare-balles, Avi...', '2020-05-11', '50', '80', '6', '13');
 
 
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('1', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('2', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('3', '3 place de la Constitution', '35000', 'Rennes-Cleunay');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('4', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('5', '4 rue des clodos', '75000', 'Paris');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('6', '3 place de la Constitution', '35000', 'Rennes-Cleunay');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('7', '25 rue des mecs cool', '35000', 'Rennes'); 
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('8', '25 rue des mecs cool', '35000', 'Rennes');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('9', '25 rue des fous', '35380', 'Maxent');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('10', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('11', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('12', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('13', '3 place de la Constitution', '35000', 'Rennes-Cleunay');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('14', '25 rue des mecs cool', '35000', 'Rennes');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('15', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('16', '25 rue des mecs cool', '35000', 'Rennes');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('17', '25 rue des fous', '35380', 'Maxent');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('18', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('19', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('20', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('21', '3 place de la Constitution', '35000', 'Rennes-Cleunay');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('22', '25 rue des mecs cool', '35000', 'Rennes');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('23', '25 rue des fous', '35380', 'Maxent');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('24', '3 place de la Constitution', '35000', 'Rennes-Cleunay');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('25', '4 rue des clodos', '75000', 'Paris');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('26', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('27', '25 rue des mecs cool', '35000', 'Rennes');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('28', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('29', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('30', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('31', '25 rue des fous', '35380', 'Maxent');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('32', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('33', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('34', 'Chez Wam', '35200', 'Rennes-Alma');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('35', '18 rue du Pommier', '35200', 'Rennes-Brequigny');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('36', '3 place de la Constitution', '35000', 'Rennes-Cleunay');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('37', '25 rue des fous', '35380', 'Maxent');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('38', '25 rue des fous', '35380', 'Maxent');
+INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('39', '4 rue des clodos', '75000', 'Paris');
 
-INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('1', '25 rue des mecs cool', '35000', 'Rennes'), ('2', '4 rue des clodos', '75000', 'Paris');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`) VALUES ('2020-05-15', '1', '1'), ('2020-05-14', '2', '2');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`) VALUES ('2020-05-15', '1', '1');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`) VALUES ('2020-05-14', '2', '2');
