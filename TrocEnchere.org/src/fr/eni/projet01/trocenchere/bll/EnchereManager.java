@@ -97,10 +97,6 @@ public class EnchereManager {
 		Enchere highestBid = null;
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		listeEnchere = enchereDAO.selectByVenteId(noVente);
-		for (Enchere e : listeEnchere) {
-			
-		}
-		// problem here out of bounds exception
 		highestBid = listeEnchere.get(0);
 		return highestBid;
 	}
