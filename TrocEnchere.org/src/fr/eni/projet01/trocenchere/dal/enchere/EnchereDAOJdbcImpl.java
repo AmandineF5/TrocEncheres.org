@@ -25,8 +25,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	private static final String INSERT_ENCHERE_SQL = "INSERT INTO encheres(date_enchere, no_acheteur, no_vente, points) VALUES (?,?,?,?)";
 
-	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE ventes.no_vente = ? ORDER BY points DESC";
-	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? ORDER BY points DESC";
+	private static final String SELECTBYID_ENCHERE_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE ventes.no_vente = ? ORDER BY points ASC";
+	private static final String SELECTBY_UTILISATEURID_VENTES_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? ORDER BY points ASC";
 
 	private static final String SELECTBY_UTILISATEURID_VENTESID_SQL = "SELECT * FROM encheres INNER JOIN ventes ON encheres.no_vente = ventes.no_vente INNER JOIN utilisateurs ON encheres.no_acheteur = utilisateurs.no_utilisateur INNER JOIN categories ON categories.no_categorie = ventes.no_categorie INNER JOIN retraits ON retraits.no_vente = ventes.no_vente WHERE encheres.no_acheteur = ? AND encheres.no_vente=?";
 
