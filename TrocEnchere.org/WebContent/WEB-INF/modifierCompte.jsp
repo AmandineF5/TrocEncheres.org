@@ -177,7 +177,13 @@
 
 		</form>
 		<form action="/TrocEnchere.org/SupprimerCompte" method="post">
-			<button type="submit" class="button main-button is-rounded" name="bouton" value="delete">Supprimer mon compte</button>
+			<div class="field-body">
+			    <div class="field">
+			      <div class="control">  
+			      	<button type="submit" class="button main-button big-button is-rounded" name="bouton" value="delete">Supprimer mon compte</button>
+				  </div>
+				</div>
+			</div>	
 		</form>
 
 
