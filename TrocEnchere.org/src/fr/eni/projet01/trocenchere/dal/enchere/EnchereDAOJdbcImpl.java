@@ -215,7 +215,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			be.ajouterErreur("Erreur: id inconnu");
 			throw be;
 		}
-
+	
 		return listeEnchere;
 	}
 
