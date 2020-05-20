@@ -144,8 +144,31 @@ public class Accueil extends HttpServlet {
 			}
 			
 			if (request.getParameter("venteByKeyword")!=null) {
-				resultatAAfficher = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
-
+				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null 
+					&& request.getParameter("autresEncheres") == null) {
+					resultatAAfficher = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
+				} else {
+					List<Vente> listeVenteMotCle = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
+					List<Vente> listeTempo = new ArrayList<Vente>();
+					for (Vente vente : resultatAAfficher) {
+						listeTempo.add(vente);
+					}
+					resultatAAfficher.clear();
+					for (Vente venteTempo : listeTempo) {
+						Boolean isEqual = false;
+						for (Vente venteMotCle : listeVenteMotCle) {
+							if (venteMotCle==venteTempo) {
+								isEqual = true;	
+							}
+							if (isEqual) {
+								resultatAAfficher.add(venteMotCle);
+								isEqual = false;
+							}
+						}
+					}
+					
+				}
+				
 			}
 			
 			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
