@@ -235,8 +235,9 @@ public class Accueil extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		String servletToCall = null;
 		for (Vente vente : resultatAAfficher) {
-			String servletToCall;
+			
 			try {
 				servletToCall = this.redirectionVente(utilisateurSession.getNoUtilisateur(), vente);				
 				vente.setToCall(servletToCall);
@@ -244,6 +245,7 @@ public class Accueil extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		request.setAttribute("servletToCall", servletToCall);
 		
 		//Définir les informations à renvoyer à la JSP (accueil.jsp)
 		request.setAttribute("mesVentes", resultatAAfficher);  //à changer le nom de l'attibut plus tard
@@ -256,8 +258,8 @@ public class Accueil extends HttpServlet {
 		String titre = "Résultat de votre recherche";
 		request.setAttribute("titre", titre);
 		
-		String servletToCall = this.redirectionVente();
-		request.setAttribute("servletToCall", servletToCall);
+		
+		
 		
 		
 		//Déléguer la réponse à la JSP

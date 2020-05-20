@@ -45,7 +45,7 @@
 			</div>
 			<div class="field-body">
 				<div class="field">
-   					${enchere.points} pts par <a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}">?${enchere.getEncherit().getPseudo()}</a>
+   					${enchere.points} pts par <a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}">${enchere.getEncherit().getPseudo()}</a>
 				</div>
 			</div>
 		</div>
@@ -101,9 +101,9 @@
 					<form action="/TrocEnchere.org/MesArticlesVendus" method="post">
 					<input type="hidden" class="is-rounded" name="venteNo" value="${vente.noVente}">
 					<input type="hidden" class="is-rounded" name="enchereValue" value="${enchere.points}">
-					<button type="submit" class="main-button is-rounded" name="validationRetrait">Retrait effectué</button> <!-- button qui débite l'acheteur et crédite le vendeur? -->
+					<button type="submit" class="button main-button is-rounded is-light" name="validationRetrait">Retrait effectué</button> <!-- button qui débite l'acheteur et crédite le vendeur? -->
 					</form>
-					<a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}&noVente=${vente.noVente}"><button type="submit" class="button is-primary is-light" name="Contacter">Contacter ${enchere.encherit.pseudo}</button></a>
+					<a href="/TrocEnchere.org/AdresseAcheteur?Acheteur=${enchere.encherit.noUtilisateur}&noVente=${vente.noVente}"><button type="submit" class="button main-button is-rounded " name="Contacter">Contacter ${enchere.encherit.pseudo}</button></a>
 					<a href="/TrocEnchere.org/accueil"><button type="submit" class="button main-button is-rounded is-light" name="retour" value="retour">Back</button></a>
 				</div>
 			</div>
