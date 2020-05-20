@@ -17,7 +17,7 @@ INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'Jouet pour chien', 'balle qui fait du bruit', '2020-05-25', '2.00', '3.00', '2', '1'), (NULL, 'Os à ronger', 'os à moelle pour le dessert', '2020-05-26', '5', '15', '4', '1'), (NULL, 'Niche', 'niche en bois, isolation et chauffage', '2020-05-11', '50', '80', '3', '1');
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'Aspirateur', 'Miele 5000 avec turbo-aspiro', '2020-05-25', '100', '120', '2', '2'), (NULL, 'balais', 'Nimbus 3000', '2020-05-09', '3', '4', '6', '2'), (NULL, 'pèse-personne électronnique', 'une balance qui pèse dans le game', '2021-05-11', '500', '500', '3', '2');
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'marteau', 'bec de corbin', '2020-05-25', '10', '10', '5', '3'), (NULL, 'piqueur', 'good vibes only', '2020-05-25', '15', '15', '5', '3'), (NULL, 'pelle', 'toi tu creuses !', '2020-05-11', '5', '80', '1', '3');
-INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'table apéro ikéa', 'petite table de 60x60cm rempli d air poloanis', '2020-05-27', '8', '3.00', '4', '4'), (NULL, 'armoire normande', 'armoire traditionnelle, 6 étages, très bon état', '2020-06-26', '800', '800', '4', '4'), (NULL, 'lampe de bureau', 'avec pied double pivot façon pixar', '2020-05-11', '50', '50', '2', '4');
+INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'table apéro ikéa', 'petite table de 60x60cm rempli d air poloanis', '2020-05-27', '8', '30', '4', '4'), (NULL, 'armoire normande', 'armoire traditionnelle, 6 étages, très bon état', '2020-06-26', '800', '800', '4', '4'), (NULL, 'lampe de bureau', 'avec pied double pivot façon pixar', '2020-05-11', '50', '50', '2', '4');
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'plante verte', 'fougère en pot', '2020-05-25', '20', '30', '3', '5'), (NULL, 'cadre de tableau', 'couleur dorée, bon état global, un coin écorné', '2020-05-26', '5', '15', '5', '5'), (NULL, 'longue vue', 'anciennement en service sur un navire, HS car lentilles manquante, belle décoration pour résidence bord de mer', '2020-07-14', '150', '150', '4', '5');
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'chateau légo', 'chateau spacieux, bien aéré, bonne exposition sud sud-ouest, très beau volume, disponible de suite', '2020-05-25', '12', '13', '5', '6'), (NULL, 'dragon playmobil', 'avec flamme qui sort de la gueule et oeuf', '2020-11-11', '5', '15', '1', '6'), (NULL, 'doudou', 'très peu servi, pas de morve collé', '2020-05-11', '1', '1', '2', '6');
 INSERT INTO `ventes` (`no_vente`, `nomarticle`, `description`, `date_fin_encheres`, `prix_initial`, `prix_vente`, `no_utilisateur`, `no_categorie`) VALUES (NULL, 'harry potter et le prisonier d Azkaban gallimard deluxe', 'comme neuf, très dur à trouver', '2020-05-25', '5000', '5000', '4', '7'), (NULL, 'Oro', 'de Cizia Zykë, état moyen', '2020-04-12', '5', '5', '2', '7'), (NULL, 'apprendre PL-SQL', 'édition ENI, je troc car plus besoin', '2020-05-29', '30', '30', '3', '7');
@@ -69,6 +69,27 @@ INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('37',
 INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('38', '25 rue des fous', '35380', 'Maxent');
 INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('39', '4 rue des clodos', '75000', 'Paris');
 
-
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`) VALUES ('2020-05-15', '1', '1');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`) VALUES ('2020-05-14', '2', '2');
+/* MANQUE LES POINTS*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '1', '1');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '2', '2');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '3');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '4');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '5');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '6', '9');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '10');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '2', '13');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '14');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '4', '16');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '17');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '6', '22');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '25');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '2', '26');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '27');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '28');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '29');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '6', '30');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '2', '31');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '34');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '4', '36');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '37');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '39');
