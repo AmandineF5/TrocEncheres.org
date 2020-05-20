@@ -42,7 +42,12 @@ public class DetailVenteEncherir extends HttpServlet {
 				HttpSession session = request.getSession();
 				//get noVente from incoming page which should arrive in a parameter
 				//getting the id
-				int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
+				
+				//for test
+				int noVenteAAfficher = 8;
+				
+				//right code
+				//int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 					
 				//find the Vente in the database
 				Vente venteAAfficher = new Vente();
@@ -126,6 +131,7 @@ public class DetailVenteEncherir extends HttpServlet {
 		}
 		//CREDIT UPDATE
 		//calculate
+		System.out.println(user.getCredit());
 		int newCredit = user.getCredit() - bid;
 		//enlever le credit de l'utilisateur
 		user.setCredit(newCredit);
@@ -142,7 +148,12 @@ public class DetailVenteEncherir extends HttpServlet {
 		int venteID = venteConcerne.getNoVente();
 		request.setAttribute("noVente", venteID);
 		
+		//for testing - doeesn't send parameters
 		response.sendRedirect(request.getContextPath()+"/DetailVenteAnnulerEncherir");
+		
+		//rd = request.getRequestDispatcher("/DetailVenteAnnulerEncherir");
+		//rd.forward(request, response);
+	
 		
 	}
 

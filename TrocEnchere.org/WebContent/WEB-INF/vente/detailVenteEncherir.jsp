@@ -98,7 +98,7 @@
 			<div class="field-body">
 				<a
 					href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
-						class="field">${vente.vendeur.pseudo}</a>
+						${vente.vendeur.pseudo}</a>
 			</div>
 		</div>
 
@@ -118,9 +118,6 @@
 						<input type="number" class="input" name="encherir"
 							max="${utilisateur.credit}" min="${enchere.points+1}"
 							value="${enchere.points+1}"> 
-							<input type="hidden"
-							name="noVente" value="${vente.noVente}">
-
 					</div>
 
 				</div>

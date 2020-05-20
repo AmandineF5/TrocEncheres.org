@@ -83,18 +83,12 @@ public class DetailVenteAnnulerEncherir extends HttpServlet {
 				request.setAttribute("utilisateur", user);
 				
 				String message = null;
-				//notify user if they are currently the highest bidder
-				if(user.getNoUtilisateur() == highestEnchere.getEncherit().getNoUtilisateur()) {
-					message = "Vous avez actuellement la meilleure enchére";
-					request.setAttribute("message", message);
-				}
 				
 				//block bidding if credit is not ok
 				if(user.getCredit()<highestEnchere.getPoints()) {
 					message = "Vous n'avez pas assez de credit";
 		            request.setAttribute("message", message);
 				}
-				
 				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vente/detailVenteAnnulerEncherir.jsp");
 				rd.forward(request, response);
