@@ -77,32 +77,32 @@ ALTER TABLE `UTILISATEURS` ADD UNIQUE(`pseudo`, `telephone`, `email`);
 ALTER TABLE `ENCHERES` 
 ADD CONSTRAINT `encheres_acheteur_fk` 
 FOREIGN KEY (`no_acheteur`) REFERENCES `UTILISATEURS`(`no_utilisateur`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION;
+ON DELETE CASCADE 
+ON UPDATE CASCADE;
 
 ALTER TABLE `ENCHERES` 
 ADD CONSTRAINT `encheres_ventes_fk` 
 FOREIGN KEY (`no_vente`) REFERENCES `VENTES`(`no_vente`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION;
+ON DELETE CASCADE  
+ON UPDATE CASCADE;
 
 ALTER TABLE `RETRAITS` 
 ADD CONSTRAINT `retraits_ventes_fk` 
 FOREIGN KEY (`no_vente`) REFERENCES `VENTES`(`no_vente`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION;
+ON DELETE CASCADE  
+ON UPDATE CASCADE;
 
 ALTER TABLE `VENTES` 
 ADD CONSTRAINT `ventes_categories_fk` 
 FOREIGN KEY (`no_categorie`) REFERENCES `CATEGORIES`(`no_categorie`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION;
+ON DELETE CASCADE  
+ON UPDATE CASCADE;
 
 ALTER TABLE `VENTES` 
 ADD CONSTRAINT `ventes_utilisateur_fk` 
 FOREIGN KEY (`no_utilisateur`) REFERENCES `UTILISATEURS`(`no_utilisateur`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION;
+ON DELETE CASCADE 
+ON UPDATE CASCADE;
 
 INSERT INTO categories(libelle) VALUES ("Animalerie"), ("Articles d'électroménager"), ("Bricolage"),
  ("Ameublement"), ("Décoration"), ("Jouets et jeux"),("Livres"), ("Puériculture"), ("Informatique"),
