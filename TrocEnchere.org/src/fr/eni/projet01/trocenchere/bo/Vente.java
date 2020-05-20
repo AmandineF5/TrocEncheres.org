@@ -23,11 +23,12 @@ public class Vente {
 	private Retrait lieuRetrait;
 	private Boolean publie;
 	private String nomImage;
+	private String toCall;
 
 	// contstructors
 	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
 			Integer prixVente, Categorie categorieArticle, Utilisateur vendeur,
-			Retrait lieuRetrait, Boolean publie, String nomImage) {
+			Retrait lieuRetrait, Boolean publie, String nomImage,  String toCall) {
 		super();
 		this.noVente = noVente;
 		this.nomArticle = nomArticle;
@@ -41,11 +42,12 @@ public class Vente {
 		this.lieuRetrait = lieuRetrait;
 		this.publie = publie;
 		this.nomImage = nomImage;
+		this.toCall = toCall;
 	}
 
 	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
 			Categorie categorieArticle, Utilisateur vendeur) {
-		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, vendeur, null, false, null);
+		this(noVente, nomArticle, description, dateFinEncheres, miseAPrix, 0, categorieArticle, vendeur, null, false, null, null);
 	}
 
 	// getters and setters
@@ -141,12 +143,22 @@ public class Vente {
 		this.nomImage = nomImage;
 	}
 	
+	public String getToCall() {
+		return toCall;
+	}
+
+	public void setToCall(String toCall) {
+		this.toCall = toCall;
+	}
+
 	@Override
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente
-				+ ", categorieArticle=" + categorieArticle + ", vendeur=" + vendeur
-				+ ", lieuRetrait=" + lieuRetrait.toString() + ", publie=" + publie + ", nomImage=" + nomImage + "]";
+				+ ", categorieArticle=" + categorieArticle + ", vendeur=" + vendeur + ", lieuRetrait=" + lieuRetrait
+				+ ", publie=" + publie + ", nomImage=" + nomImage + ", toCall=" + toCall + "]";
 	}
+
+
 
 }

@@ -34,6 +34,9 @@ public class Accueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	VenteManager vM = new VenteManager();
 	EnchereManager eM = new EnchereManager();
+	
+	String[] filtresChk; 
+	List<String> listFiltres;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -79,8 +82,8 @@ public class Accueil extends HttpServlet {
 		List<Vente> resultatAAfficher = new ArrayList<>();  //puis add les différentes ventes succèsivement en fct de ce qui a été coché
 		
 		try {
-			String[] filtresChk = request.getParameterValues("filtre");
-			List<String> listFiltres = new ArrayList<String>();
+			filtresChk = request.getParameterValues("filtre");
+			listFiltres = new ArrayList<String>();
 			
 			if (filtresChk!=null && filtresChk.length>0) {
 				for (String s : filtresChk) {
@@ -231,6 +234,16 @@ public class Accueil extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		for (Vente vente : resultatAAfficher) {
+			String servletToCall;
+			try {
+				servletToCall = this.redirectionVente(utilisateurSession.getNoUtilisateur(), vente);				
+				vente.setToCall(servletToCall);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		//Définir les informations à renvoyer à la JSP (accueil.jsp)
 		request.setAttribute("mesVentes", resultatAAfficher);  //à changer le nom de l'attibut plus tard
 		
@@ -239,8 +252,7 @@ public class Accueil extends HttpServlet {
 		List<Categorie> categories = toutesCategorie();			
 		request.setAttribute("categories", categories);	
 		
-		String servletToCall = this.redirectionVente();
-		request.setAttribute("servletToCall", servletToCall);
+		
 		
 		//Déléguer la réponse à la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
@@ -264,9 +276,28 @@ public class Accueil extends HttpServlet {
 		return categories;
 	}
 	
-	private String redirectionVente () {
+	private String redirectionVente (int noUtilisateur, Vente vente) throws BusinessException {
 		String servletToCall=null;
+		Enchere enchere = eM.trouverHighestBid(vente.getNoVente());
 		
+		if (listFiltres!=null && listFiltres.contains("mesVentes")) {
+				if (LocalDate.now().isBefore(vente.getDateFinEncheres())) {
+					servletToCall = "DetailVente";
+				}else {
+					servletToCall = "MesArticlesVendus";
+				}	
+		
+		} else if (noUtilisateur==enchere.getEncherit().getNoUtilisateur() && LocalDate.now().isAfter(vente.getDateFinEncheres())) {
+			servletToCall = "VenteRemportee";
+		}else {
+			Boolean enchereExist = eM.verifierEnchereExistant(noUtilisateur, vente.getNoVente());
+			if (enchereExist) {
+				servletToCall="DetailVenteAnnulerEncherir";
+			} else {
+				servletToCall="DetailVenteEncherir";
+			}			
+		}
+	
 		return servletToCall;
 	}
 }
