@@ -44,6 +44,10 @@ public class EnchereManager {
 		}
 
 	}
+	
+	public void deleteUserbid(int noVente, int noUtilisateur) throws BusinessException {
+		enchereDAO.deleteOne(noVente, noUtilisateur);
+	}
 
 	// varification que il n'y a pas deja un enchere par l'utilisateur pour ce
 	// produit
