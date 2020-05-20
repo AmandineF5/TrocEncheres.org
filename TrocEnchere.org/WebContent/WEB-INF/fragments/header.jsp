@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <header>
 	<div>
@@ -34,7 +35,14 @@
 				    </li>
 			    </ul>
 		    </li>
-		  </ul>
+		  </ul>  
+		</div>
+		<div class="userco">
+			<c:if test="${!empty sessionScope.utilisateur.pseudo}"> 
+			  	<p>Connecté(e) en tant que ${sessionScope.utilisateur.pseudo}</p><br>
+			  	<a class="nav-link" href="/TrocEnchere.org/DeconnecterCompte" style="font-style: italic">Déconnexion</a>
+			 </c:if>
 		</div>
 	</nav>
+	
 </header>
