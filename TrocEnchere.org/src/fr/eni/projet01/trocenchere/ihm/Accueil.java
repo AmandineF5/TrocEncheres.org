@@ -144,6 +144,7 @@ public class Accueil extends HttpServlet {
 			}
 			
 			if (request.getParameter("venteByKeyword")!=null) {
+				
 				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null 
 					&& request.getParameter("autresEncheres") == null) {
 					resultatAAfficher = vM.selectionnerVenteByKeyWord(request.getParameter("venteByKeyword"));
@@ -154,6 +155,7 @@ public class Accueil extends HttpServlet {
 						listeTempo.add(vente);
 					}
 					resultatAAfficher.clear();
+					
 					for (Vente venteTempo : listeTempo) {
 						Boolean isEqual = false;
 						for (Vente venteMotCle : listeVenteMotCle) {
@@ -171,14 +173,48 @@ public class Accueil extends HttpServlet {
 				
 			}
 			
-			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {				
-				//cas toutes catégories
+			if (request.getParameter("categorie")!=null && request.getParameter("categorie").equalsIgnoreCase("toutes")) {	//cas toutes catégories
 				
+				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null //rien coché pour les autres filtres
+						&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+					resultatAAfficher = vM.selectionnerToutesVentes();
+					
+				} else {  //au moins 1 filtre appliqué => resultatAAfficher reste le même
+					
+				}
 
-			} else {
-				//cas 1 catégorie
-				int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
-				venteByCategory = vM.selectionnerVenteByCategory(noCategorie);	
+			} else {  //cas 1 catégorie
+				
+				if (request.getParameter("mesVentes") == null && request.getParameter("mesEncheres") == null && request.getParameter("mesAcquisitions") == null //rien coché pour les autres filtres
+						&& request.getParameter("autresEncheres") == null && request.getParameter("venteByKeyword") == null) {  
+					int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
+					resultatAAfficher = vM.selectionnerVenteByCategory(noCategorie);	
+					
+				} else { //au moins 1 filtre appliqué => on compare
+					
+					int noCategorie = Integer.parseInt(request.getParameter("categorie").trim());
+					List<Vente> listeVenteCategorie = vM.selectionnerVenteByCategory(noCategorie);
+					List<Vente> listeTempo = new ArrayList<Vente>();
+					
+					for (Vente vente : resultatAAfficher) {
+						listeTempo.add(vente);
+					}
+					resultatAAfficher.clear();
+					
+					for (Vente venteTempo : listeTempo) {
+						Boolean isEqual = false;
+						for (Vente venteMotCle : listeVenteCategorie) {
+							if (venteMotCle==venteTempo) {
+								isEqual = true;	
+							}
+							if (isEqual) {
+								resultatAAfficher.add(venteMotCle);
+								isEqual = false;
+							}
+						}
+					}
+				}
+				
 			}			
 			
 		} catch (BusinessException e) {

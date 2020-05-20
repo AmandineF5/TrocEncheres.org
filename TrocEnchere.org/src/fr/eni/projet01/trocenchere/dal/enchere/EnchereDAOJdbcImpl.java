@@ -117,6 +117,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
+			System.out.println(rs.getInt("no_vente"));
+			System.out.println(enchere.getConcerne().getNoVente());
 			while (rs.next()) {
 				if (rs.getInt("no_vente") != enchere.getConcerne().getNoVente()) {
 
