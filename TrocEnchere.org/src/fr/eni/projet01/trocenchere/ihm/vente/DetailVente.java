@@ -36,12 +36,13 @@ public class DetailVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int noVenteAAfficher;
 		//get noVente from incoming page
-		
-		//getting cookie
-		//String noVente = (String) request.getAttribute("noVente");
-		int noVenteAAfficher = getNoVenteDeSession(request);
+		if(request.getParameter("noVente")!=null) {
+		noVenteAAfficher = Integer.parseInt(request.getParameter("noVente")) ;
+		}else {
+		noVenteAAfficher = getNoVenteDeSession(request);
+		}
 		
 		//find the Vente in the database
 		Vente venteAAfficher = new Vente();
