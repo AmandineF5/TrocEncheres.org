@@ -104,5 +104,26 @@ public class EnchereManager {
 		highestBid = listeEnchere.get(0);
 		return highestBid;
 	}
+	
+	//reimbourse the non-winners their credit at the end of the sale
+	public void RembourserEnFinVente(int noVente)throws BusinessException {
+		//get list of enchere linked to the vente
+		List<Enchere> e = enchereDAO.selectByVenteId(noVente);
+		//remove highest bid
+		e.remove(0);
+		//recredit the remaining encheres
+		for(Enchere a : e) {
+			//user concerned
+			Utilisateur aCredite = a.getEncherit();
+			//montant d'enchere enchereCredit + userCredit
+			int newCredit = a.getPoints() + aCredite.getCredit();
+			//set new credit
+			aCredite.setCredit(newCredit);
+			//update user in the database
+			UtilisateurManager uM = new UtilisateurManager();
+			uM.mettreAJourUtilisateur(aCredite);
+		}
+		
+	}
 
 }
