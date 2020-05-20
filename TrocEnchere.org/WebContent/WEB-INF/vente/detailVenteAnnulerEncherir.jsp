@@ -22,7 +22,7 @@
 <title>Troc-Enchères Détail Vente</title>
 </head>
 <body>
-	<%@ include file="../fragments/header.jsp" %>
+	<%@ include file="../fragments/header.jsp"%>
 	<main>
 		<div class="subtitle is-medium">Détail Vente</div>
 
@@ -96,18 +96,21 @@
 				<label class="label">Vendeur:</label>
 			</div>
 			<div class="field-body">
-				<a
-					href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
+				<div class="field">
+					<a
+						href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
 						${vente.vendeur.pseudo}</a>
+				</div>
 			</div>
 		</div>
 
-		
-				<c:if test="${message!=null && message.length()>0 }">
-					<p>${message}</p>
-				</c:if>
 
-		<form action="/TrocEnchere.org/DetailVenteAnnulerEncherir" method="post">
+		<c:if test="${message!=null && message.length()>0 }">
+			<p>${message}</p>
+		</c:if>
+
+		<form action="/TrocEnchere.org/DetailVenteAnnulerEncherir"
+			method="post">
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
 					<label class="label">Ma proposition:</label>
@@ -116,8 +119,7 @@
 					<div class="field">
 						<input type="number" class="input" name="encherir"
 							max="${utilisateur.credit}" min="${enchere.points+1}"
-							value="${enchere.points+1}"> 
-							<input type="hidden"
+							value="${enchere.points+1}"> <input type="hidden"
 							name="venteID" value="${vente.noVente}">
 
 					</div>
@@ -134,14 +136,21 @@
 		</form>
 
 
-		<div>
-		<form action="/TrocEnchere.org/DetailVenteAnnulerEncherir" method="post">
-			<button type="submit" class="button is-primary" name="annuler" value="${enchere.points}">Annuler la dernière enchère</button>
-		</form>
-		<a href="${pageContext.request.contextPath}/Accueil"><button type="submit"
-				class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
-		</div>
+		<div class="field is-horizontal">
+				<div class="field-body">
+					<form action="/TrocEnchere.org/DetailVenteAnnulerEncherir"
+						method="post">
+						<button type="submit" class="button is-primary" name="annuler"
+							value="${enchere.points}">Annuler la dernière enchère</button>
+					</form>
+				</div>
+				<div class="field">
+					<a href="${pageContext.request.contextPath}/Accueil"><button
+							type="submit" class="button is-primary is-light" name="bouton"
+							value="retour">Back</button></a>
+				</div>
+			</div>
 	</main>
-<%@ include file="../fragments/script.html" %>
+	<%@ include file="../fragments/script.html"%>
 </body>
 </html>

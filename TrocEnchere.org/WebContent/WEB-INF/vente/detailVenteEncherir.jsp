@@ -22,7 +22,7 @@
 <title>Troc-Enchères Détail Vente</title>
 </head>
 <body>
-	<%@ include file="../fragments/header.jsp" %>
+	<%@ include file="../fragments/header.jsp"%>
 	<main>
 		<div class="subtitle is-medium">Détail Vente</div>
 
@@ -96,17 +96,19 @@
 				<label class="label">Vendeur:</label>
 			</div>
 			<div class="field-body">
-				<a
-					href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
+				<div class="field">
+					<a
+						href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
 						${vente.vendeur.pseudo}</a>
+				</div>
 			</div>
 		</div>
 
-		
-				<c:if test="${message!=null && message.length()>0 }">
-					<p>${message}</p>
-				</c:if>
-		
+
+		<c:if test="${message!=null && message.length()>0 }">
+			<p>${message}</p>
+		</c:if>
+
 
 		<form action="/TrocEnchere.org/DetailVenteEncherir" method="post">
 			<div class="field is-horizontal">
@@ -117,7 +119,7 @@
 					<div class="field">
 						<input type="number" class="input" name="encherir"
 							max="${utilisateur.credit}" min="${enchere.points+1}"
-							value="${enchere.points+1}"> 
+							value="${enchere.points+1}">
 					</div>
 
 				</div>
@@ -131,10 +133,11 @@
 			</div>
 		</form>
 
-		<a href="${pageContext.request.contextPath}/Accueil"><button type="submit"
-				class="button is-primary is-light" name="bouton" value="retour">Back</button></a>
-		
+		<a href="${pageContext.request.contextPath}/Accueil"><button
+				type="submit" class="button is-primary is-light" name="bouton"
+				value="retour">Back</button></a>
+
 	</main>
-<%@ include file="../fragments/script.html" %>
+	<%@ include file="../fragments/script.html"%>
 </body>
 </html>
