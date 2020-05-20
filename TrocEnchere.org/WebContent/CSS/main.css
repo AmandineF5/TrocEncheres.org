@@ -175,13 +175,9 @@ header {
 	text-align: right;
 }
 
-a, p {
+.userco a{
 	padding: 0;
 	margin:-1.8vw;
-}
-
-.nav-link {
-	padding: 0;
 }
 
 .userco a {
