@@ -241,16 +241,17 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement state = cnx.prepareStatement(INSERT_ENCHERE_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 			state.setDate(1, java.sql.Date.valueOf(newEnchere.getDateEnchere()));
+			
 			Utilisateur user = newEnchere.getEncherit();
 			int idUser = user.getNoUtilisateur();
-			System.out.println(idUser);
+			
 			state.setInt(2, idUser);
 			Vente sale = newEnchere.getConcerne();
 			int idSale = sale.getNoVente();
-			System.out.println(idSale);
+			
 			state.setInt(3, idSale);
 			int pts = newEnchere.getPoints();
-			System.out.println(pts);
+			
 			state.setInt(4, pts);
 
 			state.executeUpdate();
