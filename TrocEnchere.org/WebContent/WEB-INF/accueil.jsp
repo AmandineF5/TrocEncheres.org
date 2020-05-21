@@ -114,23 +114,26 @@
 					    </thead>
 					    <tbody>
 					    	<tr>
-					            <td>Classement: </td>
+		           				<th colspan="2"><img src="images/ventes/${ventes.noVente}.jpg" alt="article"></th>
+		        			</tr>
+					    	<tr>
+					            <td class="row-title">Classement: </td>
 					            <td>${classement}</td>
 					        </tr>
 					         <tr>
-					            <td>Prix: </td>
+					            <td class="row-title">Prix: </td>
 					            <td>${ventes.prixVente} points</td>
 					        </tr>
 					         <tr>
-					            <td>Fin de l'enchère: </td>
+					            <td class="row-title">Fin de l'enchère: </td>
 					            <td>${ventes.dateFinEncheres}</td>
 					        </tr>
 					         <tr>
-					            <td>Retrait: </td>
+					            <td class="row-title">Retrait: </td>
 					            <td>${ventes.lieuRetrait.rue} ${ventes.lieuRetrait.codePostal} ${ventes.lieuRetrait.ville}</td>
 					        </tr>
 					         <tr>
-					            <td>Vendeur: </td>
+					            <td class="row-title">Vendeur: </td>
 					            <td><a href="/TrocEnchere.org/afficher-compte?noUtilisateur=${ventes.vendeur.noUtilisateur}">${ventes.vendeur.pseudo}</a></td>
 					        </tr>
 					    </tbody>
