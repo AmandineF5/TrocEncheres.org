@@ -5,27 +5,21 @@ package fr.eni.projet01.trocenchere.bo;
 
 import java.time.LocalDate;
 
-/**
- * 
- * @author jaja
- *
- */
 public class Vente {
 	private int noVente;
 	private String nomArticle;
 	private String description;
-	private LocalDate dateFinEncheres;  //changé de LocalDateTime pour LocalDate
+	private LocalDate dateFinEncheres; 
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private Categorie categorieArticle;
-	//private Utilisateur acheteur;
 	private Utilisateur vendeur;
 	private Retrait lieuRetrait;
 	private Boolean publie;
 	private String nomImage;
 	private String toCall;
 
-	// contstructors
+	// constructors
 	public Vente(int noVente, String nomArticle, String description, LocalDate dateFinEncheres, Integer miseAPrix,
 			Integer prixVente, Categorie categorieArticle, Utilisateur vendeur,
 			Retrait lieuRetrait, Boolean publie, String nomImage,  String toCall) {
