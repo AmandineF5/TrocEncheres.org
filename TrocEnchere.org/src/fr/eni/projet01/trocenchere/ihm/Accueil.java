@@ -72,7 +72,7 @@ public class Accueil extends HttpServlet {
 		
 		
 		List<Vente> mesVentes = new ArrayList<Vente>();
-		List<Enchere> mesEnchères = new ArrayList<Enchere>();
+		List<Enchere> mesEncheres = new ArrayList<Enchere>();
 		List<Vente> mesAcquisitions = new ArrayList<Vente>();
 		List<Vente> autresEnchères = new ArrayList<Vente>();
 		List<Vente> venteByKeyword = new ArrayList<Vente>();
@@ -109,8 +109,8 @@ public class Accueil extends HttpServlet {
 						}
 					}
 					if (s.equals("mesEncheres")) {
-						mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
-						for (Enchere enchere : mesEnchères) {
+						mesEncheres = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
+						for (Enchere enchere : mesEncheres) {
 							Vente vente = enchere.getConcerne();
 							System.out.println(vente);
 							if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
@@ -136,8 +136,8 @@ public class Accueil extends HttpServlet {
 								resultatAAfficher.remove(vente);
 						}
 						
-						mesEnchères = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
-						for (Enchere enchere : mesEnchères) {
+						mesEncheres = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
+						for (Enchere enchere : mesEncheres) {
 							Vente vente = enchere.getConcerne();
 							System.out.println(vente);
 							if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
