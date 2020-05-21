@@ -76,8 +76,7 @@ public class EnchereManager {
 
 	}
 
-	// varification que il n'y a pas deja un enchere par l'utilisateur pour ce
-	// produit
+	// varification que il n'y a pas deja un enchere par l'utilisateur pour ce produit
 	public Enchere selectEnchereByUserIdEtNoVente(int noUtilisateur, int noVente) throws BusinessException {
 
 		return enchereDAO.selectOneByUserIdVenteId(noUtilisateur, noVente);

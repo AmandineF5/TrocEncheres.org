@@ -86,9 +86,9 @@ public class UtilisateurManager {
 		return this.utilisateur;
 	}
 	
-	/**ITERATION 2 A enlever si on s'arr�te au 1!!!!!!!
+	/**
 	 * Permet de supprimer un compte. Utilisation par l'admin et l'utilisateur.
-	 * (ID 1005 et 3001
+	 * (ID 1005 et 3001)
 	 * @param noUtilisateur
 	 * @throws BusinessException 
 	 */

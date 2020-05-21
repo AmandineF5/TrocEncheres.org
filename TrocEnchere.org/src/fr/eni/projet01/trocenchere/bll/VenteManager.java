@@ -77,7 +77,7 @@ public class VenteManager {
 	/**
 	 * @author Amandine
 	 * @param numéro d'utilisateur
-	 * @return lliste de vente
+	 * @return liste de vente
 	 * @throws BusinessException
 	 */
 	public List<Vente> selectionnerVenteUtilisateurNonPubliee (int noUtilisateur)  throws BusinessException {
