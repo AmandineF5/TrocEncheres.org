@@ -35,6 +35,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
  		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)){
+			int credit = 50;
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
 			state.setString(3, user.getPrenom());
@@ -44,7 +45,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setString(7, user.getCodePostal());
 			state.setString(8, user.getVille());
 			state.setString(9, user.getMotDePasse());
-			state.setFloat(10, user.getCredit());
+			state.setInt(10, credit);
 			state.setBoolean(11, user.isAdministrateur());
 			state.executeUpdate();
 			
