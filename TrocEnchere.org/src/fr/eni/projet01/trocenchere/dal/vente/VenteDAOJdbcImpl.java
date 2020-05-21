@@ -192,7 +192,6 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTALL_VENTES_PUBLIEES_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
@@ -321,7 +320,6 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		Vente vente = new Vente();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTALL_VENTES_NONPUBLIEES_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
@@ -392,7 +390,6 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		Vente vente = new Vente();
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SEARCH_BY_KEYWORD_SQL);){			
 			ResultSet rs;
 			keyWord = "%"+keyWord+"%";
@@ -525,16 +522,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 public void delete(int noVente) throws BusinessException {
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
-			//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 			PreparedStatement state1 = cnx.prepareStatement(DELETE_RETRAITS_SQL);
 			PreparedStatement state2 = cnx.prepareStatement(DELETE_VENTES_SQL)){
 			state1.setInt(1, noVente);
 			state2.setInt(1, noVente);
 			state1.executeUpdate();
 			state2.executeUpdate();
-	//		test sans pool de connection
-	//		cnx.commit();
-	//		fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -545,7 +538,6 @@ public void delete(int noVente) throws BusinessException {
 	
 	public void deleteUser(int noVendeur) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(DELETE_VENTES_USER_SQL)){
 				
 				state.setInt(1, noVendeur);
@@ -567,7 +559,6 @@ public void delete(int noVente) throws BusinessException {
 		Categorie categorie = new Categorie();
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTALL_CATEGORIES_SQL);){			
 			ResultSet rs = state.executeQuery();			
 			while (rs.next()) {

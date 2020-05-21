@@ -18,8 +18,6 @@ import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.dal.ConnectionProvider;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
-//Amandine
-//Janet
 
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 
@@ -113,7 +111,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = new Enchere();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				// Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(SELECTBY_UTILISATEURID_VENTES_SQL);) {
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
@@ -173,7 +170,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = new Enchere();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				// Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(SELECTBYID_ENCHERE_SQL);) {
 			ResultSet rs;
 			state.setInt(1, noVente);

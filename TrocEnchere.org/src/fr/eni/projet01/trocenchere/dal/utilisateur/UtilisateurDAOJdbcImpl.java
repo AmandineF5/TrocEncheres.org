@@ -34,7 +34,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
  	public void insertUser(Utilisateur user) throws BusinessException {
  		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(INSERT_USER_SQL, PreparedStatement.RETURN_GENERATED_KEYS)){
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
@@ -56,10 +55,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			}
 			rs.close();
 			state.close();
-	
-			//test sans pool de connection
-			//cnx.commit();
-			//fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 			
 		} catch (MySQLIntegrityConstraintViolationException e1) {
 			e1.printStackTrace();
@@ -93,7 +88,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	private Utilisateur selectByEmail(String utilisateurEmail) throws BusinessException {
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTBYEMAIL_USER_SQL);){			
 			ResultSet rs;
 			state.setString(1, utilisateurEmail);
@@ -111,9 +105,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			user.setMotDePasse(rs.getString("mot_de_passe"));
 			user.setCredit(rs.getInt("credit"));
 			rs.close();	
-//			test sans pool de connection
-//			cnx.commit();
-//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -130,7 +121,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECTBYID_USER_SQL);){			
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
@@ -148,9 +138,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			user.setMotDePasse(rs.getString("mot_de_passe"));
 			user.setCredit(rs.getInt("credit"));
 			rs.close();	
-//			test sans pool de connection
-//			cnx.commit();
-//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -166,7 +153,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state= cnx.prepareStatement(SELECT_BY_PSEUDO_SQL);){			
 			ResultSet rs;
 			state.setString(1, pseudoId);
@@ -184,9 +170,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			user.setMotDePasse(rs.getString("mot_de_passe"));
 			user.setCredit(rs.getInt("credit"));
 			rs.close();
-//			test sans pool de connection
-//			cnx.commit();
-//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		} catch (Exception e) {
 			BusinessException be = new BusinessException();
 			e.printStackTrace();
@@ -199,7 +182,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	public void updateUser(Utilisateur user) throws BusinessException {
 		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
-				//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 				PreparedStatement state = cnx.prepareStatement(UPDATE_USER_SQL);){
 			state.setString(1, user.getPseudo());
 			state.setString(2, user.getNom());
@@ -214,9 +196,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			state.setBoolean(11, user.isAdministrateur());
 			state.setInt(12, user.getNoUtilisateur());
 			state.execute();
-//			test sans pool de connection
-//			cnx.commit();
-//			fr.eni.projet01.trocenchere.dal.Connection.closeConnection();
 		}   catch (MySQLIntegrityConstraintViolationException e1) {
 			e1.printStackTrace();
 			
@@ -249,7 +228,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	public void deleteUser(int noUtilisateur) throws BusinessException {
 	
 			try (Connection cnx = ConnectionProvider.getConnection();
-					//Connection cnx = fr.eni.projet01.trocenchere.dal.Connection.getConnection();
 					PreparedStatement state = cnx.prepareStatement(DELETE_USER_SQL)){
 				state.setInt(1, noUtilisateur);
 				state.executeUpdate();

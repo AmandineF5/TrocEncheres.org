@@ -14,7 +14,6 @@ public class Settings {
 		try {
 			properties.load(Settings.class.getResourceAsStream("Settings.properties.txt"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
