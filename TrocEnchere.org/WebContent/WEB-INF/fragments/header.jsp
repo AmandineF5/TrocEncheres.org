@@ -13,7 +13,7 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 		  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 		    <li class="nav-item ">
-		      <a class="nav-link" href="#" style="font-weight: bold">Accueil</a>
+		      <a class="nav-link" href="/TrocEnchere.org/accueil" style="font-weight: bold">Accueil</a>
 		    </li>
 		     <li class="nav-item">
 		      <a class="nav-link" href="/TrocEnchere.org/NouvelleVente">Déposer une vente</a>

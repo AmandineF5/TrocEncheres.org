@@ -37,7 +37,7 @@
 
 td {
 	max-width: 20%;
-	padding: 1em 0;
+	padding: 1em 1em;
 }
 
 
@@ -49,12 +49,13 @@ table {
 
 thead {
 	padding:0;
-	box-shadow: 1px 1px 1px #bdc3c7;
+	color: #4b6584
 }
 
 th {
-	background-color: #ecf0f1; 
+	color: #4b6584; 
 	width: 100%;
+	text-align: center;
 }
 
 .row-title {
@@ -62,3 +63,10 @@ th {
 	color: #4b6584;
 }
 
+th img {
+	max-width: 50%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}

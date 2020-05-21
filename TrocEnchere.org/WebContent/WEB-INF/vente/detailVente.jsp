@@ -31,13 +31,12 @@
 		 <table>
 			 <thead>
 			 <tr>
-	           <th colspan="2">${ventes.nomArticle}</th>
+	           <th colspan="2">${vente.nomArticle}</th>
 	        </tr>
         </thead>
 			 <tbody>
-		         <tr>
-		            <td class="row-title">Description: </td>
-		            <td>${vente.description}</td>
+				 <tr>
+		           <th colspan="2"><img src="" alt="article"></th>
 		        </tr>
 		         <tr>
 		            <td class="row-title">Meilleure offre: </td>
