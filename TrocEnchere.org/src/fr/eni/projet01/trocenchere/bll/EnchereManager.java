@@ -27,21 +27,14 @@ public class EnchereManager {
 	public void ajouterEnchere(Enchere enchere) throws BusinessException {
 		int noUser = enchere.getEncherit().getNoUtilisateur();
 		int noSale = enchere.getConcerne().getNoVente();
+		Integer points = enchere.getPoints();
 		Enchere test = selectEnchereByUserIdEtNoVente(noUser, noSale);
 		if (test != null) {
 			enchereDAO.updateEnchere(enchere);
 		} else {
-			this.enchereDAO.insert(enchere);
-			Integer points = enchere.getPoints();
-			Vente vente = enchere.getConcerne();
-			int noVente = vente.getNoVente();
-			Enchere meilleureEnchere = this.trouverHighestBid(noVente);
-			Integer pointsMeilleureEnchere = meilleureEnchere.getPoints();
-
-			if (points > pointsMeilleureEnchere) {
-				vm.mettreAJourPrixVente(noVente, points);
-			}
-		}
+			this.enchereDAO.insert(enchere);		
+		}	
+			vm.mettreAJourPrixVente(noSale, points);
 	}
 
 	public boolean verifierEnchereExistant(int noUser, int noSale) throws BusinessException {
