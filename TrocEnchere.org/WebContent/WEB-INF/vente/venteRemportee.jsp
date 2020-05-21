@@ -26,6 +26,9 @@
 	        </tr>
         </thead>
 			 <tbody>
+			 <tr>
+		           <th colspan="2"><img src="images/ventes/${vente.noVente}.jpg" alt="article"></th>
+		        </tr>
 		          <tr>
 		            <td class="row-title">Meilleure offre: </td>
 		            <td>
