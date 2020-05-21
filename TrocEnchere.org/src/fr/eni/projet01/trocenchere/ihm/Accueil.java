@@ -123,7 +123,9 @@ public class Accueil extends HttpServlet {
 						for (Vente vente : lesVentes) {
 							Enchere enchereGagnante = eM.trouverHighestBid(vente.getNoVente());
 							Utilisateur utilisateurAVerifier = enchereGagnante.getEncherit();
-							if (vente.getDateFinEncheres().isBefore(ajd) && utilisateurAVerifier == utilisateurSession ) { //ventes terminées
+							int noUserToCheck = utilisateurAVerifier.getNoUtilisateur();
+							int noUserSession = utilisateurSession.getNoUtilisateur();
+							if (noUserToCheck == noUserSession && vente.getDateFinEncheres().isBefore(ajd)) { //ventes terminées
 								resultatAAfficher.add(vente);
 							}
 						}
