@@ -113,9 +113,9 @@
 					        </tr>
 					    </thead>
 					    <tbody>
-					         <tr>
-					            <td>Description: </td>
-					            <td>${ventes.getDescription()}</td>
+					    	<tr>
+					            <td>Classement: </td>
+					            <td>${classement}</td>
 					        </tr>
 					         <tr>
 					            <td>Prix: </td>

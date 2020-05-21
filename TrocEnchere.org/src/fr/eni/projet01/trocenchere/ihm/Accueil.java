@@ -236,16 +236,26 @@ public class Accueil extends HttpServlet {
 		}
 		
 		String servletToCall = null;
+		String classement = null;
 		for (Vente vente : resultatAAfficher) {
-			
+			//redirection en fonction de l'état de la vente
 			try {
 				servletToCall = this.redirectionVente(utilisateurSession.getNoUtilisateur(), vente);				
 				vente.setToCall(servletToCall);
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
+			//classement de mon enchère
+			try {
+				classement = eM.trouverClassementEnchere(vente.getNoVente(), utilisateurSession.getNoUtilisateur());
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
 		}
 		request.setAttribute("servletToCall", servletToCall);
+		request.setAttribute("classement", classement);
+		
+		
 		
 		//Définir les informations à renvoyer à la JSP (accueil.jsp)
 		request.setAttribute("mesVentes", resultatAAfficher);  //à changer le nom de l'attibut plus tard
