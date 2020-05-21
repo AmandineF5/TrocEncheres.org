@@ -52,7 +52,7 @@
    			 			0
   						</c:when>
 						<c:otherwise>
-   						 ${enchere.points} pts par ${enchere.getEncherit().getPseudo()}
+   						 ${enchere.points} points par ${enchere.getEncherit().getPseudo()}
   						</c:otherwise>
 					</c:choose>
 
@@ -65,7 +65,7 @@
 			<div class="field-label is-normal">
 				<label class="label">Mise à prix:</label>
 			</div>
-			<div class="field-body">${vente.miseAPrix}</div>
+			<div class="field-body">${vente.miseAPrix} points</div>
 		</div>
 
 		<div class="field is-horizontal">

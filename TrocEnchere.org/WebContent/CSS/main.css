@@ -195,24 +195,10 @@ header {
 	padding: 1vw;
  }
  
- .side-side {
- 	display: flex;
- 	justify-content: flex-start;
- 	align-items: center;
+ h4 {
+ 	color: #4b6584;
+	font-weight: bold;
+	font-size: min(1.2em, 22px);
+	padding: 1vw;
  }
  
- .side1{
-  	text-align: left;
-  	float: left;
- }
- .side2{
- 	float: left;
-  	text-align: left;
-  	vertical-align: center;
-  	
- }
- .side2b {
- 	flex-basis: 1;
- 	padding-left: 2em;
- }
-

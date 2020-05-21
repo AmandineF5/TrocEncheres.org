@@ -16,6 +16,7 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="CSS/main.css">
+<link rel="stylesheet" href="CSS/ventes.css">
 <script defer
 	src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <!-- created by Janet -->
@@ -24,86 +25,69 @@
 <body>
 	<%@ include file="../fragments/header.jsp"%>
 	<main>
-		<div class="subtitle is-medium">Détail Vente</div>
+		<div class="rubrique">
+		 	<h2>Détails de la vente</h2>
+		 </div>
+		 <table>
+			 <thead>
+			 <tr>
+	           <th colspan="2">${ventes.nomArticle}</th>
+	        </tr>
+        </thead>
+			 <tbody>
+		         <tr>
+		            <td class="row-title">Description: </td>
+		            <td>${vente.description}</td>
+		        </tr>
+		         <tr>
+		            <td class="row-title">Meilleure offre: </td>
+		            <td>
+						<c:choose>
+							<c:when test="${enchere.points == null}">
+	   			 			0
+	  						</c:when>
+							<c:otherwise>
+	   						 ${enchere.points} points par ${enchere.getEncherit().getPseudo()}
+	  						</c:otherwise>
+						</c:choose>
+					</td>
+		        </tr>
+		        <tr>
+		            <td class="row-title">Prix: </td>
+		            <td>${vente.miseAPrix} points</td>
+		        </tr>
+		         <tr>
+		            <td class="row-title">Fin de l'enchère: </td>
+		            <td>${vente.dateFinEncheres}</td>
+		        </tr>
+		         
+		     </tbody>
+		 </table>
 
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Article:</label>
-			</div>
-			<div class="field-body">
-				<div class="field">${vente.nomArticle}</div>
-			</div>
-		</div>
-
-		<div class="field is-horizontal">
-			<img
-				src="${pageContext.request.contextPath}/nomdupath/${vente.nomImage}"
-				alt="Photo d'objet à vendre">
-		</div>
-
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Meilleure offre:</label>
-			</div>
-			<div class="field-body">
-				<div class="field">
-					<c:choose>
-						<c:when test="${enchere.points == null}">
-   			 			0
-  						</c:when>
-						<c:otherwise>
-   						 ${enchere.points} pts par ${enchere.getEncherit().getPseudo()}
-  						</c:otherwise>
-					</c:choose>
-
-
-				</div>
-			</div>
-		</div>
-
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Mise à prix:</label>
-			</div>
-			<div class="field-body">${vente.miseAPrix}</div>
-		</div>
-
-		<div class="field is-horizontal">
-			<div class="field-label is-normal">
-				<label class="label">Fin de l'enchère:</label>
-			</div>
-			<div class="field-body">
-				<div class="field">${vente.dateFinEncheres}</div>
-			</div>
-		</div>
-
-			<div class="side-side">
-			<div class="side1">
-				<img src="images/delivery.png" style="max-width:50%" alt="retrait">
+		<div class="side-side">
 			
-			</div>
+				<img src="images/delivery.png" class="side1" alt="retrait">
+			
+		
 			<div class="field is-horizontal side2">
-				<div class="field-label is-normal side2a">
+				<div class="side2a">
 					<h4>Retrait:</h4>
-				</div>
-				<div class="field-body">
-					<div class="field is-rounded">
-						${vente.getLieuRetrait().getRue()}<br />
-						${vente.getLieuRetrait().getCodePostal()}
-						${vente.getLieuRetrait().getVille()}
-	
-					</div>
-				</div>
-				<div class="side2b">
-					<h4>Vendeur: <a
-						href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
-						${vente.vendeur.pseudo}</a></h4>
-				</div>
-					
-				
-			</div>
-		</div>
+					${vente.getLieuRetrait().getRue()}<br />
+					${vente.getLieuRetrait().getCodePostal()}
+					${vente.getLieuRetrait().getVille()}
 
+				</div>
+				
+				<div class="side2b">
+					<h4>Vendeur:</h4>
+					<a
+						href="${pageContext.request.contextPath}/afficher-compte?noUtilisateur=${vente.vendeur.noUtilisateur}">
+						${vente.vendeur.pseudo}</a>
+				</div>
+	
+				</div>
+			</div>
+		
 		<c:if test="${message!=null && message.length()>0 }">
 			<p>${message}</p>
 		</c:if>
@@ -146,7 +130,7 @@
 				<div class="field">
 					<a href="${pageContext.request.contextPath}/Accueil"><button
 							type="submit" class="button main-button is-rounded  is-light" name="bouton"
-							value="retour">Back</button></a>
+							value="retour">Retour</button></a>
 				</div>
 			</div>
 	</main>

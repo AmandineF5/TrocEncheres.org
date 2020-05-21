@@ -119,7 +119,7 @@
 					        </tr>
 					         <tr>
 					            <td>Prix: </td>
-					            <td>${ventes.prixVente}</td>
+					            <td>${ventes.prixVente} points</td>
 					        </tr>
 					         <tr>
 					            <td>Fin de l'enchère: </td>

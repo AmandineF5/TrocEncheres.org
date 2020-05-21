@@ -77,7 +77,7 @@
 		 
 		  <div class="field is-horizontal">
   			<div class="field-label is-normal">
-			    <label class="label">Mise à prix:</label>
+			    <label class="label">Mise à prix (points):</label>
 			 </div>
 			 <div class="field-body">
     			<div class="field">
