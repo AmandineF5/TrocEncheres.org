@@ -133,7 +133,6 @@ public class Accueil extends HttpServlet {
 						mesEncheres = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());
 						for (Enchere enchere : mesEncheres) {
 							Vente vente = enchere.getConcerne();
-							System.out.println(vente);
 							if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
 								resultatAAfficher.add(vente);
 							} 
@@ -162,7 +161,6 @@ public class Accueil extends HttpServlet {
 						mesEncheres = eM.selectionnerEnchereByIdUser (utilisateurSession.getNoUtilisateur());  //on retire mesEncheres
 						for (Enchere enchere : mesEncheres) {
 							Vente vente = enchere.getConcerne();
-							System.out.println(vente);
 							if (vente.getDateFinEncheres().isAfter(ajd)) {  //ventes en cours
 								resultatAAfficher.remove(vente);
 							}
