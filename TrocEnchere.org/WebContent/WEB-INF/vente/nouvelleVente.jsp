@@ -148,12 +148,19 @@
 		      <div class="control">
 				  <button type="submit" class="button main-button is-rounded" name="bouton" value="Publier">Publier</button>
 				  
-				  <a href="/TrocEnchere.org/accueil"><button type="submit" class="button main-button is-rounded is-light" name="bouton" value="annuler">Annuler</button></a>
+				 
 			  </div>
 			</div>
 		</div>
 		
 		</form>
+			<div class="field-body">
+			    <div class="field">
+			      <div class="control">
+					 <a href="/TrocEnchere.org/accueil"><button class="button main-button is-rounded is-light" name="bouton" value="annuler">Annuler</button></a>
+					 </div>
+			</div>
+		</div>
 	</main>
 <%@ include file="../fragments/script.html" %>
 </body>
