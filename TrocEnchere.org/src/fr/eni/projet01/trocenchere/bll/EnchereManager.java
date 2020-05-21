@@ -118,10 +118,11 @@ public class EnchereManager {
 			noUtilisateurEnchere = utilisateurEnchere.getNoUtilisateur();
 
 			if (noUtilisateurEnchere == noUtilisateurSession) {
+				index++;
 				break;
 			}
-
 			index++;
+
 		}
 
 		classement = String.format("%d / %d", index, nbEnchere);
