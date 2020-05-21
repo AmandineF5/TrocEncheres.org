@@ -118,15 +118,15 @@
 		</form>
 
 
-		<div class="field is-horizontal">
 				<div class="field-body">
+					<div class="control">
 					<form action="/TrocEnchere.org/DetailVenteAnnulerEncherir"
 						method="post">
 						<button type="submit" class="button main-button is-rounded " name="annuler"
 							value="${enchere.points}">Annuler la dernière enchère</button>
 					</form>
 				</div>
-				<div class="field">
+				<div class="control">
 					<a href="${pageContext.request.contextPath}/Accueil"><button
 							type="submit" class="button main-button is-rounded  is-light" name="bouton"
 							value="retour">Retour</button></a>
