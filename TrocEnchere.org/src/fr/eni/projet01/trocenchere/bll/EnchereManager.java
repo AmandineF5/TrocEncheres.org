@@ -142,6 +142,7 @@ public class EnchereManager {
 		List<Enchere> e = enchereDAO.selectByVenteId(noVente);
 		// remove highest bid
 		e.remove(0);
+		e.remove(e.size()-1);
 		// recredit the remaining encheres
 		for (Enchere a : e) {
 			// user concerned
