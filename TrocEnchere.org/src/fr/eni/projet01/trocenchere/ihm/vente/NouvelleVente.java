@@ -1,46 +1,23 @@
-
-// LESLIE
-
 package fr.eni.projet01.trocenchere.ihm.vente;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.io.File;
 
-import javax.servlet.RequestDispatcher;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.FileItemIterator;
+
 
 import fr.eni.projet01.trocenchere.bll.EnchereManager;
 
-//import org.apache.commons.fileupload.FileItem;
-//import org.apache.commons.fileupload.FileItemIterator;
-//import org.apache.commons.fileupload.FileItemStream;
-//import org.apache.commons.fileupload.FileUploadException;
-//import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-//import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import fr.eni.projet01.trocenchere.bll.UtilisateurManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
 import fr.eni.projet01.trocenchere.bo.Categorie;
 import fr.eni.projet01.trocenchere.bo.Enchere;
@@ -117,7 +94,6 @@ public class NouvelleVente extends HttpServlet {
 		
 		//Enregistrer ou publier une vente		
 		String boutonChoix = request.getParameter("bouton");
-		System.out.println(boutonChoix);
 		if (boutonChoix.equalsIgnoreCase("Publier")) {
 			newVente.setPublie(true);
 		} else {
@@ -143,11 +119,6 @@ public class NouvelleVente extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("NoVente", venteAAfficher.getNoVente());
-//		String noVente = String.valueOf(venteAAfficher.getNoVente());
-//		request.setAttribute("NoVente", noVente);		
-//		RequestDispatcher rd;
-//		rd = request.getRequestDispatcher("/DetailVente");		
-//		rd.forward(request, response);
 		response.sendRedirect(request.getContextPath()+"/DetailVente");
 
 	

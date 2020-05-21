@@ -146,7 +146,6 @@ public class DetailVenteEncherir extends HttpServlet {
 		}
 		//CREDIT UPDATE
 		//calculate
-		System.out.println(user.getCredit());
 		int newCredit = user.getCredit() - bid;
 		//enlever le credit de l'utilisateur
 		user.setCredit(newCredit);

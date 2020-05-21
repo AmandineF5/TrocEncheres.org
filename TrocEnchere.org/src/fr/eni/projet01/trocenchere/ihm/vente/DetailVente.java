@@ -1,6 +1,3 @@
-
-// JANET
-
 package fr.eni.projet01.trocenchere.ihm.vente;
 
 import java.io.IOException;
@@ -23,7 +20,7 @@ import fr.eni.projet01.trocenchere.bo.Utilisateur;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
-/**
+/**@author janet
  * Servlet implementation class DetailVente
  */
 @WebServlet("/DetailVente")
@@ -48,7 +45,6 @@ public class DetailVente extends HttpServlet {
 		Vente venteAAfficher = new Vente();
 		try {
 			 venteAAfficher = vM.selectionnerVenteById(noVenteAAfficher);
-			 System.out.println(venteAAfficher.getVendeur());
 			 
 		} catch (BusinessException e) {
 			e.printStackTrace();
@@ -81,7 +77,7 @@ public class DetailVente extends HttpServlet {
 		HttpSession session = request.getSession();
 		int noVente = (int) session.getAttribute("NoVente");
 		//getting the id
-		int noVenteAAfficher = noVente; //Integer.parseInt(noVente);
+		int noVenteAAfficher = noVente;
 		return noVenteAAfficher;
 	}
 

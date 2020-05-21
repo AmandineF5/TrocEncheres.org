@@ -1,6 +1,3 @@
-
-// LESLIE
-
 package fr.eni.projet01.trocenchere.ihm.vente;
 
 import java.io.IOException;
@@ -66,12 +63,11 @@ public class MesArticlesVendus extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//fonction qui débite l'acheteur et crédite le vendeur?
 		//donner credit à le vendeur
-		//recoupere le parameters de vendeur par le session
+		//recupere le parameters de vendeur par le session
 		HttpSession session = request.getSession();
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
-		//recouperer le montant du enchere
+		//recuperer le montant du enchere
 		int creditAAjouter = Integer.parseInt(request.getParameter("enchereValue"));
 		int newCredit = creditAAjouter + user.getCredit();
 		//set new credit
@@ -94,7 +90,6 @@ public class MesArticlesVendus extends HttpServlet {
 		}
 		
 		response.sendRedirect("/TrocEnchere.org/accueil");		
-		//doGet(request, response);
 	}
 
 }
