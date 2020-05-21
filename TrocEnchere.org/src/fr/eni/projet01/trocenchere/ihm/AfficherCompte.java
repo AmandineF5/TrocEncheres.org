@@ -1,6 +1,3 @@
-
-// JANET ET LESLIE
-
 package fr.eni.projet01.trocenchere.ihm;
 
 import java.io.IOException;
@@ -48,15 +45,6 @@ public class AfficherCompte extends HttpServlet {
 		} else {
 			request.setAttribute("utilisateur", utilisateur);
 		}
-		
-		//pour tester si aucune session chargée !
-//		Utilisateur utilisateur = null;
-//		try {
-//			utilisateur = UM.selectionnerUtilisateurById(1);
-//		} catch (BusinessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 
 		rd.forward(request, response);
 		
