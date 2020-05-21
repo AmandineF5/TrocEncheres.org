@@ -6,6 +6,7 @@ package fr.eni.projet01.trocenchere.dal.enchere;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,23 +111,27 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	public List<Enchere> selectByUserId(int noUtilisateur) throws BusinessException {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = new Enchere();
+		Vente vente = new Vente();
+		vente.setNoVente(0);
+		enchere.setConcerne(vente);
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement state = cnx.prepareStatement(SELECTBY_UTILISATEURID_VENTES_SQL);) {
 			ResultSet rs;
 			state.setInt(1, noUtilisateur);
 			rs = state.executeQuery();
-			System.out.println(rs.getInt("no_vente"));
-			System.out.println(enchere.getConcerne().getNoVente());
+			
 			while (rs.next()) {
-				if (rs.getInt("no_vente") != enchere.getConcerne().getNoVente()) {
+				int noVente = rs.getInt("no_vente");
+				if (noVente != vente.getNoVente()) {
 
+					enchere = new Enchere();
 					enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
 
 					UtilisateurManager um = new UtilisateurManager();
 					Utilisateur user = um.selectionnerUtilisateurById(noUtilisateur);
 					enchere.setEncherit(user);
 
-					Vente vente = new Vente();
+					vente= new Vente();
 					vente.setNoVente(rs.getInt("no_vente"));
 					vente.setNomArticle(rs.getString("nomarticle"));
 					vente.setDescription(rs.getString("description"));
@@ -146,11 +151,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					vente.setCategorieArticle(categorie);
 
 					enchere.setConcerne(vente);
+					
 
 					enchere.setPoints(rs.getInt("points"));
 
 					listeEnchere.add(enchere);
 				}
+				
 
 			}
 			rs.close();
