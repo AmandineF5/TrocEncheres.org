@@ -2,7 +2,7 @@
 DELETE FROM `utilisateurs`;
 DELETE FROM `ventes`;
 DELETE FROM `retraits`;
-DELETE FROM `encheres`;
+DELETE FROM `encheres`; 
 
 /* /!\ PENSER A BIEN REINITIALISER L'AUTO-INCREMENT DES TABLES QUI EN USENT (valeur à 1) ! */
 
