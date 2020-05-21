@@ -56,7 +56,6 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 public class NouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;    
 	VenteManager vM = new VenteManager();
-	private String repertoireStockage=null;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,15 +63,6 @@ public class NouvelleVente extends HttpServlet {
     public NouvelleVente() {
         super();
     }
-    
-    
-//  @Override
-//  public void init(ServletConfig config) throws ServletException {
-//  	super.init(config);
-//  	this.repertoireStockage=config.getInitParameter("repertoireStockage");
-//  	this.repertoireStockage="/Images";
-//  	System.out.println("repertoireStockage : " + this.repertoireStockage);
-//  }
     
 
 	/**
@@ -104,11 +94,8 @@ public class NouvelleVente extends HttpServlet {
 		newVente.setNomArticle(request.getParameter("nomArticle"));
 		newVente.setDescription(request.getParameter("description"));
 		
-		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy"); //  yyyy-MM-dd
-		String date1 = request.getParameter("dateFinEncheres");
-        LocalDate date2 =  LocalDate.parse(date1);
-        //LocalDateTime dateFinEncheres = date.atTime(0, 0);
-        newVente.setDateFinEncheres(date2);
+        LocalDate date =  LocalDate.parse(request.getParameter("dateFinEncheres"));
+        newVente.setDateFinEncheres(date);
 		
         int prix = Integer.parseInt(request.getParameter("prixInitial"));
 		newVente.setMiseAPrix(prix);		
@@ -126,19 +113,9 @@ public class NouvelleVente extends HttpServlet {
 		Retrait retrait = new Retrait(request.getParameter("rueUtilisateur"), request.getParameter("cpUtilisateur"), request.getParameter("villeUtilisateur"));
 		newVente.setLieuRetrait(retrait);
 		
-//		try {
-//		String fichier = processRequest(request, response);
-//		System.out.println(" FICHIER : " + fichier);
-//	} catch (IOException e1) {
-//		e1.printStackTrace();
-//	} catch (FileUploadException e1) {
-//		e1.printStackTrace();
-//	}
 		newVente.setNomImage("Essai");
 		
-		//Enregistrer ou publier une vente
-		//newVente.setPublie(true);
-		
+		//Enregistrer ou publier une vente		
 		String boutonChoix = request.getParameter("bouton");
 		System.out.println(boutonChoix);
 		if (boutonChoix.equalsIgnoreCase("Publier")) {
@@ -167,13 +144,12 @@ public class NouvelleVente extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("NoVente", venteAAfficher.getNoVente());
 //		String noVente = String.valueOf(venteAAfficher.getNoVente());
-//		request.setAttribute("NoVente", noVente);
-		
+//		request.setAttribute("NoVente", noVente);		
 //		RequestDispatcher rd;
 //		rd = request.getRequestDispatcher("/DetailVente");		
 //		rd.forward(request, response);
 		response.sendRedirect(request.getContextPath()+"/DetailVente");
-		//request.getRequestDispatcher("/DetailVente").forward(request, response);
+
 	
 	}
 		
@@ -183,55 +159,5 @@ public class NouvelleVente extends HttpServlet {
 		return utilisateur;
 	}
 
-//	private String processRequest(HttpServletRequest request,
-//			HttpServletResponse response) throws IOException, FileUploadException {
-//		//PrintWriter out = response.getWriter();
-//		 String fichier = null;
-//		if(ServletFileUpload.isMultipartContent(request))
-//		{
-//			// Create a factory for disk-based file items
-//			DiskFileItemFactory factory = new DiskFileItemFactory();
-//
-//			// Create a new file upload handler
-//			ServletFileUpload upload = new ServletFileUpload(factory);
-//
-//			// Parse the request
-//			List items = upload.parseRequest(request);
-//			
-//			// Process the uploaded items
-//			Iterator iter = items.iterator();
-//			while (iter.hasNext()) {
-//			    FileItem item = (FileItem) iter.next();
-//			    System.out.println(item.getName());
-//			    if (!item.isFormField()) 
-//			    {
-//			        fichier = processUploadedFile(item);
-//			       // out.write("{success:true,fichier:\""+fichier+"\"}");
-//			    }
-//			}
-//		}
-////		out.flush();
-////		out.close();
-//		return fichier;
-//	}
-//
-//	private String processUploadedFile(FileItem item) {
-//		String fileName = item.getName();
-//		int index=1;
-//		while(new File(this.repertoireStockage+fileName).exists())
-//		{
-//			fileName = "("+index+")"+item.getName();
-//			index+=1;
-//		}
-//		
-//	    File uploadedFile = new File(this.repertoireStockage + fileName);
-//	    try {
-//			item.write(uploadedFile);
-//			Thread.sleep(1000);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	    return fileName;
-//	}
 
 }
