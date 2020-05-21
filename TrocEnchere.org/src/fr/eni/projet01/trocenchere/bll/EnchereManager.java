@@ -18,6 +18,7 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 public class EnchereManager {
 	EnchereDAO enchereDAO;
 	Enchere enchere;
+	VenteManager vm = new VenteManager();
 
 	public EnchereManager() {
 		this.enchereDAO = DAOFactory.getEnchereDAO();
@@ -38,25 +39,41 @@ public class EnchereManager {
 			Integer pointsMeilleureEnchere = meilleureEnchere.getPoints();
 
 			if (points > pointsMeilleureEnchere) {
-				VenteManager vm = new VenteManager();
 				vm.mettreAJourPrixVente(noVente, points);
 			}
 		}
 	}
-	
-	public boolean verifierEnchereExistant(int noUser, int noSale) throws BusinessException{
+
+	public boolean verifierEnchereExistant(int noUser, int noSale) throws BusinessException {
 		boolean doesExist;
 		Enchere test = selectEnchereByUserIdEtNoVente(noUser, noSale);
-		if(test != null) {
+		if (test != null) {
 			doesExist = true;
-		}else {
+		} else {
 			doesExist = false;
 		}
 		return doesExist;
 	}
-	
+
 	public void deleteUserbid(int noVente, int noUtilisateur) throws BusinessException {
-		enchereDAO.deleteOne(noVente, noUtilisateur);
+		// check to see if the user's bid is the highest
+		// get highest bid
+		Enchere highest = trouverHighestBid(noVente);
+		// compare the user to the highest bidder to see if they are the same
+		if (noUtilisateur == highest.getEncherit().getNoUtilisateur()) {
+			// if yes, delete bid
+			enchereDAO.deleteOne(noVente, noUtilisateur);
+			// find the highest bid again
+			highest = trouverHighestBid(noVente);
+			//get the points from the highest bid
+			int points = highest.getPoints();
+			// update the prix de vente to be the number of points of the new highest bid
+			vm.mettreAJourPrixVente(noVente, points);
+		} else {
+			// otherwise, just delete the user's bid without having to change the prixdevente
+			enchereDAO.deleteOne(noVente, noUtilisateur);
+		}
+
 	}
 
 	// varification que il n'y a pas deja un enchere par l'utilisateur pour ce
@@ -82,7 +99,7 @@ public class EnchereManager {
 	public void supprimerEnchere(int noVente) throws BusinessException {
 		this.enchereDAO.delete(noVente);
 	}
-	
+
 	public void supprimerEnchereUtilisateur(int noAcheteur) throws BusinessException {
 		this.enchereDAO.deleteUser(noAcheteur);
 	}
@@ -118,26 +135,26 @@ public class EnchereManager {
 		highestBid = listeEnchere.get(0);
 		return highestBid;
 	}
-	
-	//reimbourse the non-winners their credit at the end of the sale
-	public void RembourserEnFinVente(int noVente)throws BusinessException {
-		//get list of enchere linked to the vente
+
+	// reimbourse the non-winners their credit at the end of the sale
+	public void RembourserEnFinVente(int noVente) throws BusinessException {
+		// get list of enchere linked to the vente
 		List<Enchere> e = enchereDAO.selectByVenteId(noVente);
-		//remove highest bid
+		// remove highest bid
 		e.remove(0);
-		//recredit the remaining encheres
-		for(Enchere a : e) {
-			//user concerned
+		// recredit the remaining encheres
+		for (Enchere a : e) {
+			// user concerned
 			Utilisateur aCredite = a.getEncherit();
-			//montant d'enchere enchereCredit + userCredit
+			// montant d'enchere enchereCredit + userCredit
 			int newCredit = a.getPoints() + aCredite.getCredit();
-			//set new credit
+			// set new credit
 			aCredite.setCredit(newCredit);
-			//update user in the database
+			// update user in the database
 			UtilisateurManager uM = new UtilisateurManager();
 			uM.mettreAJourUtilisateur(aCredite);
 		}
-		
+
 	}
 
 }
