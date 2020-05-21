@@ -124,18 +124,18 @@ public class DetailVenteAnnulerEncherir extends HttpServlet {
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
 		// get Vent
 		Vente venteConcerne = (Vente) session.getAttribute("VenteConcerne");
-
+		//annuler bid
+		//remettre le prix de vente à jour qui est dans le function deleteUserBid
 		if (request.getParameter("annuler") != null) {
 
 			// delete bid
 			try {
 				eM.deleteUserbid(venteConcerne.getNoVente(), user.getNoUtilisateur());
-
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
 
-			// remettre le credit
+			// remettre le credit à l'utilisateur
 			// prendre le prix de l'enchere
 			int bid = Integer.parseInt(request.getParameter("annuler"));
 			// calculate
