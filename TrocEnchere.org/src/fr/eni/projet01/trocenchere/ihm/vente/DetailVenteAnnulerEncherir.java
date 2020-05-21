@@ -54,7 +54,7 @@ public class DetailVenteAnnulerEncherir extends HttpServlet {
 		if (request.getParameter("noVente") != null) {
 			noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 		}
-		
+
 		// find the Vente in the database
 		Vente venteAAfficher = new Vente();
 		try {
@@ -124,29 +124,29 @@ public class DetailVenteAnnulerEncherir extends HttpServlet {
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
 		// get Vent
 		Vente venteConcerne = (Vente) session.getAttribute("VenteConcerne");
-		//annuler bid
-		//remettre le prix de vente à jour qui est dans le function deleteUserBid
+		// annuler bid
+		// remettre le prix de vente à jour qui est dans le function deleteUserBid
 		if (request.getParameter("annuler") != null) {
-
-			// delete bid
-			try {
-				eM.deleteUserbid(venteConcerne.getNoVente(), user.getNoUtilisateur());
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			}
 
 			// remettre le credit à l'utilisateur
 			// prendre le prix de l'enchere
 			int bid = Integer.parseInt(request.getParameter("annuler"));
+			System.out.println(bid);
 			// calculate
 			int newCredit = user.getCredit() + bid;
-			// enlever le credit de l'utilisateur
+			// remettre le credit de l'utilisateur
 			user.setCredit(newCredit);
 			// send user with new credit to be updated
 			try {
 				uM.mettreAJourUtilisateur(user);
 				// update in session
 				session.setAttribute("utilisateur", user);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+			// delete bid
+			try {
+				eM.deleteUserbid(venteConcerne.getNoVente(), user.getNoUtilisateur());
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
