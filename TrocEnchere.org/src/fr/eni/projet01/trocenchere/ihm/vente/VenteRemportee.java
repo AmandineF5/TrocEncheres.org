@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet01.trocenchere.bll.EnchereManager;
 import fr.eni.projet01.trocenchere.bll.VenteManager;
+import fr.eni.projet01.trocenchere.bo.Enchere;
 import fr.eni.projet01.trocenchere.bo.Vente;
 import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 
@@ -20,7 +22,8 @@ import fr.eni.projet01.trocenchere.erreurs.BusinessException;
 @WebServlet("/VenteRemportee")
 public class VenteRemportee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	VenteManager vM = new VenteManager();   
+	VenteManager vM = new VenteManager(); 
+	EnchereManager eM = new EnchereManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,9 +37,12 @@ public class VenteRemportee extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int noVenteAAfficher = Integer.parseInt(request.getParameter("noVente"));
 		Vente venteAAfficher = new Vente();
+		Enchere enchere = new Enchere();
 		try {
 			venteAAfficher = vM.selectionnerVenteById(noVenteAAfficher);
 			request.setAttribute("vente", venteAAfficher);
+			enchere = eM.trouverHighestBid(noVenteAAfficher);
+			request.setAttribute("enchere", enchere);
 			 
 		} catch (BusinessException e) {
 			e.printStackTrace();
