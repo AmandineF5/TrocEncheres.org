@@ -136,6 +136,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
+					int noVendeur = rs.getInt("no_utilisateur");
+					Utilisateur vendeur = um.selectionnerUtilisateurById(noVendeur);
+					vente.setVendeur(vendeur);
 
 					Retrait retrait = new Retrait();
 					retrait.setRue(rs.getString("rue"));
@@ -197,6 +200,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					vente.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setPrixVente(rs.getInt("prix_vente"));
+					int noVendeur = rs.getInt("no_utilisateur");
+					Utilisateur vendeur = um.selectionnerUtilisateurById(noVendeur);
+					vente.setVendeur(vendeur);
 
 					Retrait retrait = new Retrait();
 					retrait.setRue(rs.getString("rue"));
