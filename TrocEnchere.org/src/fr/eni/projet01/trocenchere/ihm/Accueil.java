@@ -48,12 +48,33 @@ public class Accueil extends HttpServlet {
 		List<Categorie> categories = toutesCategorie();		
 		request.setAttribute("categories", categories);	
 		//affichage de toutes les ventes
+		List<Vente> lesVentes = new ArrayList<Vente>();
 		try {
-			List<Vente> lesVentes = vM.selectionnerToutesVentes();
+			lesVentes = vM.selectionnerToutesVentes();
 			request.setAttribute("mesVentes", lesVentes);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
+		
+		String servletToCall = null;
+		for (Vente v : lesVentes) {
+			if (utilisateur==null) {
+				servletToCall = "DetailVente";
+				v.setToCall(servletToCall);
+			} else if (utilisateur!=null){
+			
+				try {
+					servletToCall = this.redirectionVente(utilisateur.getNoUtilisateur(), v);				
+					v.setToCall(servletToCall);
+				} catch (BusinessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		
+	
 		String titre = "Top classement des ventes en cours";
 		request.setAttribute("titre", titre);
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
@@ -254,7 +275,7 @@ public class Accueil extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		request.setAttribute("servletToCall", servletToCall);
+		
 		request.setAttribute("classement", classement);
 		
 		
@@ -300,7 +321,7 @@ public class Accueil extends HttpServlet {
 		String servletToCall=null;
 		Enchere enchere = eM.trouverHighestBid(vente.getNoVente());
 		
-		if (listFiltres!=null && listFiltres.contains("mesVentes")) {
+		if (noUtilisateur == vente.getVendeur().getNoUtilisateur()) {
 				if (LocalDate.now().isBefore(vente.getDateFinEncheres())) {
 					servletToCall = "DetailVente";
 				}else {
