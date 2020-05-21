@@ -70,58 +70,61 @@ INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('38',
 INSERT INTO `retraits` (`no_vente`, `rue`, `code_postal`, `ville`) VALUES ('39', '4 rue des clodos', '75000', 'Paris');
 
 /* MANQUE LES POINTS*/
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '1', '1', '3');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '2', '2', '15');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '3', '80');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '4', '120');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '5', '4');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '2', '1', '2');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '1', '1', '3');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '2', '5');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '2', '2', '15');/*ENCHERE INITIALE DU VENDEUR + 1 ENCHERE DE L'AQUEREUR*/
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '6', '500');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '7', '10');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '8', '15');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '3', '80');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '3', '4', '120');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '5', '5', '4');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '6', '9', '80');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '10', '30');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '3', '6', '500');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '5', '7', '10');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '5', '8', '15');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '11', '800');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '2', '12', '50');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '6', '9', '80');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '1', '10', '30');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '2', '13', '30');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '14', '15');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '11', '800');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '2', '12', '50');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '4', '15', '150');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '2', '13', '30');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '3', '14', '15');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '4', '16', '13');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '17', '15');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '4', '15', '150');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '2', '18', '1');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '19', '5000');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '2', '20', '5');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '21', '30');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '4', '16', '13');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '5', '17', '15');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '6', '22', '13');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '2', '18', '1');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '19', '5000');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '2', '20', '5');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '3', '21', '30');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '23', '158');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '3', '24', '1');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '6', '22', '13');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '25', '300');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '2', '26', '35');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '27', '8');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '28', '30');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '29', '60');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '6', '30', '80');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '2', '31', '300');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '1', '23', '158');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '3', '24', '1');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '32', '50'); /*ENCHERE DE BASE = PAS DE SURENCHERE*/
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '2', '33', '5');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '1', '25', '300');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '2', '26', '35');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '3', '27', '8');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '28', '30');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '5', '29', '60');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '6', '30', '80');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '2', '31', '300');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '34', '300');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '32', '50'); /*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '2', '33', '5');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '4', '35', '15');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '1', '34', '300');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-15', '4', '36', '200');
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '3', '37', '30');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '4', '35', '15');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '1', '38', '5000');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-15', '4', '36', '200');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '3', '37', '30');
 
-INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`,'points') VALUES ('2020-05-20', '5', '39', '80');
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '1', '38', '5000');/*ENCHERE DE BASE = PAS DE SURENCHERE*/
+
+INSERT INTO `encheres` (`date_enchere`, `no_acheteur`, `no_vente`, `points`) VALUES ('2020-05-20', '5', '39', '80');
