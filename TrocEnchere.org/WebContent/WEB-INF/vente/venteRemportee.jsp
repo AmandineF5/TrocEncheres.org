@@ -17,7 +17,7 @@
 	<%@ include file="../fragments/header.jsp" %>
 	<main>
 	<div class="rubrique">
-		 	<h2>Détails de la vente</h2>
+		 	<h2>Vous avez remporté l'enchère</h2>
 		 </div>
 		 <table>
 			 <thead>
