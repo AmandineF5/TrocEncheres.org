@@ -22,7 +22,7 @@ public class DeconnecterCompte extends HttpServlet {
 		String messageDeco = null;
         if(session!=null) {
             session.invalidate(); //supprime les attributs de la session
-            request.setAttribute("messageDeco", "Vous êtes déconnecté");
+            request.setAttribute("messageDeco", "Vous êtes déconnecté(e)");
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
             rd.forward(request, response);
         }

@@ -4,7 +4,7 @@
 
 .checkbox {
 	color : black;
-	font-size: min(3vw, 15px);
+	font-size: min(3.5vw, 15px);
 	padding-left: 2vw;
 	vertical-align: center;
 }
