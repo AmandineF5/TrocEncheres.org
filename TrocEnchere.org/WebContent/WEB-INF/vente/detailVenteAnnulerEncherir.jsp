@@ -42,8 +42,8 @@
 		            <td class="row-title">Meilleure offre: </td>
 		            <td>
 						<c:choose>
-							<c:when test="${enchere.points == null}">
-	   			 			0
+							<c:when test="${enchere.getEncherit().getNoUtilisateur() == enchere.getConcerne().getVendeur().getNoUtilisateur()}">
+	   			 			Aucune enchère en cours
 	  						</c:when>
 							<c:otherwise>
 	   						 ${enchere.points} points par ${enchere.getEncherit().getPseudo()}
