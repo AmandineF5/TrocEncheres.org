@@ -93,9 +93,12 @@
 		<div class="field-body">
 			<div class="field">
 				<div class="control">
-					<form action="/TrocEnchere.org/DetailVente" method="post">
-					<button type="submit" class="button main-button is-rounded" name="delete" value="${vente.noVente}">Annuler la vente</button>
-					</form>
+					<c:if test="${!empty utilisateur}">
+						<form action="/TrocEnchere.org/DetailVente" method="post">
+						<button type="submit" class="button main-button is-rounded" name="delete" value="${vente.noVente}">Annuler la vente</button>
+						</form>
+					</c:if>
+					
 					
 					<a href="/TrocEnchere.org/accueil"><button type="submit"
 							class="button main-button is-rounded is-light" name="bouton" value="retour">Retour</button></a>

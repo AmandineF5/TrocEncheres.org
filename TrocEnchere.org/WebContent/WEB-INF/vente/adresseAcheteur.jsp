@@ -23,7 +23,7 @@
 					<label class="label">Pseudo:</label>
 				</div>
 				<div class="field-body">
-					<div class="field">
+					<div class="field" style="text-align:center">
 						${acheteur.pseudo}
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 					<label class="label">Adresse:</label>
 				</div>
 				<div class="field-body">
-					<div class="field">
+					<div class="field" style="text-align:center">
 						${acheteur.rue}
 						${acheteur.codePostal}
 						${acheteur.ville}
@@ -47,7 +47,7 @@
 					<label class="label">Téléphone:</label>
 				</div>
 				<div class="field-body">
-					<div class="field">
+					<div class="field" style="text-align:center">
 						${acheteur.telephone}
 					</div>
 				</div>

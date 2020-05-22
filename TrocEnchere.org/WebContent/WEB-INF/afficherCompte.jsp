@@ -32,7 +32,7 @@
 			    <label class="label">Pseudo:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.pseudo}
 		 		</div>
 		 	</div>
@@ -43,7 +43,7 @@
 			    <label class="label">Nom:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.nom}
 		 		</div>
 		 	</div>
@@ -54,7 +54,7 @@
 			    <label class="label">Prénom:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.prenom}
 		 		</div>
 		 	</div>
@@ -65,7 +65,7 @@
 			    <label class="label">Email:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.email}
 		 		</div>
 		 	</div>
@@ -76,7 +76,7 @@
 			    <label class="label">Téléphone:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.telephone}
 		 		</div>
 		 	</div>
@@ -87,7 +87,7 @@
 			    <label class="label">Rue:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.rue}
 		 		</div>
 		 	</div>
@@ -98,7 +98,7 @@
 			    <label class="label">Code postal:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.codePostal}
 		 		</div>
 		 	</div>
@@ -109,7 +109,7 @@
 			    <label class="label">Ville:</label>
 			 </div>
 			 <div class="field-body">
-    			<div class="field">
+    			<div class="field" style="text-align:center">
 			    	${utilisateur.ville}
 		 		</div>
 		 	</div>
