@@ -1,10 +1,11 @@
-/* SUPPRESSION */
 DELETE FROM `utilisateurs`;
 DELETE FROM `ventes`;
 DELETE FROM `retraits`;
 DELETE FROM `encheres`; 
 
-/* /!\ PENSER A BIEN REINITIALISER L'AUTO-INCREMENT DES TABLES QUI EN USENT (valeur à 1) ! */
+
+INSERT INTO `categories`(`libelle`) VALUES ("Animalerie"), ("Articles d'électroménager"), ("Bricolage"), ("Ameublement"), ("Décoration"), ("Jouets et jeux"),("Livres"), ("Puériculture"), ("Informatique"), ("Téléphonie"), ("Jeux vidéo et consoles"), ("Vélo"), ("Vêtements et accessoires")
+
 
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'didine', 'Foulet', 'Amandine', 'amande.foul@hotmail.com', '0601020304', '25 rue des fous', '35380', 'Maxent', 'didine', '500', b'0');
 INSERT INTO `utilisateurs` (`no_utilisateur`, `pseudo`, `nom`, `prenom`, `email`, `telephone`, `rue`, `code_postal`, `ville`, `mot_de_passe`, `credit`, `administrateur`) VALUES (NULL, 'coco', 'Villiermet', 'Corentin', 'coco.vivi@b.com', '0606060606', 'Chez Wam', '35200', 'Rennes-Alma', 'coco', '10000', b'0');

@@ -103,8 +103,3 @@ ADD CONSTRAINT `ventes_utilisateur_fk`
 FOREIGN KEY (`no_utilisateur`) REFERENCES `UTILISATEURS`(`no_utilisateur`) 
 ON DELETE CASCADE 
 ON UPDATE CASCADE;
-
-INSERT INTO categories(libelle) VALUES ("Animalerie"), ("Articles d'électroménager"), ("Bricolage"),
- ("Ameublement"), ("Décoration"), ("Jouets et jeux"),("Livres"), ("Puériculture"), ("Informatique"),
- ("Téléphonie"), ("Jeux vidéo et consoles"), ("Vélo"), ("Vêtements et accessoires")
-
